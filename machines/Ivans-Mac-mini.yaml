@@ -13,3 +13,32 @@ uv:
   packages:
     osxphotos:
       binary: osxphotos
+
+brew:
+  onActivation:
+    autoUpdate: false
+    cleanup: zap
+  caskArgs:
+    no_quarantine: true
+  taps:
+    - pomdtr/homebrew-tap
+    - ivankovnatsky/homebrew-tap
+    - keith/homebrew-formulae
+    - antoniorodr/homebrew-memo
+    - xwmx/homebrew-taps
+  brews:
+    - pam-reattach
+    - ollama
+  casks:
+    - chromium
+    - firefox
+    - ghostty
+    - hammerspoon
+    - kitty
+    - mac-mouse-fix
+    - obsidian
+    - silicon-labs-vcp-driver
+  masApps:
+    Numbers: 409203825
+    Pages: 409201541
+    Bitwarden: 1352778147
