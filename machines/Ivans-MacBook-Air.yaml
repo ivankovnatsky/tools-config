@@ -1,1 +1,8 @@
-# TODO: migrate from nix-config
+include:
+  - ../shared/base.yaml
+  - ../shared/darwin.yaml
+
+uv:
+  packages:
+    osxphotos:
+      binary: osxphotos
