@@ -30,12 +30,7 @@ gh repo edit ivankovnatsky/tools-config --default-branch main
 ```console
 # Install uv (Python package manager)
 brew install uv
-
-# Install tools CLI into an isolated venv
-uv tool install git+https://github.com/ivankovnatsky/tools.git
 ```
-
-This puts `tools` on PATH at `~/.local/bin/tools`.
 
 ## Usage
 
