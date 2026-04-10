@@ -11,5 +11,9 @@ uv:
       source: git+https://github.com/ivankovnatsky/tools.git
       binary: tools
 
+configFiles:
+  - dir: dotfiles
+    type: dotfiles
+
 curlShell:
   "https://claude.ai/install.sh": bash
