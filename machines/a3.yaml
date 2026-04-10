@@ -1,1 +1,2 @@
-# TODO: migrate from nix-config
+include:
+  - ../shared/base.yaml
