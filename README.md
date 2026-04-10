@@ -25,6 +25,18 @@ git push -u origin main
 gh repo edit ivankovnatsky/tools-config --default-branch main
 ```
 
+## Bootstrap
+
+```console
+# Install uv (Python package manager)
+brew install uv
+
+# Install tools CLI into an isolated venv
+uv tool install git+https://github.com/ivankovnatsky/tools.git
+```
+
+This puts `tools` on PATH at `~/.local/bin/tools`.
+
 ## Usage
 
 ```console
