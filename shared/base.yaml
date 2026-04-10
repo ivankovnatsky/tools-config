@@ -5,5 +5,11 @@ npm:
     "@openai/codex":
       binary: codex
 
+uv:
+  packages:
+    tools:
+      source: git+https://github.com/ivankovnatsky/tools.git
+      binary: tools
+
 curlShell:
   "https://claude.ai/install.sh": bash
