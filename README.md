@@ -20,6 +20,9 @@ cd "$(ghq root)/github.com/ivankovnatsky/tools-config"
 git checkout -b main
 git commit --allow-empty -S -m "Initial commit"
 git push -u origin main
+
+# Set default branch to main
+gh repo edit ivankovnatsky/tools-config --default-branch main
 ```
 
 ## Usage
