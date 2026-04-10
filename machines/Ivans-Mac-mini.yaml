@@ -1,1 +1,15 @@
-# TODO: migrate from nix-config
+include:
+  - ../shared/base.yaml
+  - ../shared/darwin.yaml
+
+npm:
+  packages:
+    openclaw:
+      binary: openclaw
+      version: latest
+      postInstall: "node scripts/postinstall-bundled-plugins.mjs"
+
+uv:
+  packages:
+    osxphotos:
+      binary: osxphotos
