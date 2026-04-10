@@ -1,1 +1,2 @@
-# TODO: migrate from nix-config
+# macOS-specific shared config
+# (empty for now — will hold brew packages when nix-homebrew migration starts)
