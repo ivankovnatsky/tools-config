@@ -27,8 +27,9 @@ brew:
     - antoniorodr/homebrew-memo
     - xwmx/homebrew-taps
   brews:
-    - pam-reattach
     - ollama
+    - pam-reattach
+    - uv
   casks:
     - chromium
     - firefox
