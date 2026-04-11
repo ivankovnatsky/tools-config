@@ -26,6 +26,9 @@ uv:
       binary: ruff
 
 brew:
+  environment:
+    HOMEBREW_NO_INSTALL_CLEANUP: "1"
+    HOMEBREW_NO_ENV_HINTS: "1"
   onActivation:
     autoUpdate: false
     cleanup: zap
