@@ -1,3 +1,5 @@
+stateFile: ~/.local/state/tools/state.json
+
 npm:
   packages:
     "@google/gemini-cli":
