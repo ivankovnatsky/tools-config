@@ -2,6 +2,15 @@ include:
   - ../shared/base.yaml
   - ../shared/darwin.yaml
 
+paths:
+  uv: /opt/homebrew/bin
+  uvBin: /Volumes/Storage/Data/.local/bin
+  uvToolDir: /Volumes/Storage/Data/.local/share/uv/tools
+  nodejs: /opt/homebrew/bin
+  npmBin: /Volumes/Storage/Data/.npm/bin
+  bunBin: /Volumes/Storage/Data/.bun/bin
+  bun: /Volumes/Storage/Data/.bun/bin
+
 npm:
   packages:
     openclaw:
@@ -29,6 +38,7 @@ brew:
     - antoniorodr/homebrew-memo
     - xwmx/homebrew-taps
   brews:
+    - node
     - ollama
     - pam-reattach
     - uv
