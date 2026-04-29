@@ -1,0 +1,31 @@
+{
+  "env": {
+    "CLAUDE_CODE_ENABLE_TELEMETRY": "1"
+  },
+  "includeCoAuthoredBy": false,
+  "permissions": {
+    "allow": [
+      "Read(/Volumes/Storage/Data/Sources/**)",
+      "Bash(git add:*)",
+      "Bash(git log:*)",
+      "WebFetch(domain:*)",
+      "WebSearch",
+      "Bash(nix-prefetch-url:*)",
+      "Read(/Users/ivan/.config/**)",
+      "Read(/Users/ivan/.local/**)"
+    ],
+    "deny": [
+      "Bash(sudo:*)"
+    ],
+    "defaultMode": "auto",
+    "autoApproveWebFetch": true
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "claude-statusline"
+  },
+  "feedbackSurveyRate": 0,
+  "effortLevel": "high",
+  "skipDangerousModePermissionPrompt": true,
+  "skipAutoPermissionPrompt": true
+}
