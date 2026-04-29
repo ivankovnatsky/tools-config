@@ -25,6 +25,17 @@ uv:
     ruff:
       binary: ruff
 
+files:
+  # Inherit the shared dir-walk for dotfiles. YAML lists replace on
+  # deep-merge, so we restate it here alongside the per-file entries.
+  - dir: dotfiles
+  - target: ~/.claude/settings.json
+    source: dotfiles/.claude/settings.json
+    mode: "0644"
+  - target: ~/.local/bin/claude-statusline
+    source: machines/Ivans-Mac-mini/.local/bin/claude-statusline
+    mode: "0755"
+
 brew:
   environment:
     HOMEBREW_NO_ENV_HINTS: "1"
