@@ -13,6 +13,12 @@ uv:
       source: git+https://github.com/ivankovnatsky/tools.git
       binary: tools
 
+go:
+  packages:
+    rclone:
+      source: github.com/rclone/rclone
+      binary: rclone
+
 files:
   - dir: dotfiles
 
