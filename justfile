@@ -8,8 +8,8 @@ lint:
 
 # Apply config for this host
 apply:
-    tools --config .
+    tools deploy --config .
 
 # Dry-run — show what would change
 diff:
-    tools --config . --diff
+    tools diff --config .
