@@ -68,3 +68,98 @@ brew:
     Numbers: 409203825
     Pages: 409201541
     Bitwarden: 1352778147
+
+defaults:
+  user:
+    NSGlobalDomain:
+      AppleIconAppearanceTheme: RegularAutomatic
+      AppleKeyboardUIMode: 3
+      AppleSpacesSwitchOnActivate: false
+      InitialKeyRepeat: 120
+      KeyRepeat: 120
+      NSUserKeyEquivalents:
+        Move focus to active or next window: "~`"
+      TISRomanSwitchState: 1
+    com.apple.dock:
+      autohide: false
+      autohide-delay: 1000.0
+      mru-spaces: true
+      tilesize: 64
+    com.apple.finder:
+      FXRemoveOldTrashItems: true
+    com.apple.spaces:
+      spans-displays: false
+    com.apple.WindowManager:
+      EnableTiledWindowMargins: true
+      EnableTilingByEdgeDrag: true
+      EnableTilingOptionAccelerator: true
+      EnableTopTilingByEdgeDrag: true
+    com.apple.HIToolbox:
+      AppleEnabledInputSources:
+        - InputSourceKind: Keyboard Layout
+          KeyboardLayout ID: 252
+          KeyboardLayout Name: ABC
+        - InputSourceKind: Keyboard Layout
+          KeyboardLayout ID: -2354
+          KeyboardLayout Name: Ukrainian-PC
+      AppleGlobalTextInputProperties:
+        TextInputGlobalPropertyPerContextInput: 1
+    # Not the -currentHost (<domain>.<UUID>) file: nix-darwin writes this path.
+    ~/Library/Preferences/ByHost/com.apple.controlcenter:
+      Bluetooth: 24
+      Weather: 2
+    com.apple.screencapture:
+      location: ${env:HOME}/Screenshots
+      # macOS 27 screencapture reads per-target keys, not `location`.
+      location-screenrecording: ${env:HOME}/Screenshots
+      location-screenshot: ${env:HOME}/Screenshots
+    com.apple.CloudSubscriptionFeatures.optIn:
+      auto_opt_in: false
+      device: false
+    com.vincent-neo.LosslessSwitcher:
+      PreferSampleRateMultiples: false
+      com.vincent-neo.LosslessSwitcher-Key-BitDepthDetection: true
+      com.vincent-neo.LosslessSwitcher-Key-UserPreferIconStatusBarItem: false
+    com.apple.Safari:
+      AutoOpenSafeDownloads: false
+      DeveloperPreferences: 836
+      ShowFullURLInSmartSearchField: true
+      ShowStandaloneTabBar: true
+    com.apple.Safari.SandboxBroker:
+      AlwaysPromptForDownloadFolder: true
+    org.gpgtools.pinentry-mac:
+      UseKeychain: false
+  restart:
+    com.apple.screencapture: screencaptureui
+
+dock:
+  apps:
+    - /System/Applications/Apps.app
+    - /Applications/Safari.app
+    - /System/Applications/Messages.app
+    - /System/Applications/Mail.app
+    - /System/Applications/Photos.app
+    - /System/Applications/Calendar.app
+    - /System/Applications/Contacts.app
+    - /System/Applications/Notes.app
+    - /System/Applications/Music.app
+    - /System/Applications/Podcasts.app
+    - /System/Applications/App Store.app
+    - /System/Applications/iPhone Mirroring.app
+    - /System/Applications/System Settings.app
+    - spacer
+    - /System/Applications/Utilities/Terminal.app
+    - /System/Applications/Utilities/Activity Monitor.app
+    - /System/Applications/Passwords.app
+    - spacer
+    - /Applications/kitty.app
+    - /Applications/Muxy.app
+    - /Applications/Firefox Developer Edition.app
+    - /Applications/Bitwarden.app
+    - /Applications/Claude.app
+    - /Applications/Obsidian.app
+    - /Applications/TaskForge.app
+    - /Applications/WhatsApp.app
+  others:
+    - ~/Downloads
+    - ~/Screenshots
