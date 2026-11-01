@@ -1,5 +1,9 @@
 stateFile: ~/.local/state/tools/state.json
 
+vars:
+  home: ${env:HOME}
+  homeWorkPath: ${home}
+
 npm:
   packages:
     "@google/gemini-cli":
@@ -21,6 +25,12 @@ go:
 
 files:
   - dir: dotfiles
+
+templates:
+  claude-settings:
+    path: ~/.claude/settings.json
+    file: templates/claude-settings.json
+    mode: "0644"
 
 curlShell:
   "https://claude.ai/install.sh": bash

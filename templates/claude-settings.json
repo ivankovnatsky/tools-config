@@ -5,14 +5,14 @@
   "includeCoAuthoredBy": false,
   "permissions": {
     "allow": [
-      "Read(/Volumes/Storage/Data/Sources/**)",
+      "Read(${homeWorkPath}/Sources/**)",
       "Bash(git add:*)",
       "Bash(git log:*)",
       "WebFetch(domain:*)",
       "WebSearch",
       "Bash(nix-prefetch-url:*)",
-      "Read(/Users/ivan/.config/**)",
-      "Read(/Users/ivan/.local/**)"
+      "Read(${home}/.config/**)",
+      "Read(${home}/.local/**)"
     ],
     "deny": [
       "Bash(sudo:*)"
