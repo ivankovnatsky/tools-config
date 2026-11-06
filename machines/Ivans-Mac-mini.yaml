@@ -215,6 +215,9 @@ files:
   - target: ~/.config/kitty/themes/Tokyo_Night_Moon.conf
     source: machines/Ivans-Mac-mini/.config/kitty/themes/Tokyo_Night_Moon.conf
     mode: "0644"
+  - target: ~/.config/bat/config
+    source: dotfiles/.config/bat/config
+    onChange: if command -v bat >/dev/null; then bat cache --build; fi
 
 gitRepos:
   ~/.local/share/fish-plugins/autopair: https://github.com/jorgebucaran/autopair.fish
@@ -236,6 +239,17 @@ gitRepos:
 links:
   - source: ~/.codex/AGENTS.md
     target: ~/.pi/agent/AGENTS.md
+  - source: ${externalStoragePath}/.cache/qmd
+    target: ~/.cache/qmd
+
+skills:
+  sources:
+    qmd:
+      url: https://github.com/tobi/qmd
+      subdir: skills
+  targets: [~/.agents/skills]
+  enable:
+    - qmd/qmd
 
 brew:
   environment:
