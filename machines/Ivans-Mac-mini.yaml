@@ -92,6 +92,10 @@ files:
     source: machines/Ivans-Mac-mini/.local/bin/claude-statusline
     mode: "0755"
 
+gitRepos:
+  # yazi loads <name>.yazi dirs from here; piper.yazi is used by yazi.toml.
+  ~/.config/yazi/plugins: https://github.com/yazi-rs/plugins
+
 brew:
   environment:
     HOMEBREW_NO_ENV_HINTS: "1"

@@ -1,0 +1,18 @@
+#!/bin/bash
+
+file_path="$1"
+
+# foo.json.gpg -> foo.json, so bat picks the syntax; bare foo.gpg -> foo.txt.
+inner_name="${file_path%.*}"
+base_noext="${inner_name##*/}"
+if [[ "$base_noext" != *.* ]]; then
+  inner_name="$inner_name.txt"
+fi
+
+/opt/homebrew/bin/gpg --batch --quiet --decrypt -- "$file_path" 2>/dev/null |
+  /opt/homebrew/bin/bat \
+    --color=always \
+    --style=plain \
+    --paging=never \
+    --file-name "$inner_name" \
+    -- 2>/dev/null

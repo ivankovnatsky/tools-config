@@ -1,0 +1,14 @@
+[mgr]
+ratio = [1, 2, 4]
+
+[[plugin.prepend_previewers]]
+run = 'piper -- ~/.config/yazi/scripts/gpg-preview "$1"'
+url = "*.gpg"
+
+[[plugin.prepend_previewers]]
+run = 'piper -- ~/.config/yazi/scripts/gpg-preview "$1"'
+url = "*.pgp"
+
+[[plugin.prepend_previewers]]
+run = 'piper -- ~/.config/yazi/scripts/gpg-preview "$1"'
+url = "*.asc"
