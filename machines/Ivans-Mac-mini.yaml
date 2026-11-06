@@ -171,6 +171,17 @@ files:
     source:
       "machines/Ivans-Mac-mini/Library/Application Support/Muxy 2/terminal.toml"
     mode: "0644"
+  - target: "~/Library/Application Support/Firefox/Profiles/default/user.js"
+    source:
+      "machines/Ivans-Mac-mini/Library/Application
+      Support/Firefox/Profiles/default/user.js"
+    mode: "0644"
+  - target: ~/.pi/agent/settings.json
+    source: machines/Ivans-Mac-mini/.pi/agent/settings.json
+    mode: "0644"
+  - target: ~/.pi/agent/models.json
+    source: machines/Ivans-Mac-mini/.pi/agent/models.json
+    mode: "0644"
 
 gitRepos:
   ~/.local/share/fish-plugins/autopair: https://github.com/jorgebucaran/autopair.fish
@@ -188,6 +199,10 @@ gitRepos:
   ~/.local/share/tmux-plugins/tmux-yank: https://github.com/tmux-plugins/tmux-yank
   # yazi loads <name>.yazi dirs from here; piper.yazi is used by yazi.toml.
   ~/.config/yazi/plugins: https://github.com/yazi-rs/plugins
+
+links:
+  - source: ~/.codex/AGENTS.md
+    target: ~/.pi/agent/AGENTS.md
 
 brew:
   environment:

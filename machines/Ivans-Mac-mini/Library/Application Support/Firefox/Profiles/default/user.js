@@ -1,0 +1,14 @@
+user_pref("browser.ctrlTab.recentlyUsedOrder", true);
+user_pref("browser.ctrlTab.sortByRecentlyUsed", true);
+user_pref("browser.startup.page", 3);
+user_pref("browser.toolbars.bookmarks.visibility", "never");
+user_pref("browser.translations.automaticallyPopup", false);
+user_pref("media.videocontrols.picture-in-picture.enabled", false);
+user_pref("media.videocontrols.picture-in-picture.video-toggle.enabled", false);
+user_pref("media.videocontrols.picture-in-picture.video-toggle.has-used", false);
+user_pref("permissions.default.desktop-notification", 2);
+user_pref("permissions.default.geo", 2);
+user_pref("permissions.default.persistent-storage", 2);
+user_pref("sidebar.position_start", true);
+user_pref("sidebar.verticalTabs", true);
+user_pref("signon.rememberSignons", false);

@@ -1,0 +1,9 @@
+{
+  "defaultModel": "claude-opus-5-5",
+  "defaultProvider": "anthropic",
+  "lastChangelogVersion": "1.4.0",
+  "packages": [
+    "npm:pi-antigravity"
+  ],
+  "tuiMode": "regular"
+}
