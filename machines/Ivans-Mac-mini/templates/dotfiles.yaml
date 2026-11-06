@@ -11,3 +11,7 @@ templates:
     path: ~/.unison/notes.prf
     file: machines/Ivans-Mac-mini/.unison/notes.prf
     mode: "0644"
+  bunfig:
+    path: ~/.bunfig.toml
+    file: machines/Ivans-Mac-mini/.bunfig.toml
+    mode: "0644"

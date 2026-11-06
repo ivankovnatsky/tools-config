@@ -1,0 +1,6 @@
+[install]
+globalDir = "${externalStoragePath}/.bun/install/global"
+globalBinDir = "${externalStoragePath}/.bun/bin"
+
+[install.cache]
+dir = "${externalStoragePath}/.bun/install/cache"
