@@ -145,6 +145,9 @@ ext.cache.bar.menu:setClickCallback(function()
 end)
 
 ext.cache.sys = {
+  cpu = "–",
+  mem = "–",
+  temp = "–",
   disk = "–",
   extra = {},
   extraDisks = {
@@ -181,10 +184,11 @@ end
 local function memStats()
   local v = hs.host.vmStat()
   local function gb(bytes)
-    return string.format("%.2fGB", bytes / 2^30)
+    return string.format("%.1fGB", bytes / 2^30)
   end
   local cached = (v.fileBackedPages + v.pagesPurgeable) * v.pageSize
-  local used = v.memSize - cached
+  local free = (v.pagesFree + v.pagesSpeculative) * v.pageSize
+  local used = v.memSize - cached - free
   local swap = tonumber(hs.execute("/usr/sbin/sysctl -n vm.swapusage"):match("used = ([%d.]+)M"))
   return table.concat({ gb(v.memSize), gb(used), gb(cached), swap and gb(swap * 2^20) or "–" }, ", ")
 end
@@ -197,13 +201,13 @@ function ext.app.updateSysDisks()
   end
 end
 
-function ext.app.updateSysStats()
+local function renderSysStats()
   local s = ext.cache.sys
-  -- Nerd Font: oct-cpu, fa-memory, md-harddisk.
+  -- Nerd Font: oct-cpu, fa-thermometer_half, fa-memory, md-harddisk.
   local items = {
-    { "\u{F4BC}", cpuPct() }, { "\u{EFC5}", memStats() }, { "\u{F02CA}", s.disk },
+    { "\u{F4BC}", s.cpu }, { "\u{F2C9}", s.temp }, { "\u{EFC5}", s.mem }, { "\u{F02CA}", s.disk },
   }
-  local tips = { "CPU", "Memory", "Disk" }
+  local tips = { "CPU", "Temp (max of CPU/GPU)", "Memory", "Disk" }
   for i, d in ipairs(s.extraDisks) do
     table.insert(items, { d.icon, s.extra[i] or "–" })
     table.insert(tips, d.path)
@@ -213,6 +217,37 @@ function ext.app.updateSysStats()
     table.insert(parts, it[1] .. " " .. it[2])
   end
   ext.app.barSet("sysstats", 20, table.concat(parts, "  "), table.concat(tips, " · "))
+end
+
+-- macmon samples for ~0.5s, so run it async and re-render on exit.
+local function updateTemp()
+  local s = ext.cache.sys
+  if s.tempTask and s.tempTask:isRunning() then
+    return
+  end
+  s.tempTask = hs.task.new("/opt/homebrew/bin/macmon", function(code, out)
+    local ok, data = pcall(hs.json.decode, out or "")
+    local temps = code == 0 and ok and type(data) == "table" and type(data.temp) == "table" and data.temp or {}
+    local t
+    for _, v in ipairs({ temps.cpu_temp_avg, temps.gpu_temp_avg }) do
+      if type(v) == "number" and (not t or v > t) then
+        t = v
+      end
+    end
+    s.temp = t and (math.floor(t + 0.5) .. "°") or "–"
+    renderSysStats()
+  end, { "pipe", "-s", "1", "-i", "500" })
+  if not (s.tempTask and s.tempTask:start()) then
+    s.temp = "–"
+  end
+end
+
+function ext.app.updateSysStats()
+  local s = ext.cache.sys
+  s.cpu = cpuPct()
+  s.mem = memStats()
+  renderSysStats()
+  updateTemp()
 end
 
 ext.app.barOnClick(ext.app.updateSysStats)
