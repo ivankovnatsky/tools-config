@@ -1,0 +1,55 @@
+templates:
+  forgejo-credential-helper:
+    path: ~/.local/bin/forgejo-credential-helper
+    file: templates/forgejo-credential-helper.sh
+    mode: "0755"
+
+  # Optional include of ~/.config/git/config; git ignores it when absent.
+  forgejo-git-credential:
+    path: ~/.config/git/forgejo
+    content: |
+      [credential]
+      	helper = ${home}/.local/bin/forgejo-credential-helper
+    mode: "0644"
+
+  forgejo-app-ini:
+    path: ${renderedDir}/forgejo-app.ini
+    format: ini
+    mode: "0600"
+    content:
+      APP_NAME: Forgejo
+      RUN_MODE: prod
+      server:
+        HTTP_ADDR: ${bindAddress}
+        HTTP_PORT: 3300
+        ROOT_URL: https://forgejo.${sops:external-domain}/
+        SSH_DOMAIN: forgejo.${sops:external-domain}
+        START_SSH_SERVER: true
+        SSH_PORT: 2222
+        SSH_LISTEN_PORT: 2222
+        LFS_START_SERVER: true
+        LFS_JWT_SECRET_URI: file:${forgejoDir}/jwt_secret
+      database:
+        DB_TYPE: sqlite3
+        PATH: ${forgejoDir}/data/forgejo.db
+      repository:
+        ROOT: ${forgejoDir}/repos
+      lfs:
+        PATH: ${forgejoDir}/data/lfs
+      log:
+        ROOT_PATH: ${forgejoDir}/log
+      security:
+        INSTALL_LOCK: true
+        SECRET_KEY_URI: file:${forgejoDir}/secret_key
+        INTERNAL_TOKEN_URI: file:${forgejoDir}/internal_token
+      service:
+        DISABLE_REGISTRATION: true
+      oauth2:
+        JWT_SECRET_URI: file:${forgejoDir}/oauth2_jwt_secret
+      session:
+        PROVIDER: file
+        PROVIDER_CONFIG: ${forgejoDir}/data/sessions
+        COOKIE_SECURE: true
+      picture:
+        AVATAR_UPLOAD_PATH: ${forgejoDir}/data/avatars
+        REPOSITORY_AVATAR_UPLOAD_PATH: ${forgejoDir}/data/repo-avatars

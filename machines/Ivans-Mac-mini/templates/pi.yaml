@@ -1,0 +1,10 @@
+templates:
+  # pi runs a `!`-prefixed key as a command, so the key stays in its sops file.
+  pi-auth:
+    path: ~/.pi/agent/auth.json
+    format: json
+    mode: "0600"
+    content:
+      anthropic:
+        type: api_key
+        key: "!cat ${sopsPath:anthropic-api-key}"

@@ -1,0 +1,235 @@
+templates:
+  gatus-config:
+    path: ${renderedDir}/gatus-config.yaml
+    format: yaml
+    content:
+      web: { address: "${bindAddress}", port: 8086 }
+      storage:
+        type: sqlite
+        path: ${externalStoragePath}/.gatus/data.db
+        caching: true
+      ui:
+        title: mini | Gatus
+        header: mini
+        dashboard-heading: mini
+        dashboard-subheading: Homelab services, grouped by host
+        default-sort-by: group
+      alerting:
+        discord:
+          webhook-url: ${sops:discord-webhook-gatus}
+          default-alert:
+            enabled: true
+            failure-threshold: 3
+            success-threshold: 2
+            send-on-resolved: true
+      # mini probes use loopback: miniIp vanishes when the LAN link drops.
+      # a3 is powered off deliberately at times, so its probes have no alerts.
+      endpoints:
+        - name: external-domain
+          group: local-domain
+          url: https://forgejo.${sops:external-domain}
+          interval: 60s
+          conditions: ["[STATUS] == 200", "[CERTIFICATE_EXPIRATION] > 72h"]
+          alerts: [{ type: discord }]
+        - name: battery-dashboard
+          group: local-domain
+          url: https://battery.${sops:external-domain}/
+          interval: 60s
+          conditions:
+            - "[STATUS] == 200"
+            - "[BODY] == pat(*<title>Battery Monitoring</title>*)"
+          alerts: [{ type: discord }]
+        - name: caddy-http
+          group: mini
+          url: "tcp://127.0.0.1:80"
+          interval: 60s
+          conditions: ["[CONNECTED] == true"]
+          alerts: [{ type: discord }]
+        - name: caddy-https
+          group: mini
+          url: "tcp://127.0.0.1:443"
+          interval: 60s
+          conditions: ["[CONNECTED] == true"]
+          alerts: [{ type: discord }]
+        - name: dnsmasq
+          group: mini
+          url: 127.0.0.1
+          dns: { query-name: example.com, query-type: A }
+          interval: 60s
+          conditions: ["[DNS_RCODE] == NOERROR"]
+          alerts: [{ type: discord }]
+        - name: stubby
+          group: mini
+          url: "tcp://127.0.0.1:5453"
+          interval: 60s
+          conditions: ["[CONNECTED] == true"]
+          alerts: [{ type: discord }]
+        - name: ssh
+          group: mini
+          url: "tcp://127.0.0.1:22"
+          interval: 60s
+          conditions: ["[CONNECTED] == true"]
+          alerts: [{ type: discord }]
+        - name: forgejo
+          group: mini
+          url: "http://127.0.0.1:3300"
+          interval: 60s
+          conditions: ["[STATUS] == 200"]
+          alerts: [{ type: discord }]
+        - name: forgejo-ssh
+          group: mini
+          url: "tcp://127.0.0.1:2222"
+          interval: 60s
+          conditions: ["[CONNECTED] == true"]
+          alerts: [{ type: discord }]
+        - name: syncthing
+          group: mini
+          url: "http://127.0.0.1:8384"
+          interval: 60s
+          conditions: ["[STATUS] == 200"]
+          alerts: [{ type: discord }]
+        - name: stash
+          group: mini
+          url: "http://127.0.0.1:9999"
+          interval: 60s
+          conditions: ["[STATUS] == 200"]
+          alerts: [{ type: discord }]
+        - name: battery-monitoring
+          group: mini
+          url: "http://127.0.0.1:8787/soc"
+          interval: 60s
+          conditions: ["[STATUS] == 200"]
+          alerts: [{ type: discord }]
+        - name: beszel-agent
+          group: mini
+          url: "tcp://127.0.0.1:45876"
+          interval: 60s
+          conditions: ["[CONNECTED] == true"]
+          alerts: [{ type: discord }]
+        - name: beszel-hub
+          group: mini
+          url: "http://127.0.0.1:8090"
+          interval: 60s
+          conditions: ["[STATUS] == 200"]
+          alerts: [{ type: discord }]
+        - name: podservice
+          group: mini
+          url: "http://127.0.0.1:8083"
+          interval: 60s
+          conditions: ["[STATUS] == 200"]
+          alerts: [{ type: discord }]
+        - name: mailpit
+          group: mini
+          url: "http://127.0.0.1:8025/readyz"
+          interval: 60s
+          conditions: ["[STATUS] == 200"]
+          alerts: [{ type: discord }]
+        - name: mailpit-smtp
+          group: mini
+          url: "tcp://127.0.0.1:25"
+          interval: 60s
+          conditions: ["[CONNECTED] == true"]
+          alerts: [{ type: discord }]
+        - name: rabbitmq
+          group: mini
+          url: "tcp://127.0.0.1:5672"
+          interval: 60s
+          conditions: ["[CONNECTED] == true"]
+          alerts: [{ type: discord }]
+        - name: jellyfin
+          group: mini
+          url: "http://127.0.0.1:8096"
+          interval: 60s
+          conditions: ["[STATUS] == 200"]
+          alerts: [{ type: discord }]
+        - name: navidrome
+          group: mini
+          url: "http://127.0.0.1:4533"
+          interval: 60s
+          conditions: ["[STATUS] == 200"]
+          alerts: [{ type: discord }]
+        - name: prowlarr
+          group: mini
+          url: "http://127.0.0.1:9696"
+          interval: 60s
+          conditions: ["[STATUS] == 200"]
+          alerts: [{ type: discord }]
+        - name: radarr
+          group: mini
+          url: "http://127.0.0.1:7878"
+          interval: 60s
+          conditions: ["[STATUS] == 200"]
+          alerts: [{ type: discord }]
+        - name: sonarr
+          group: mini
+          url: "http://127.0.0.1:8989"
+          interval: 60s
+          conditions: ["[STATUS] == 200"]
+          alerts: [{ type: discord }]
+        - name: transmission
+          group: mini
+          url: "http://127.0.0.1:9091"
+          interval: 60s
+          conditions: ["[STATUS] == 401"]
+          alerts: [{ type: discord }]
+        - name: miniserve
+          group: mini
+          url: "http://127.0.0.1:8080"
+          interval: 60s
+          conditions: ["[STATUS] == 401"]
+          alerts: [{ type: discord }]
+        - name: beszel-agent
+          group: a3
+          url: "tcp://${a3Ip}:45876"
+          interval: 60s
+          conditions: ["[CONNECTED] == true"]
+          alerts: []
+        - name: caddy-http
+          group: a3
+          url: "tcp://${a3Ip}:80"
+          interval: 60s
+          conditions: ["[CONNECTED] == true"]
+          alerts: []
+        - name: caddy-https
+          group: a3
+          url: "tcp://${a3Ip}:443"
+          interval: 60s
+          conditions: ["[CONNECTED] == true"]
+          alerts: []
+        - name: dnsmasq
+          group: a3
+          url: "${a3Ip}"
+          dns: { query-name: example.com, query-type: A }
+          interval: 60s
+          conditions: ["[DNS_RCODE] == NOERROR"]
+          alerts: []
+        - name: stubby
+          group: a3
+          url: "tcp://${a3Ip}:5453"
+          interval: 60s
+          conditions: ["[CONNECTED] == true"]
+          alerts: []
+        - name: immich
+          group: a3
+          url: "http://${a3Ip}:2283"
+          interval: 60s
+          conditions: ["[STATUS] == 200"]
+          alerts: []
+        - name: ollama
+          group: a3
+          url: "http://${a3Ip}:11434"
+          interval: 60s
+          conditions: ["[STATUS] == 200"]
+          alerts: []
+        - name: open-webui
+          group: a3
+          url: "http://${a3Ip}:8091"
+          interval: 60s
+          conditions: ["[STATUS] == 200"]
+          alerts: []
+        - name: syncthing
+          group: a3
+          url: "http://${a3Ip}:8384"
+          interval: 60s
+          conditions: ["[STATUS] == 200"]
+          alerts: []

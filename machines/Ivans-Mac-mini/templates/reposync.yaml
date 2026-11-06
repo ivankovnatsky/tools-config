@@ -1,0 +1,54 @@
+templates:
+  reposync-config:
+    path: ${renderedDir}/reposync-config.json
+    format: json
+    content:
+      alertRepeatSeconds: 10800
+      alertStateFile: ${home}/.local/state/reposync/alerts.json
+      discordWebhookFile: ${sopsPath:discord-webhook-reposync}
+      domainFile: ${sopsPath:external-domain}
+      usernameFile: ${sopsPath:forgejo-user-name}
+      # @domain@/@username@ are substituted by reposync from the files above.
+      repositories:
+        - name: home
+          path: ${home}
+          remote: origin
+          remoteUrl: https://forgejo.@domain@/@username@/home.git
+          branch: main
+          identity: &forgejoIdentity
+            name: "@username@"
+            email: "@username@@@domain@"
+            signingKey: "@username@@@domain@"
+        - path: ${homeWorkPath}/Sources/github.com/ivankovnatsky/nix-config
+          remote: origin
+          remoteUrl: https://github.com/ivankovnatsky/nix-config.git
+          branch: main
+        - path: ${home}/Sources/github.com/ivankovnatsky/tools
+          remote: origin
+          remoteUrl: https://github.com/ivankovnatsky/tools.git
+          branch: main
+        - path: ${home}/Sources/github.com/ivankovnatsky/podservice
+          remote: origin
+          remoteUrl: https://github.com/ivankovnatsky/podservice.git
+          branch: main
+        - path: ${home}/Notes
+          remote: origin
+          remoteUrl: https://forgejo.@domain@/@username@/notes.git
+          branch: main
+          autoStage: true
+          identity: *forgejoIdentity
+        - path: ${home}/Notes2
+          remote: origin
+          remoteUrl: https://forgejo.@domain@/@username@/notes2.git
+          branch: main
+          autoStage: true
+          identity: *forgejoIdentity
+        - path: ${home}/Sources/@domain@/@username@/cv
+          remote: origin
+          remoteUrl: https://forgejo.@domain@/@username@/cv.git
+          branch: main
+          identity: *forgejoIdentity
+        - path: ${externalStoragePath}
+          remote: origin
+          remoteUrl: https://forgejo.@domain@/@username@/data.git
+          branch: main

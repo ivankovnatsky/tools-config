@@ -1,0 +1,41 @@
+templates:
+  transmission-settings:
+    path: ${renderedDir}/transmission-settings.json
+    format: json
+    content:
+      rpc-enabled: true
+      rpc-bind-address: ${bindAddress}
+      rpc-port: 9091
+      rpc-host-whitelist-enabled: false
+      rpc-authentication-required: true
+      rpc-username: ${sops:transmission-username}
+      rpc-password: ${sops:transmission-password}
+      rpc-whitelist-enabled: false
+      rpc-whitelist: 192.168.*.*
+      download-dir: ${mediaDir}/Downloads
+      incomplete-dir: ${mediaDir}/Downloads/.incomplete
+      incomplete-dir-enabled: true
+      watch-dir: ${mediaDir}/Downloads/Watchdir
+      watch-dir-enabled: true
+      bind-address-ipv4: ${bindAddress}
+      peer-port: 51413
+      peer-port-random-on-start: false
+      port-forwarding-enabled: false
+      umask: 2
+      message-level: 2
+      cache-size-mb: 4
+      queue-stalled-enabled: true
+      queue-stalled-minutes: 30
+      ratio-limit-enabled: false
+      seed-time-limit-enabled: false
+      idle-seeding-limit-enabled: false
+      script-torrent-done-enabled: false
+      speed-limit-down: 0
+      speed-limit-down-enabled: false
+      speed-limit-up: 0
+      speed-limit-up-enabled: false
+      encryption: 1
+      utp-enabled: true
+      dht-enabled: true
+      pex-enabled: true
+      lpd-enabled: false

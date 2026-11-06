@@ -1,0 +1,15 @@
+templates:
+  # https://github.com/gabrie30/ghorg/blob/master/sample-conf.yaml
+  ghorg-conf:
+    path: ~/.config/ghorg/conf.yaml
+    format: yaml
+    content:
+      GHORG_SCM_TYPE: github
+      GHORG_CLONE_PROTOCOL: https
+      GHORG_CLONE_TYPE: org
+      GHORG_NO_CLEAN: true
+      GHORG_FETCH_ALL: true
+      GHORG_QUIET: true
+      GHORG_ABSOLUTE_PATH_TO_CLONE_TO: ${home}/Sources/github.com
+      GHORG_SKIP_ARCHIVED: true
+      GHORG_GITHUB_TOKEN: ${sops:github-token}

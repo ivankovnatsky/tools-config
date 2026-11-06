@@ -1,0 +1,12 @@
+templates:
+  agent-sessions-config:
+    path: ${renderedDir}/agent-sessions.json
+    format: json
+    mode: "0444"
+    content:
+      dir: ${agentSessionsDir}
+      sources:
+        claude: ${home}/.claude/projects
+        codex: ${home}/.codex/sessions
+        pi: ${home}/.pi/agent/sessions
+        grok: ${home}/.grok/sessions

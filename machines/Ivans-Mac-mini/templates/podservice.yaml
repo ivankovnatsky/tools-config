@@ -1,0 +1,42 @@
+templates:
+  podservice-config:
+    path: ${renderedDir}/podservice-config.yaml
+    format: yaml
+    content:
+      server:
+        port: 8083
+        host: ${bindAddress}
+        base_url: https://podservice.${sops:external-domain}
+      podcast:
+        title: My YouTube Podcast
+        description: YouTube videos converted to podcast episodes
+        author: Podservice
+        language: en-us
+        category: Technology
+      storage:
+        data_dir: ${podserviceDir}
+        audio_dir: ${podserviceDir}/audio
+        metadata_dir: ${podserviceDir}/metadata
+        thumbnails_dir: ${podserviceDir}/thumbnails
+        s3:
+          enabled: true
+          endpoint_url: ${sops:podservice-s3-endpoint-url}
+          bucket: ${sops:podservice-s3-bucket}
+          region: auto
+          public_base_url: https://${sops:podservice-s3-public-host}
+          prefix: ${sops:podservice-s3-prefix}
+          access_key_id_file: ${sopsPath:podservice-s3-access-key-id}
+          secret_access_key_file: ${sopsPath:podservice-s3-secret-access-key}
+      rabbitmq:
+        host: 127.0.0.1
+        port: 5672
+        management_port: 15672
+        username: guest
+        virtual_host: /
+        exchange: podservice.commands
+        queue: podservice.downloads
+        routing_key: download.requested
+        retry_delays: [30, 300, 1800]
+        reconnect_delay: 5
+      kafka: { enabled: false }
+      log_level: INFO

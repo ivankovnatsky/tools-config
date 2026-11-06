@@ -1,0 +1,10 @@
+templates:
+  rbw-config:
+    path: ~/Library/Application Support/rbw/config.json
+    format: json
+    mode: "0600"
+    content:
+      email: ${sops:email}
+      lock_timeout: 2419200
+      sync_interval: 3600
+      pinentry: /opt/homebrew/bin/pinentry-tty

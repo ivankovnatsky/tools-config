@@ -2,6 +2,19 @@ include:
   - ../shared/base.yaml
   - ../shared/darwin.yaml
   - Ivans-Mac-mini/sops.yaml
+  - Ivans-Mac-mini/templates/agent-sessions.yaml
+  - Ivans-Mac-mini/templates/battery-monitoring.yaml
+  - Ivans-Mac-mini/templates/forgejo.yaml
+  - Ivans-Mac-mini/templates/gatus.yaml
+  - Ivans-Mac-mini/templates/ghorg.yaml
+  - Ivans-Mac-mini/templates/miniserve.yaml
+  - Ivans-Mac-mini/templates/pi.yaml
+  - Ivans-Mac-mini/templates/podservice.yaml
+  - Ivans-Mac-mini/templates/rabbitmq.yaml
+  - Ivans-Mac-mini/templates/rbw.yaml
+  - Ivans-Mac-mini/templates/reposync.yaml
+  - Ivans-Mac-mini/templates/stash.yaml
+  - Ivans-Mac-mini/templates/transmission.yaml
 
 vars:
   externalStoragePath: /Volumes/Storage/Data

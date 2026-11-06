@@ -1,0 +1,5 @@
+templates:
+  miniserve-auth:
+    path: ${renderedDir}/miniserve-auth
+    content: |
+      ${sops:miniserve-username}:${sops:miniserve-password}
