@@ -35,3 +35,7 @@ templates:
     path: ~/.config/gwq/config.toml
     file: machines/Ivans-Mac-mini/.config/gwq/config.toml
     mode: "0644"
+  tmuxinator-dev:
+    path: ~/.config/tmuxinator/Ivans-Mac-mini-dev.yml
+    file: machines/Ivans-Mac-mini/.config/tmuxinator/Ivans-Mac-mini-dev.yml
+    mode: "0644"

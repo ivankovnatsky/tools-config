@@ -1,0 +1,17 @@
+name: Ivans-Mac-mini-dev
+startup_window: 0
+root: ${home}
+
+windows:
+  - backup:
+      root: ${externalStoragePath}/Backup
+      layout: main-horizontal
+      panes:
+        - ls -lah
+        - make sync
+  - youtube:
+      root: ${externalStoragePath}/Youtube
+      layout: main-horizontal
+      panes:
+        - nvim List.txt
+        - make watch
