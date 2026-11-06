@@ -91,6 +91,10 @@ files:
   - target: ~/.local/bin/claude-statusline
     source: machines/Ivans-Mac-mini/.local/bin/claude-statusline
     mode: "0755"
+  - target: ~/.config/env/env.sh
+    source: machines/Ivans-Mac-mini/.config/env/env.sh
+  - target: ~/.config/env/env.nu
+    source: machines/Ivans-Mac-mini/.config/env/env.nu
 
 gitRepos:
   ~/.local/share/tmux-plugins/tmux-continuum: https://github.com/tmux-plugins/tmux-continuum
