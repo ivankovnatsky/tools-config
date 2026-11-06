@@ -194,6 +194,9 @@ files:
   - target: ~/.gnupg/gpg-agent.conf
     source: machines/Ivans-Mac-mini/.gnupg/gpg-agent.conf
     mode: "0600"
+  - target: ~/.config/gwq/config.toml
+    source: machines/Ivans-Mac-mini/.config/gwq/config.toml
+    mode: "0644"
 
 gitRepos:
   ~/.local/share/fish-plugins/autopair: https://github.com/jorgebucaran/autopair.fish
