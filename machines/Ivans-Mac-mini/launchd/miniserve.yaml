@@ -1,0 +1,15 @@
+launchd:
+  services:
+    miniserve:
+      waitForPath: ${externalStoragePath}
+      waitForSecrets: true
+      command: |-
+        /opt/homebrew/bin/miniserve \
+        --interfaces 127.0.0.1 \
+        --interfaces ::1 \
+        --interfaces ${bindAddress} \
+        --auth-file ${renderedDir}/miniserve-auth \
+        --upload-files /Backup/Machines \
+        --mkdir \
+        --on-duplicate-files rename \
+        ${externalStoragePath}

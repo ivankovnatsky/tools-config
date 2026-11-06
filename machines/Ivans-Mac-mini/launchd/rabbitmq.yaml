@@ -1,0 +1,20 @@
+launchd:
+  services:
+    rabbitmq:
+      waitForPath: ${externalStoragePath}
+      dataDir: ${rabbitmqDir}
+      extraDirs:
+        - ${rabbitmqDir}/log
+      environment:
+        # Short node name avoids depending on the LAN hostname resolving.
+        RABBITMQ_NODENAME: rabbit@localhost
+        RABBITMQ_MNESIA_BASE: ${rabbitmqDir}
+        RABBITMQ_LOG_BASE: ${rabbitmqDir}/log
+        RABBITMQ_CONFIG_FILE: ${renderedDir}/rabbitmq.conf
+        RABBITMQ_ENABLED_PLUGINS_FILE: ${renderedDir}/rabbitmq-enabled-plugins
+        # epmd and Erlang distribution bind all interfaces unless told otherwise.
+        ERL_EPMD_ADDRESS: 127.0.0.1
+        RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS: |-
+          -kernel inet_dist_use_interface {127,0,0,1}
+        PATH: /opt/homebrew/bin:/usr/bin:/bin
+      command: /opt/homebrew/sbin/rabbitmq-server

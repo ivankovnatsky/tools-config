@@ -1,0 +1,25 @@
+launchd:
+  services:
+    # config.xml is rewritten at start: BindAddress "*" so a missing interface
+    # can't stop the service, ApiKey from sops so arr services and Prowlarr's
+    # app sync share it.
+    prowlarr:
+      waitForPath: ${externalStoragePath}
+      waitForSecrets: true
+      dataDir: ${externalStoragePath}/.prowlarr
+      preStart: |
+        if [ -f "${externalStoragePath}/.prowlarr/config.xml" ]; then
+          API_KEY=$(cat ${sopsPath:arr-prowlarr-api-key})
+          /usr/bin/sed -i '' \
+            -e 's|<BindAddress>[^<]*</BindAddress>|<BindAddress>*</BindAddress>|' \
+            -e "s|<ApiKey>[^<]*</ApiKey>|<ApiKey>$API_KEY</ApiKey>|" \
+            "${externalStoragePath}/.prowlarr/config.xml"
+        fi
+      environment:
+        DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: "1"
+        # Indexer definitions need cultures beyond invariant.
+        DOTNET_SYSTEM_GLOBALIZATION_PREDEFINED_CULTURES_ONLY: "false"
+      command: |-
+        /Applications/Prowlarr.app/Contents/MacOS/Prowlarr \
+        -nobrowser \
+        -data=${externalStoragePath}/.prowlarr

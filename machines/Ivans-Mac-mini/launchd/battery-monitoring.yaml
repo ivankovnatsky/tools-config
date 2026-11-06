@@ -1,0 +1,20 @@
+launchd:
+  services:
+    battery-monitoring-serve:
+      waitForSecrets: true
+      command: |-
+        ${uvBin}/battery-monitoring serve \
+        --host ${bindAddress} --port 8787 --max-age 300 \
+        --notify-step 10 --notify-on discharge \
+        --webhook-file ${sopsPath:battery-monitoring-discord-webhook} \
+        --secrets-file ${renderedDir}/battery-monitoring-secrets
+
+    # Needs Automation (TCC) permission to control System Events for turnoff.
+    battery-monitoring-check:
+      waitForSecrets: true
+      command: |-
+        ${uvBin}/battery-monitoring check \
+        --url http://127.0.0.1:8787/soc \
+        --threshold 25 --debounce 1 --interval 30 \
+        --shutdown --shutdown-cmd '${uvBin}/settings turnoff' \
+        --webhook-file ${sopsPath:battery-monitoring-discord-webhook}

@@ -1,0 +1,23 @@
+launchd:
+  services:
+    radarr:
+      waitForPath: ${externalStoragePath}
+      waitForSecrets: true
+      dataDir: ${externalStoragePath}/.radarr
+      extraDirs:
+        - ${mediaDir}/Movies
+        - ${mediaDir}/Downloads/Radarr
+      preStart: |
+        if [ -f "${externalStoragePath}/.radarr/config.xml" ]; then
+          API_KEY=$(cat ${sopsPath:arr-radarr-api-key})
+          /usr/bin/sed -i '' \
+            -e 's|<BindAddress>[^<]*</BindAddress>|<BindAddress>*</BindAddress>|' \
+            -e "s|<ApiKey>[^<]*</ApiKey>|<ApiKey>$API_KEY</ApiKey>|" \
+            "${externalStoragePath}/.radarr/config.xml"
+        fi
+      environment:
+        DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: "1"
+      command: |-
+        /Applications/Radarr.app/Contents/MacOS/Radarr \
+        -nobrowser \
+        -data=${externalStoragePath}/.radarr

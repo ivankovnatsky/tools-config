@@ -1,0 +1,20 @@
+launchd:
+  services:
+    # The cask keeps the web client in Resources, so --webdir is required.
+    jellyfin:
+      waitForPath: ${externalStoragePath}
+      dataDir: ${externalStoragePath}/.jellyfin
+      extraDirs:
+        - ${externalStoragePath}/.jellyfin/config
+        - ${externalStoragePath}/.jellyfin/cache
+        - ${externalStoragePath}/.jellyfin/log
+        - ${mediaDir}/Movies
+        - ${mediaDir}/TV
+      command: |-
+        "/Applications/Jellyfin.app/Contents/MacOS/jellyfin" \
+        --datadir ${externalStoragePath}/.jellyfin \
+        --configdir ${externalStoragePath}/.jellyfin/config \
+        --cachedir ${externalStoragePath}/.jellyfin/cache \
+        --logdir ${externalStoragePath}/.jellyfin/log \
+        --webdir "/Applications/Jellyfin.app/Contents/Resources/jellyfin-web" \
+        --ffmpeg "/Applications/Jellyfin.app/Contents/MacOS/ffmpeg"

@@ -1,0 +1,23 @@
+launchd:
+  services:
+    # Replaces the nix *-mgmt agents (arr, beszel, forgejo, jellyfin,
+    # nextdns, syncthing): at load, then every 3h like forgejo-mgmt.
+    # preStart waits for the slow-starting APIs after boot.
+    tools-mgmt:
+      keepAlive: false
+      waitForSecrets: true
+      startInterval: 10800
+      environment:
+        PATH: /opt/homebrew/bin:/usr/bin:/bin
+      preStart: |
+        for url in http://127.0.0.1:8096/System/Info/Public http://127.0.0.1:8384/rest/noauth/health; do
+          for _ in $(seq 90); do
+            curl -fsS -o /dev/null --connect-timeout 2 "$url" && break
+            sleep 2
+          done
+        done
+      command: |-
+        ${uvBin}/tools deploy \
+        --config ${toolsConfigPath} \
+        --scope mgmt \
+        --approve

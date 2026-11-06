@@ -1,0 +1,19 @@
+launchd:
+  services:
+    # transmission-daemon rewrites settings.json on exit, so it gets a copy.
+    transmission:
+      waitForPath: ${externalStoragePath}
+      waitForSecrets: true
+      dataDir: ${transmissionDir}
+      extraDirs:
+        - ${mediaDir}/Downloads
+        - ${mediaDir}/Downloads/.incomplete
+        - ${mediaDir}/Downloads/Watchdir
+      preStart: |
+        /bin/cp ${renderedDir}/transmission-settings.json ${transmissionDir}/settings.json
+        /bin/chmod 600 ${transmissionDir}/settings.json
+      command: |-
+        /opt/homebrew/bin/transmission-daemon \
+        --foreground \
+        --config-dir ${transmissionDir} \
+        --logfile ${transmissionDir}/transmission.log

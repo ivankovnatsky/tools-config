@@ -1,0 +1,17 @@
+launchd:
+  services:
+    podservice:
+      waitForPath: ${externalStoragePath}
+      waitForSecrets: true
+      dataDir: ${podserviceDir}
+      extraDirs:
+        - ${podserviceDir}/audio
+        - ${podserviceDir}/metadata
+        - ${podserviceDir}/thumbnails
+        - ${podserviceDir}/db
+      environment:
+        # brew ffmpeg.
+        PATH: /opt/homebrew/bin:/usr/bin:/bin
+      command: |-
+        ${uvBin}/podservice serve \
+        --config=${renderedDir}/podservice-config.yaml

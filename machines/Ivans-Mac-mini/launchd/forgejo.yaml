@@ -1,0 +1,29 @@
+launchd:
+  services:
+    forgejo:
+      waitForPath: ${externalStoragePath}
+      waitForSecrets: true
+      dataDir: ${forgejoDir}
+      extraDirs:
+        - ${forgejoDir}/data
+        - ${forgejoDir}/repos
+        - ${forgejoDir}/data/lfs
+        - ${forgejoDir}/data/sessions
+        - ${forgejoDir}/data/avatars
+        - ${forgejoDir}/data/repo-avatars
+        - ${forgejoDir}/log
+      environment:
+        HOME: ${home}
+        FORGEJO_WORK_DIR: ${forgejoDir}
+      # Forgejo requires these with INSTALL_LOCK=true; created once.
+      preStart: |
+        for pair in secret_key:SECRET_KEY internal_token:INTERNAL_TOKEN jwt_secret:JWT_SECRET oauth2_jwt_secret:JWT_SECRET; do
+          file="${forgejoDir}/$(echo "$pair" | cut -d: -f1)"
+          if [ ! -f "$file" ]; then
+            /opt/homebrew/bin/forgejo generate secret "$(echo "$pair" | cut -d: -f2)" > "$file"
+            chmod 600 "$file"
+          fi
+        done
+      command: |-
+        /opt/homebrew/bin/forgejo web \
+        --config ${renderedDir}/forgejo-app.ini

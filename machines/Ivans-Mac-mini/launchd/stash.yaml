@@ -1,0 +1,31 @@
+launchd:
+  services:
+    # Stash bcrypt-compares the login against config `password`, so hash a
+    # plaintext secret. script(1) gives stash a pty, which suppresses its
+    # menubar icon.
+    stash:
+      waitForPath: ${stashDir}
+      waitForSecrets: true
+      dataDir: ${stashDataDir}
+      extraDirs:
+        - ${stashDataDir}/logs
+        - ${stashDataDir}/config
+        - ${stashDataDir}/generated
+        - ${stashDataDir}/cache
+        - ${stashDataDir}/blobs
+        - ${stashDataDir}/metadata
+      preStart: |
+        if [ -f "${stashDataDir}/config/config.yml" ]; then
+          cp "${stashDataDir}/config/config.yml" "${stashDataDir}/config/config.yml.backup.$(date +%Y%m%d-%H%M%S)"
+        fi
+        STASH_PASSWORD=$(cat ${sopsPath:stash-password})
+        case "$STASH_PASSWORD" in
+          '$2'[aby]'$'*) ;;
+          *) STASH_PASSWORD=$(/usr/sbin/htpasswd -nbBC 10 "" "$STASH_PASSWORD" | cut -d: -f2 | tr -d '\n') ;;
+        esac
+        sed -e "s|@password@|$STASH_PASSWORD|g" ${renderedDir}/stash-config.yml > "${stashDataDir}/config/config.yml"
+        chmod 600 "${stashDataDir}/config/config.yml"
+      command: |-
+        script \
+        -q /dev/null ${localBin}/stash \
+        --config ${stashDataDir}/config/config.yml

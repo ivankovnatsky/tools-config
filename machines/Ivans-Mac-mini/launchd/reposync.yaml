@@ -1,0 +1,15 @@
+launchd:
+  services:
+    # REPOSYNC_TIMER=1 marks a timer run: reposync waits out the first
+    # minutes after boot.
+    reposync:
+      runAtLoad: false
+      keepAlive: false
+      waitForSecrets: true
+      startInterval: 300
+      environment:
+        PATH: /opt/homebrew/bin:/usr/bin:/bin
+        REPOSYNC_TIMER: "1"
+      command: |-
+        ${uvBin}/reposync sync \
+        --config-file ${renderedDir}/reposync-config.json

@@ -1,0 +1,13 @@
+launchd:
+  services:
+    auto-poweroff:
+      runAtLoad: false
+      keepAlive: false
+      startCalendarInterval: { hour: 22, minute: 20 }
+      command: ${uvBin}/homelab auto-shutdown
+
+    auto-poweroff-notify:
+      runAtLoad: false
+      keepAlive: false
+      startCalendarInterval: { hour: 22, minute: 10 }
+      command: ${uvBin}/homelab auto-notify

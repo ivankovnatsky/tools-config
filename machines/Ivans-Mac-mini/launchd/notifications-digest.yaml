@@ -1,0 +1,8 @@
+launchd:
+  services:
+    notifications-digest:
+      runAtLoad: false
+      keepAlive: false
+      waitForSecrets: true
+      startCalendarInterval: [{ hour: 21, minute: 0 }]
+      command: ${uvBin}/notifications digest-flush

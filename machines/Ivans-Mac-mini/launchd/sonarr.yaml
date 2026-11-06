@@ -1,0 +1,23 @@
+launchd:
+  services:
+    sonarr:
+      waitForPath: ${externalStoragePath}
+      waitForSecrets: true
+      dataDir: ${externalStoragePath}/.sonarr
+      extraDirs:
+        - ${mediaDir}/TV
+        - ${mediaDir}/Downloads/TV-Sonarr
+      preStart: |
+        if [ -f "${externalStoragePath}/.sonarr/config.xml" ]; then
+          API_KEY=$(cat ${sopsPath:arr-sonarr-api-key})
+          /usr/bin/sed -i '' \
+            -e 's|<BindAddress>[^<]*</BindAddress>|<BindAddress>*</BindAddress>|' \
+            -e "s|<ApiKey>[^<]*</ApiKey>|<ApiKey>$API_KEY</ApiKey>|" \
+            "${externalStoragePath}/.sonarr/config.xml"
+        fi
+      environment:
+        DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: "1"
+      command: |-
+        /Applications/Sonarr.app/Contents/MacOS/Sonarr \
+        -nobrowser \
+        -data=${externalStoragePath}/.sonarr

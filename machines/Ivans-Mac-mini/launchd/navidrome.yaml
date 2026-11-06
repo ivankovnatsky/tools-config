@@ -1,0 +1,21 @@
+launchd:
+  services:
+    navidrome:
+      waitForPath: ${externalStoragePath}
+      waitForSecrets: true
+      dataDir: ${externalStoragePath}/.navidrome
+      extraDirs:
+        - ${externalStoragePath}/Music
+      preStart: |
+        export ND_LASTFM_APIKEY=$(cat ${sopsPath:lastFm-api-key})
+        export ND_LASTFM_SECRET=$(cat ${sopsPath:lastFm-secret})
+      environment:
+        ND_ENABLETRANSCODINGCONFIG: "true"
+        ND_FFMPEGPATH: /opt/homebrew/bin/ffmpeg
+        ND_SCANNER_SCHEDULE: "@every 15m"
+      command: |-
+        /opt/homebrew/bin/navidrome \
+        --datafolder "${externalStoragePath}/.navidrome" \
+        --musicfolder "${externalStoragePath}/Music" \
+        --address ${bindAddress} \
+        --port 4533

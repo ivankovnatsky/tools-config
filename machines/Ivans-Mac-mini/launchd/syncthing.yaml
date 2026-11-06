@@ -1,0 +1,10 @@
+launchd:
+  services:
+    syncthing:
+      throttleInterval: 10
+      command: |-
+        /opt/homebrew/bin/syncthing serve \
+        --no-browser \
+        --no-restart \
+        --no-upgrade \
+        --gui-address=${bindAddress}:8384

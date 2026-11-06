@@ -1,0 +1,22 @@
+launchd:
+  services:
+    # No `qmd cleanup`: on 2.8.3 it permanently drops docs that a run with
+    # the vault path missing marked inactive (tobi/qmd#989).
+    qmd-update:
+      keepAlive: false
+      waitForPath: ${externalStoragePath}
+      dataDir: ${externalStoragePath}/.cache/qmd
+      startCalendarInterval: { minute: 30 }
+      environment:
+        PATH: ${npmBin}:/opt/homebrew/bin:/usr/bin:/bin
+      preStart: |
+        /bin/mkdir -p "${agentSessionsDir}/md"
+        ${uvBin}/agent-sessions ${renderedDir}/agent-sessions.json || echo "agent-sessions failed"
+        if ! qmd collection show notes >/dev/null 2>&1; then
+          qmd collection add "${home}/Notes" --name notes
+        fi
+        if ! qmd collection show sessions >/dev/null 2>&1; then
+          qmd collection add "${agentSessionsDir}/md" --name sessions
+          qmd context add qmd://sessions 'Past agent sessions (Claude Code, Codex, Grok, pi): user and assistant text only'
+        fi
+      command: /bin/bash -c 'qmd update && qmd embed'

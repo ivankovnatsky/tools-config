@@ -1,0 +1,8 @@
+launchd:
+  services:
+    settings-daemon:
+      throttleInterval: 30
+      command: |-
+        ${uvBin}/settings daemon run --autovolume \
+        --autovolume-idle 1800 --autovolume-threshold 6 \
+        --check-interval 300 --verbose

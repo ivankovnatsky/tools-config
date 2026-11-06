@@ -1,0 +1,9 @@
+launchd:
+  services:
+    gatus:
+      waitForPath: ${externalStoragePath}
+      waitForSecrets: true
+      dataDir: ${externalStoragePath}/.gatus
+      environment:
+        GATUS_CONFIG_PATH: ${renderedDir}/gatus-config.yaml
+      command: ${goBin}/gatus

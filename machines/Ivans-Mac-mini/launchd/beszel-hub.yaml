@@ -1,0 +1,11 @@
+launchd:
+  services:
+    # A config.yml in dataDir would make the hub prune every system
+    # beszel mgmt does not list, so keep none there.
+    beszel-hub:
+      waitForPath: ${externalStoragePath}
+      dataDir: ${externalStoragePath}/.beszel-hub
+      command: |-
+        ${localBin}/beszel-hub serve \
+        --http ${bindAddress}:8090 \
+        --dir ${externalStoragePath}/.beszel-hub
