@@ -1,0 +1,45 @@
+add_newline = false
+command_timeout = 1000
+
+[aws]
+format = "on [$symbol$profile]($style) "
+
+[directory]
+truncation_length = 1
+
+[gcloud]
+disabled = true
+
+[git_branch]
+truncation_length = 30
+truncation_symbol = ""
+
+[git_status]
+disabled = false
+
+[hostname]
+ssh_only = true
+
+[kubernetes]
+disabled = false
+[[kubernetes.contexts]]
+context_alias = "$cluster"
+context_pattern = "arn.*\\/(?P<cluster>[\\w\\/-]+)"
+
+[nodejs]
+disabled = true
+
+[package]
+disabled = true
+
+[palettes.dark]
+
+[rust]
+disabled = true
+
+[time]
+disabled = false
+time_format = "%h %d %R"
+
+[username]
+show_always = false
