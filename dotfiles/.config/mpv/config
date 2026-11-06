@@ -1,0 +1,33 @@
+# Do not show video window when playing audio
+no-audio-display
+save-position-on-quit=yes
+fs=no
+
+# When viewing images
+image-display-duration=5
+
+alang=eng
+force-seekable=yes
+audio-channels=2
+
+slang=eng
+# sub-scale=0.5
+
+# OnScreen Controller at the bottom, terriable UI, disable it.
+osc=no
+
+# https://mpv.io/manual/master/#options-osd-level
+osd-level=3
+
+no-border
+
+ytdl-format="bestvideo[height<=1080]+bestaudio/best"
+
+auto-window-resize=no
+keep-open=no
+
+keepaspect-window=no
+autofit-larger=100%x100%
+
+# Prevent window from floating on top
+ontop=no
