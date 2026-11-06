@@ -197,6 +197,9 @@ files:
   - target: ~/.config/gwq/config.toml
     source: machines/Ivans-Mac-mini/.config/gwq/config.toml
     mode: "0644"
+  - target: ~/.ssh/config
+    source: dotfiles/.ssh/config
+    mode: "0600"
 
 gitRepos:
   ~/.local/share/fish-plugins/autopair: https://github.com/jorgebucaran/autopair.fish
