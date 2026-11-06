@@ -1,0 +1,3 @@
+GO111MODULE=on
+GOCACHE=${externalStoragePath}/.cache/go-build
+GOPATH=${externalStoragePath}/.go

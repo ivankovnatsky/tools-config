@@ -19,3 +19,7 @@ templates:
     path: ~/.config/kitty/kitty.conf
     file: machines/Ivans-Mac-mini/.config/kitty/kitty.conf
     mode: "0644"
+  go-env:
+    path: "~/Library/Application Support/go/env"
+    file: "machines/Ivans-Mac-mini/Library/Application Support/go/env"
+    mode: "0644"
