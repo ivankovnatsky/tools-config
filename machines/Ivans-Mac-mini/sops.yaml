@@ -1,0 +1,65 @@
+sops:
+  age:
+    sshKeyPaths: [~/.ssh/id_ed25519]
+  secretsDir: ${secretsDir}
+  defaultSopsFile: ${homeWorkPath}/Sources/github.com/ivankovnatsky/tools-config/secrets/default.yaml
+  secrets:
+    email: { key: email }
+    openai-api-key: { key: openaiApiKey }
+    anthropic-api-key: { key: anthropicApiKey }
+    github-token: { key: githubToken }
+    external-domain: { key: externalDomain }
+    bitwarden-session: { key: bitwardenSession }
+    gh-mcp-token: { key: ghMcpToken }
+    miniserve-username: { key: miniserve/mini/username }
+    miniserve-password: { key: miniserve/mini/password }
+    forgejo-user-name: { key: forgejo/users/forgejoUser/name }
+    forgejo-token: { key: forgejo/users/forgejoUser/token }
+    steam-username: { key: steam/username }
+    steam-password: { key: steam/password }
+    discord-webhook-rebuild: { key: discord/webhooks/monitoringRebuild }
+    discord-webhook-notifications: { key: discord/webhooks/notifications }
+    weather-label: { key: weather/label }
+    weather-id: { key: weather/id }
+    youtube-client-secret: { key: youtube/clientSecret }
+    nextdns-api-key: { key: nextDNS/common/apiKey }
+    nextdns-profile-pro: { key: nextDNS/Pro/profileId }
+    nextdns-profile-air: { key: nextDNS/Air/profileId }
+    nextdns-profile-mini: { key: nextDNS/Mini/profileId }
+    nextdns-profile-phone: { key: nextDNS/Phone/profileId }
+    nextdns-profile-asus: { key: nextDNS/Asus/profileId }
+    nextdns-profile-lgphone: { key: nextDNS/LgPhone/profileId }
+    battery-monitoring-email: { key: anker/email }
+    battery-monitoring-password: { key: anker/password }
+    battery-monitoring-country: { key: anker/country }
+    battery-monitoring-discord-webhook: { key: discord/webhooks/notifications }
+    beszel-email: { key: beszel/email }
+    beszel-password: { key: beszel/password }
+    discord-webhook-beszel: { key: discord/webhooks/monitoringBeszel }
+    discord-webhook-gatus: { key: discord/webhooks/notifications }
+    discord-webhook-reposync: { key: discord/webhooks/monitoringRepoSync }
+    syncthing-devices: { key: syncthing/devices }
+    forgejo-admin-name: { key: forgejo/users/forgejoAdmin/name }
+    forgejo-admin-password: { key: forgejo/users/forgejoAdmin/password }
+    forgejo-admin-email: { key: forgejo/users/forgejoAdmin/email }
+    forgejo-user-password: { key: forgejo/users/forgejoUser/password }
+    forgejo-user-email: { key: forgejo/users/forgejoUser/email }
+    forgejo-user-gpg-key: { key: forgejo/users/forgejoUser/gpgPublicKey }
+    jellyfin-api-key: { key: jellyfin/apiKey }
+    arr-radarr-api-key: { key: arr/radarr/apiKey }
+    arr-sonarr-api-key: { key: arr/sonarr/apiKey }
+    arr-prowlarr-api-key: { key: arr/prowlarr/apiKey }
+    arr-toloka-username: { key: arr/indexers/toloka/username }
+    arr-toloka-password: { key: arr/indexers/toloka/password }
+    transmission-username: { key: transmission/username }
+    transmission-password: { key: transmission/password }
+    lastFm-api-key: { key: lastFm/apiKey }
+    lastFm-secret: { key: lastFm/secret }
+    stash-username: { key: stash/username }
+    stash-password: { key: stash/password }
+    podservice-s3-endpoint-url: { key: podservice/s3/endpointUrl }
+    podservice-s3-bucket: { key: podservice/s3/bucket }
+    podservice-s3-public-host: { key: podservice/s3/publicHost }
+    podservice-s3-prefix: { key: podservice/s3/prefix }
+    podservice-s3-access-key-id: { key: podservice/s3/accessKeyId }
+    podservice-s3-secret-access-key: { key: podservice/s3/secretAccessKey }

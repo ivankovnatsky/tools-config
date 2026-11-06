@@ -1,9 +1,11 @@
 include:
   - ../shared/base.yaml
   - ../shared/darwin.yaml
+  - Ivans-Mac-mini/sops.yaml
 
 vars:
   externalStoragePath: /Volumes/Storage/Data
+  secretsDir: ${home}/.local/state/tools/secrets
 
 paths:
   uv: /opt/homebrew/bin
