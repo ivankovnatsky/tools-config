@@ -13,9 +13,16 @@ paths:
   npmBin: ${externalStoragePath}/.npm/bin
   bunBin: ${externalStoragePath}/.bun/bin
   bun: ${externalStoragePath}/.bun/bin
+  goPath: ${externalStoragePath}/.go
+  goBin: ${externalStoragePath}/.go/bin
 
 npm:
   packages:
+    "@earendil-works/pi-coding-agent": {}
+    "@bitwarden/cli": {}
+    "@steipete/summarize": {}
+    "@xai-official/grok": {}
+    "@tobilu/qmd": {}
     openclaw:
       binary: openclaw
       version: latest
@@ -27,6 +34,57 @@ uv:
       binary: osxphotos
     ruff:
       binary: ruff
+    yt-dlp:
+      source: yt-dlp[default,curl-cffi]
+    mlx-whisper: {}
+    gallery-dl: {}
+    agent-sessions:
+      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/agent-sessions
+      binary: agent-sessions
+    battery-monitoring:
+      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/battery-monitoring
+      binary: battery-monitoring
+    homelab:
+      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/homelab
+      binary: homelab
+    notifications:
+      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/notifications
+      binary: notifications
+    reposync:
+      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/reposync
+      binary: reposync
+    settingsctl:
+      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/settingsctl
+      binary: settings
+    gh-pr:
+      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/gh-pr
+      binary: gh-pr
+    podservice:
+      source: git+https://github.com/ivankovnatsky/podservice.git
+      binary: podservice
+
+go:
+  packages:
+    go-grip:
+      source: github.com/chrishrb/go-grip
+      binary: go-grip
+    ssh-to-age:
+      source: github.com/Mic92/ssh-to-age/cmd/ssh-to-age
+      binary: ssh-to-age
+    gwq:
+      source: github.com/d-kuro/gwq/cmd/gwq
+      binary: gwq
+    gatus:
+      source: github.com/TwiN/gatus/v5
+      binary: gatus
+
+pi:
+  packages:
+    npm:pi-antigravity: {}
+
+curlShell:
+  "https://claude.ai/install.sh": bash
+  "https://antigravity.google/cli/install.sh": bash
 
 files:
   # Inherit the shared dir-walk for dotfiles. YAML lists replace on
@@ -50,24 +108,154 @@ brew:
     - keith/homebrew-formulae
     - antoniorodr/homebrew-memo
     - xwmx/homebrew-taps
+    - muxy-app/homebrew-tap
+    - openclaw/homebrew-tap
+  trust:
+    taps:
+      - pomdtr/tap
+      - keith/formulae
+      - antoniorodr/memo
+      - xwmx/taps
+      - muxy-app/tap
+      - openclaw/tap
   brews:
+    - age
+    - aria2
+    - atuin
+    - autossh
+    - bash
+    - bat
+    - black
+    - btop
+    - carapace
+    - coreutils
+    - defaultbrowser
+    - delve
+    - direnv
+    - dnsmasq
+    - duf
+    - dust
+    - erdtree
+    - exiftool
+    - fd
+    - ffmpeg
+    - ffmpegthumbnailer
+    - fish
+    - forgejo
+    - forgit
+    - fzf
+    - ggh
+    - gh
+    - ghorg
+    - ghq
+    - git
+    - git-crypt
+    - git-delta
+    - git-extras
+    - git-filter-repo
+    - gitleaks
+    - gnu-sed
+    - gnupg
+    - go
+    - gofumpt
+    - golangci-lint
+    - gopls
+    - grc
+    - grep
+    - grip
+    - imagemagick
+    - jq
+    - lsd
+    - lua-language-server
+    - macmon
+    - magic-wormhole
+    - mailpit
+    - make
+    - mas
+    - miniserve
+    - mpv
+    - navidrome
+    - ncurses
+    - neovim
+    - nixfmt
     - node
+    - nushell
     - ollama
     - pam-reattach
+    - pandoc
+    - parallel
+    - pigz
+    - pinentry
+    - poppler
+    - pre-commit
+    - prettier
+    - pv
+    - pyright
+    - rabbitmq
+    - ranger
+    - rbw
+    - rclone
+    - ripgrep
+    - ruff
+    - rumdl
+    - rust
+    - rust-analyzer
+    - shellcheck
+    - shfmt
+    - sops
+    - starship
+    - staticcheck
+    - statix
+    - stubby
+    - stylua
+    - swiftformat
+    - syncthing
+    - tailscale
+    - tinymist
+    - tmux
+    - tmuxinator
+    - transmission-cli
+    - tree
+    - tree-sitter-cli
+    - treefmt
+    - typos-cli
+    - typst
+    - typstyle
+    - unison
     - uv
+    - watchman
+    - wget
+    - yazi
+    - z.lua
+    - zapp
+    - zoxide
+    - zsh
   casks:
     - chromium
+    - claude
     - firefox
+    - firefox@developer-edition
+    - font-hack-nerd-font
     - ghostty
     - hammerspoon
+    - jellyfin
     - kitty
+    - losslessswitcher
     - mac-mouse-fix
+    - mullvad-vpn
+    - muxy-app/tap/muxy
     - obsidian
+    - prowlarr
+    - radarr
     - silicon-labs-vcp-driver
+    - sonarr
+    - stash
+    - whatsapp
   masApps:
     Numbers: 409203825
     Pages: 409201541
     Bitwarden: 1352778147
+    TaskForge - Obsidian Tasks: 6744716215
 
 defaults:
   user:
