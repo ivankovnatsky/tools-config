@@ -1,0 +1,6 @@
+color:
+  theme: custom
+icons:
+  when: always
+sorting:
+  dir-grouping: first
