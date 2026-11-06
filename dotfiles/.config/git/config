@@ -1,0 +1,53 @@
+[core]
+	editor = "nvim"
+	hooksPath = "~/.config/git/hooks"
+	pager = "LESS=R delta"
+
+[credential "https://gist.github.com"]
+	helper = ""
+	helper = "/opt/homebrew/bin/gh auth git-credential"
+
+[credential "https://github.com"]
+	helper = ""
+	helper = "/opt/homebrew/bin/gh auth git-credential"
+
+[delta]
+	features = "interactive"
+	file-modified-label = ""
+	file-renamed-label = "renamed:"
+	line-numbers = true
+	max-line-length = 0
+	navigate = true
+	pager = "less -R"
+	right-arrow = " "
+	wrap-max-lines = "unlimited"
+
+[ghq]
+	root = "~/Sources"
+
+[interactive]
+	diffFilter = "/opt/homebrew/bin/delta --color-only"
+
+[merge]
+	tool = "fugitive"
+
+[mergetool]
+	keepBackup = false
+	prompt = true
+	tool = "fugitive"
+
+[mergetool "fugitive"]
+	cmd = "nvim -f -c \"Gvdiffsplit!\" \"$MERGED\""
+
+[pager]
+	blame = "/opt/homebrew/bin/delta"
+	diff = "/opt/homebrew/bin/delta"
+	log = "/opt/homebrew/bin/delta"
+	show = "/opt/homebrew/bin/delta"
+
+[safe]
+	directory = "~/Sources/github.com/ivankovnatsky/nix-config"
+
+[include]
+	path = "common"
+	path = "forgejo"

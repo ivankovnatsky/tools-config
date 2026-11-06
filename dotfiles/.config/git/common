@@ -1,0 +1,65 @@
+[user]
+	name = Ivan Kovnatsky
+	email = 75213+ivankovnatsky@users.noreply.github.com
+	signingKey = 75213+ivankovnatsky@users.noreply.github.com
+
+[commit]
+	gpgSign = true
+
+[tag]
+	gpgSign = true
+	forceSignAnnotated = true
+
+[core]
+	filemode = true
+	commentChar = ";"
+	quotePath = false
+
+[init]
+	defaultBranch = main
+
+[diff]
+	noprefix = true
+
+[diff "gpg"]
+	binary = true
+	textconv = gpg -d --quiet --yes --compress-algo=none --no-encrypt-to --batch --use-agent
+
+[log]
+	decorate = no
+
+[pull]
+	rebase = false
+
+[push]
+	default = current
+	autoSetupRemote = true
+
+[http]
+	version = HTTP/1.1
+	postBuffer = 157286400
+
+[delta "interactive"]
+	keep-plus-minus-markers = true
+
+[alias]
+	a = add
+	# Add all files in git root
+	addall = "!git add \"$(git rev-parse --show-toplevel)\""
+	co = checkout
+	c = commit -v
+	ca = commit -av
+	# Show unstaged changes (working tree vs index)
+	d = diff --unified=10
+	# Show staged changes (index vs HEAD)
+	staged = diff --staged --unified=10
+	cached = diff --cached --unified=10
+	# Show all changes (both staged and unstaged, working tree vs HEAD)
+	changes = diff --unified=10 HEAD
+	# Show the last commit
+	last = show HEAD
+	l = log --format='%C(auto)%h %s %C(brightblack)%cr%Creset' -n 20
+  m = message
+	p = push
+	pp = pull
+	s = status
