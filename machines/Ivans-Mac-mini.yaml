@@ -163,6 +163,14 @@ files:
     source: machines/Ivans-Mac-mini/.config/env/env.fish
   - target: ~/.config/env/env.nu
     source: machines/Ivans-Mac-mini/.config/env/env.nu
+  - target: "~/Library/Application Support/Muxy 2/settings.toml"
+    source:
+      "machines/Ivans-Mac-mini/Library/Application Support/Muxy 2/settings.toml"
+    mode: "0644"
+  - target: "~/Library/Application Support/Muxy 2/terminal.toml"
+    source:
+      "machines/Ivans-Mac-mini/Library/Application Support/Muxy 2/terminal.toml"
+    mode: "0644"
 
 gitRepos:
   ~/.local/share/fish-plugins/autopair: https://github.com/jorgebucaran/autopair.fish
