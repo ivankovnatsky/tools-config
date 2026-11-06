@@ -5,7 +5,29 @@ include:
 
 vars:
   externalStoragePath: /Volumes/Storage/Data
+  hostName: Ivans-Mac-mini
+  miniIp: 192.168.50.4
+  miniWifiIp: 192.168.50.12
+  a3Ip: 192.168.50.6
+  a3WifiIp: 192.168.50.11
+  bindAddress: 0.0.0.0
+  localAddress: 127.0.0.1
+  uvBin: ${externalStoragePath}/.local/bin
+  npmBin: ${externalStoragePath}/.npm/bin
+  goBin: ${externalStoragePath}/.go/bin
+  # Release binaries with no brew formula or go-installable source.
+  localBin: ${home}/.local/bin
+  toolsConfigPath: ${home}/Sources/github.com/ivankovnatsky/tools-config
   secretsDir: ${home}/.local/state/tools/secrets
+  renderedDir: ${secretsDir}/rendered
+  forgejoDir: ${externalStoragePath}/.forgejo
+  stashDataDir: ${externalStoragePath}/.stash
+  stashDir: ${externalStoragePath}/Stash
+  mediaDir: ${externalStoragePath}/Media
+  rabbitmqDir: ${externalStoragePath}/.rabbitmq
+  podserviceDir: ${externalStoragePath}/.podservice
+  transmissionDir: ${externalStoragePath}/.transmission
+  agentSessionsDir: ${home}/.local/share/agent-sessions
 
 paths:
   uv: /opt/homebrew/bin
@@ -374,3 +396,6 @@ dock:
   others:
     - ~/Downloads
     - ~/Screenshots
+
+launchd:
+  labelPrefix: com.ivankovnatsky
