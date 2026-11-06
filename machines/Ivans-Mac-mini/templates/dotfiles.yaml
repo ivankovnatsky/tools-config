@@ -23,3 +23,11 @@ templates:
     path: "~/Library/Application Support/go/env"
     file: "machines/Ivans-Mac-mini/Library/Application Support/go/env"
     mode: "0644"
+  env-fish:
+    path: ~/.config/env/env.fish
+    file: machines/Ivans-Mac-mini/.config/env/env.fish
+    mode: "0644"
+  env-nu:
+    path: ~/.config/env/env.nu
+    file: machines/Ivans-Mac-mini/.config/env/env.nu
+    mode: "0644"
