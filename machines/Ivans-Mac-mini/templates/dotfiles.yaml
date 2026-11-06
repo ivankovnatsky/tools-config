@@ -1,0 +1,13 @@
+templates:
+  npmrc:
+    path: ~/.npmrc
+    file: machines/Ivans-Mac-mini/.npmrc
+    mode: "0644"
+  tofurc:
+    path: ~/.tofurc
+    file: machines/Ivans-Mac-mini/.tofurc
+    mode: "0644"
+  unison-notes:
+    path: ~/.unison/notes.prf
+    file: machines/Ivans-Mac-mini/.unison/notes.prf
+    mode: "0644"

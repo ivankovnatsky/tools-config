@@ -15,6 +15,7 @@ include:
   - Ivans-Mac-mini/templates/reposync.yaml
   - Ivans-Mac-mini/templates/stash.yaml
   - Ivans-Mac-mini/templates/transmission.yaml
+  - Ivans-Mac-mini/templates/dotfiles.yaml
   - Ivans-Mac-mini/launchd/auto-poweroff.yaml
   - Ivans-Mac-mini/launchd/battery-monitoring.yaml
   - Ivans-Mac-mini/launchd/beszel-hub.yaml
@@ -197,6 +198,8 @@ files:
   - target: ~/.config/gwq/config.toml
     source: machines/Ivans-Mac-mini/.config/gwq/config.toml
     mode: "0644"
+  - target: ${externalStoragePath}/.opentofu/plugin-cache
+    directory: true
   - target: ~/.ssh/config
     source: dotfiles/.ssh/config
     mode: "0600"

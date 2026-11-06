@@ -1,0 +1,14 @@
+root = ${home}/Library/Mobile Documents/iCloud~md~obsidian/Documents/Notes
+root = ${home}/Notes
+
+batch = true
+perms = 0
+dontchmod = true
+xattrs = false
+
+ignore = Path .rumdl_cache
+ignore = Name .DS_Store
+ignore = Path .git
+ignore = Path .claude
+ignore = Path .obsidian/workspace.json
+ignore = Path .obsidian/workspace-mobile.json

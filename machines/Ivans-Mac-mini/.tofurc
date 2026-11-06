@@ -1,0 +1,3 @@
+plugin_cache_dir = "${externalStoragePath}/.opentofu/plugin-cache"
+plugin_cache_may_break_dependency_lock_file = true
+disable_checkpoint = true
