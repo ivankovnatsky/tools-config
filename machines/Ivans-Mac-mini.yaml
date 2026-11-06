@@ -188,6 +188,12 @@ files:
   - target: ~/.hammerspoon/init.lua
     source: machines/Ivans-Mac-mini/.hammerspoon/init.lua
     onChange: pkill -x Hammerspoon; open -g -a Hammerspoon
+  - target: ~/.gnupg
+    directory: true
+    mode: "0700"
+  - target: ~/.gnupg/gpg-agent.conf
+    source: machines/Ivans-Mac-mini/.gnupg/gpg-agent.conf
+    mode: "0600"
 
 gitRepos:
   ~/.local/share/fish-plugins/autopair: https://github.com/jorgebucaran/autopair.fish
