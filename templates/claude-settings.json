@@ -1,8 +1,13 @@
 {
+  "attribution": false,
+  "autoMemoryEnabled": false,
+  "cleanupPeriodDays": 30,
+  "editorMode": "vim",
+  "effortLevel": "high",
   "env": {
     "CLAUDE_CODE_ENABLE_TELEMETRY": "1"
   },
-  "includeCoAuthoredBy": false,
+  "feedbackSurveyRate": 0,
   "permissions": {
     "allow": [
       "Read(${homeWorkPath}/Sources/**)",
@@ -14,18 +19,40 @@
       "Read(${home}/.config/**)",
       "Read(${home}/.local/**)"
     ],
+    "autoApproveWebFetch": true,
+    "defaultMode": "auto",
     "deny": [
       "Bash(sudo:*)"
-    ],
-    "defaultMode": "auto",
-    "autoApproveWebFetch": true
+    ]
   },
-  "statusLine": {
-    "type": "command",
-    "command": "claude-statusline"
+  "pluginConfigs": {
+    "cc-plugin-agents-md@builtin": {
+      "options": {
+        "instructionFiles": "claude-md-and-agents-md"
+      }
+    }
   },
-  "feedbackSurveyRate": 0,
-  "effortLevel": "high",
+  "skillOverrides": {
+    "gcx": "name-only",
+    "json-canvas": "name-only",
+    "obsidian-bases": "name-only",
+    "obsidian-cli": "name-only",
+    "package-usage": "name-only",
+    "provider-upgrade": "name-only",
+    "pulumi-automation-api": "name-only",
+    "pulumi-best-practices": "name-only",
+    "pulumi-component": "name-only",
+    "pulumi-context-api": "name-only",
+    "pulumi-debug-failed-operation": "name-only",
+    "pulumi-esc": "name-only",
+    "pulumi-overview": "name-only",
+    "pulumi-upgrade-provider": "name-only"
+  },
+  "skipAutoPermissionPrompt": true,
   "skipDangerousModePermissionPrompt": true,
-  "skipAutoPermissionPrompt": true
+  "statusLine": {
+    "command": "${home}/.local/bin/claude-statusline",
+    "type": "command"
+  },
+  "tui": "default"
 }
