@@ -15,3 +15,7 @@ templates:
     path: ~/.bunfig.toml
     file: machines/Ivans-Mac-mini/.bunfig.toml
     mode: "0644"
+  kitty:
+    path: ~/.config/kitty/kitty.conf
+    file: machines/Ivans-Mac-mini/.config/kitty/kitty.conf
+    mode: "0644"

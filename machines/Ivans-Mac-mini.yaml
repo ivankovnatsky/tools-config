@@ -203,6 +203,27 @@ files:
   - target: ~/.ssh/config
     source: dotfiles/.ssh/config
     mode: "0600"
+  - target: ~/.config/kitty/quick-access-terminal.conf
+    source: machines/Ivans-Mac-mini/.config/kitty/quick-access-terminal.conf
+    mode: "0644"
+  - target: ~/.config/kitty/dark-theme.auto.conf
+    source: machines/Ivans-Mac-mini/.config/kitty/dark-theme.auto.conf
+    mode: "0644"
+  - target: ~/.config/kitty/light-theme.auto.conf
+    source: machines/Ivans-Mac-mini/.config/kitty/light-theme.auto.conf
+    mode: "0644"
+  - target: ~/.config/kitty/no-preference-theme.auto.conf
+    source: machines/Ivans-Mac-mini/.config/kitty/no-preference-theme.auto.conf
+    mode: "0644"
+  - target: ~/.config/kitty/themes/default.conf
+    source: machines/Ivans-Mac-mini/.config/kitty/themes/default.conf
+    mode: "0644"
+  - target: ~/.config/kitty/themes/GitHub_Light.conf
+    source: machines/Ivans-Mac-mini/.config/kitty/themes/GitHub_Light.conf
+    mode: "0644"
+  - target: ~/.config/kitty/themes/Tokyo_Night_Moon.conf
+    source: machines/Ivans-Mac-mini/.config/kitty/themes/Tokyo_Night_Moon.conf
+    mode: "0644"
 
 gitRepos:
   ~/.local/share/fish-plugins/autopair: https://github.com/jorgebucaran/autopair.fish
