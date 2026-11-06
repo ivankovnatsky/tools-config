@@ -1,0 +1,18 @@
+[cli]
+auto_update = false
+installer = "npm"
+
+[features]
+telemetry = false
+
+[marketplace]
+default_skills_installs_purged = true
+official_marketplace_auto_installed = true
+
+[[marketplace.sources]]
+git = "https://github.com/xai-org/plugin-marketplace.git"
+name = "xAI Official"
+
+[ui]
+permission_mode = "always-approve"
+screen_mode = "minimal"

@@ -182,6 +182,12 @@ files:
   - target: ~/.pi/agent/models.json
     source: machines/Ivans-Mac-mini/.pi/agent/models.json
     mode: "0644"
+  - target: ~/.grok/config.toml
+    source: machines/Ivans-Mac-mini/.grok/config.toml
+    mode: "0644"
+  - target: ~/.hammerspoon/init.lua
+    source: machines/Ivans-Mac-mini/.hammerspoon/init.lua
+    onChange: pkill -x Hammerspoon; open -g -a Hammerspoon
 
 gitRepos:
   ~/.local/share/fish-plugins/autopair: https://github.com/jorgebucaran/autopair.fish
