@@ -389,7 +389,6 @@ brew:
     - zsh
   casks:
     - chromium
-    - claude
     - firefox
     - firefox@developer-edition
     - font-hack-nerd-font
@@ -501,7 +500,6 @@ dock:
     - /Applications/Muxy.app
     - /Applications/Firefox Developer Edition.app
     - /Applications/Bitwarden.app
-    - /Applications/Claude.app
     - /Applications/Obsidian.app
     - /Applications/TaskForge.app
     - /Applications/WhatsApp.app
