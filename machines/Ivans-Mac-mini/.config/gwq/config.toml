@@ -1,5 +1,5 @@
 [worktree]
-basedir = "/Users/ivan/Worktrees"
+basedir = "${home}/Worktrees"
 auto_mkdir = true
 
 [finder]
@@ -20,6 +20,6 @@ icons = true
 tilde_home = true
 
 [[repository_settings]]
-repository = "/Users/ivan/Sources/github.com/ivankovnatsky/nix-config"
+repository = "${home}/Sources/github.com/ivankovnatsky/nix-config"
 copy_files = []
 setup_commands = []

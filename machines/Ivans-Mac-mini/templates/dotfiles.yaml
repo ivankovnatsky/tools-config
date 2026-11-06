@@ -31,3 +31,7 @@ templates:
     path: ~/.config/env/env.nu
     file: machines/Ivans-Mac-mini/.config/env/env.nu
     mode: "0644"
+  gwq:
+    path: ~/.config/gwq/config.toml
+    file: machines/Ivans-Mac-mini/.config/gwq/config.toml
+    mode: "0644"
