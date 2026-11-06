@@ -38,6 +38,12 @@ include:
   - Ivans-Mac-mini/launchd/syncthing.yaml
   - Ivans-Mac-mini/launchd/tools-mgmt.yaml
   - Ivans-Mac-mini/launchd/transmission.yaml
+  - Ivans-Mac-mini/mgmt/arr.yaml
+  - Ivans-Mac-mini/mgmt/beszel.yaml
+  - Ivans-Mac-mini/mgmt/forgejo.yaml
+  - Ivans-Mac-mini/mgmt/jellyfin.yaml
+  - Ivans-Mac-mini/mgmt/nextdns.yaml
+  - Ivans-Mac-mini/mgmt/syncthing.yaml
 
 vars:
   externalStoragePath: /Volumes/Storage/Data

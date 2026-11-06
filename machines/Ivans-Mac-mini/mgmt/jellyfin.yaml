@@ -1,0 +1,18 @@
+mgmt:
+  jellyfin:
+    baseUrl: http://${localAddress}:8096
+    apiKeyFile: ${sopsPath:jellyfin-api-key}
+    # Becomes LocalNetworkAddresses, an allow-list: a single IP would stop
+    # Jellyfin listening on 127.0.0.1 (baseUrl above).
+    bindAddress: ${bindAddress}
+    libraries:
+      - name: Movies
+        type: movies
+        paths: ["${mediaDir}/Movies"]
+        enableRealtimeMonitor: true
+        automaticRefreshIntervalDays: 7
+      - name: Shows
+        type: tvshows
+        paths: ["${mediaDir}/TV"]
+        enableRealtimeMonitor: true
+        automaticRefreshIntervalDays: 7

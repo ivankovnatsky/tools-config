@@ -1,0 +1,29 @@
+mgmt:
+  # Device lists use hardcoded hostnames (including this one) so hosts
+  # sharing these folders can use identical definitions.
+  syncthing:
+    baseUrl: http://${localAddress}:8384
+    configDir: ~/Library/Application Support/Syncthing
+    localDeviceName: ${hostName}
+    deviceDefinitionsFile: ${sopsPath:syncthing-devices}
+    devices:
+      - Ivans-Mac-mini
+      - a3
+      - Ivans-iPhone
+      - Ivans-MacBook-Pro
+      - Ivans-MacBook-Air
+      - Mooings-iPhone
+    folders:
+      # mini bridges iCloud + Unison into ~/Notes, Syncthing carries the
+      # working tree to a3; reposync owns the git history.
+      Notes:
+        path: ~/Notes
+        label: Notes
+        devices: [Ivans-Mac-mini, a3]
+        ignorePatterns: [.git, .claude, .rumdl_cache]
+      Notes2:
+        path: ~/Notes2
+        label: Notes2
+        devices: [Ivans-Mac-mini, a3, Mooings-iPhone]
+        ignorePatterns: [.git, .claude, .rumdl_cache]
+    restart: false

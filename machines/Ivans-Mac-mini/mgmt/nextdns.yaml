@@ -1,0 +1,43 @@
+mgmt:
+  # a3 has no profile id secret: the profile is looked up by name (created
+  # on first run if missing).
+  nextdns:
+    profiles:
+      pro: &nextdnsProfile
+        profileFile: templates/nextdns-profile.json
+        apiKeyFile: ${sopsPath:nextdns-api-key}
+        profileIdFile: ${sopsPath:nextdns-profile-pro}
+        vars:
+          miniIp: ${miniIp}
+          miniWifiIp: ${miniWifiIp}
+          a3Ip: ${a3Ip}
+          a3WifiIp: ${a3WifiIp}
+        varsFiles:
+          externalDomain: ${sopsPath:external-domain}
+          podServicePublicHost: ${sopsPath:podservice-s3-public-host}
+      air:
+        <<: *nextdnsProfile
+        profileIdFile: ${sopsPath:nextdns-profile-air}
+      phone:
+        <<: *nextdnsProfile
+        profileIdFile: ${sopsPath:nextdns-profile-phone}
+      mini:
+        <<: *nextdnsProfile
+        profileIdFile: ${sopsPath:nextdns-profile-mini}
+      asus:
+        <<: *nextdnsProfile
+        profileIdFile: ${sopsPath:nextdns-profile-asus}
+      lgphone:
+        <<: *nextdnsProfile
+        profileIdFile: ${sopsPath:nextdns-profile-lgphone}
+      a3:
+        profileFile: templates/nextdns-profile.json
+        apiKeyFile: ${sopsPath:nextdns-api-key}
+        vars:
+          miniIp: ${miniIp}
+          miniWifiIp: ${miniWifiIp}
+          a3Ip: ${a3Ip}
+          a3WifiIp: ${a3WifiIp}
+        varsFiles:
+          externalDomain: ${sopsPath:external-domain}
+          podServicePublicHost: ${sopsPath:podservice-s3-public-host}

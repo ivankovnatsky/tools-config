@@ -1,0 +1,65 @@
+mgmt:
+  arr:
+    radarr:
+      baseUrl: http://127.0.0.1:7878
+      apiKeyFile: ${sopsPath:arr-radarr-api-key}
+      bindAddress: "*"
+      downloadClients:
+        - name: Transmission
+          host: 127.0.0.1
+          port: 9091
+          useSsl: false
+          urlBase: /transmission/
+          usernameFile: ${sopsPath:transmission-username}
+          passwordFile: ${sopsPath:transmission-password}
+          category: radarr
+      rootFolders: ["${mediaDir}/Movies"]
+    sonarr:
+      baseUrl: http://127.0.0.1:8989
+      apiKeyFile: ${sopsPath:arr-sonarr-api-key}
+      bindAddress: "*"
+      downloadClients:
+        - name: Transmission
+          host: 127.0.0.1
+          port: 9091
+          useSsl: false
+          urlBase: /transmission/
+          usernameFile: ${sopsPath:transmission-username}
+          passwordFile: ${sopsPath:transmission-password}
+          category: tv-sonarr
+      rootFolders: ["${mediaDir}/TV"]
+    prowlarr:
+      baseUrl: http://127.0.0.1:9696
+      apiKeyFile: ${sopsPath:arr-prowlarr-api-key}
+      bindAddress: "*"
+      indexers:
+        - name: LimeTorrents
+          definitionName: limetorrents
+          enable: true
+          priority: 25
+        - name: Toloka.to
+          definitionName: Toloka.to
+          enable: true
+          priority: 25
+          usernameFile: ${sopsPath:arr-toloka-username}
+          passwordFile: ${sopsPath:arr-toloka-password}
+        - name: The Pirate Bay
+          definitionName: thepiratebay
+          enable: true
+          priority: 25
+      applications:
+        - name: Radarr
+          baseUrl: http://127.0.0.1:7878
+          apiKeyFile: ${sopsPath:arr-radarr-api-key}
+          prowlarrUrl: http://127.0.0.1:9696
+          syncLevel: fullSync
+          # Movies, Foreign, Other, SD, HD, UHD, BluRay, 3D, DVD, WEB-DL, x265
+          syncCategories:
+            [2000, 2010, 2020, 2030, 2040, 2045, 2050, 2060, 2070, 2080, 2090]
+        - name: Sonarr
+          baseUrl: http://127.0.0.1:8989
+          apiKeyFile: ${sopsPath:arr-sonarr-api-key}
+          prowlarrUrl: http://127.0.0.1:9696
+          syncLevel: fullSync
+          # TV, WEB-DL, Foreign, SD, HD, UHD, Other, x265
+          syncCategories: [5000, 5010, 5020, 5030, 5040, 5045, 5050, 5090]

@@ -1,0 +1,38 @@
+mgmt:
+  forgejo:
+    baseUrl: http://${localAddress}:3300
+    forgejoBin: /opt/homebrew/bin/forgejo
+    configFile: ${renderedDir}/forgejo-app.ini
+    workPath: ${forgejoDir}
+    tokenFile: ${forgejoDir}/mgmt-token
+    users:
+      - usernameFile: ${sopsPath:forgejo-admin-name}
+        admin: true
+        emailFile: ${sopsPath:forgejo-admin-email}
+        passwordFile: ${sopsPath:forgejo-admin-password}
+      - usernameFile: ${sopsPath:forgejo-user-name}
+        emailFile: ${sopsPath:forgejo-user-email}
+        passwordFile: ${sopsPath:forgejo-user-password}
+        gpgKeyFile: ${sopsPath:forgejo-user-gpg-key}
+        tokenFile: ${forgejoDir}/user-token
+    repositories:
+      - name: home
+        ownerFile: ${sopsPath:forgejo-user-name}
+        description: Home directory
+        private: true
+      - name: notes
+        ownerFile: ${sopsPath:forgejo-user-name}
+        description: ""
+        private: true
+      - name: notes2
+        ownerFile: ${sopsPath:forgejo-user-name}
+        description: ""
+        private: true
+      - name: data
+        ownerFile: ${sopsPath:forgejo-user-name}
+        description: ""
+        private: true
+      - name: cv
+        ownerFile: ${sopsPath:forgejo-user-name}
+        description: ""
+        private: true

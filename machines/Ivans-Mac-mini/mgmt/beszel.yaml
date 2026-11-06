@@ -1,0 +1,13 @@
+mgmt:
+  beszel:
+    baseUrl: https://beszel.@DOMAIN@
+    baseUrlFiles: { DOMAIN: "${sopsPath:external-domain}" }
+    emailFile: ${sopsPath:beszel-email}
+    passwordFile: ${sopsPath:beszel-password}
+    discordWebhookFile: ${sopsPath:discord-webhook-beszel}
+    # 1h is broken upstream (charts never load):
+    # https://github.com/henrygd/beszel/issues/2104
+    userSettings: { chartTime: 12h }
+    systems:
+      - { name: "${hostName}", host: 127.0.0.1, port: "45876" }
+      - { name: a3, host: "${a3Ip}", port: "45876" }
