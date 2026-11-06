@@ -93,6 +93,9 @@ files:
     mode: "0755"
 
 gitRepos:
+  ~/.local/share/tmux-plugins/tmux-continuum: https://github.com/tmux-plugins/tmux-continuum
+  ~/.local/share/tmux-plugins/tmux-sensible: https://github.com/tmux-plugins/tmux-sensible
+  ~/.local/share/tmux-plugins/tmux-yank: https://github.com/tmux-plugins/tmux-yank
   # yazi loads <name>.yazi dirs from here; piper.yazi is used by yazi.toml.
   ~/.config/yazi/plugins: https://github.com/yazi-rs/plugins
 
