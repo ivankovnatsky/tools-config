@@ -99,6 +99,16 @@ files:
     source: machines/Ivans-Mac-mini/.config/env/env.nu
 
 gitRepos:
+  ~/.local/share/fish-plugins/autopair: https://github.com/jorgebucaran/autopair.fish
+  ~/.local/share/fish-plugins/bass: https://github.com/edc/bass
+  ~/.local/share/fish-plugins/colored-man-pages: https://github.com/PatrickF1/colored_man_pages.fish
+  ~/.local/share/fish-plugins/done: https://github.com/franciscolourenco/done
+  ~/.local/share/fish-plugins/fish-bd: https://github.com/0rax/fish-bd
+  ~/.local/share/fish-plugins/fzf-fish: https://github.com/PatrickF1/fzf.fish
+  ~/.local/share/fish-plugins/git-abbr: https://github.com/lewisacidic/fish-git-abbr
+  ~/.local/share/fish-plugins/grc: https://github.com/oh-my-fish/plugin-grc
+  ~/.local/share/fish-plugins/macos: https://github.com/halostatue/fish-macos
+  ~/.local/share/fish-plugins/puffer: https://github.com/nickeb96/puffer-fish
   ~/.local/share/tmux-plugins/tmux-continuum: https://github.com/tmux-plugins/tmux-continuum
   ~/.local/share/tmux-plugins/tmux-sensible: https://github.com/tmux-plugins/tmux-sensible
   ~/.local/share/tmux-plugins/tmux-yank: https://github.com/tmux-plugins/tmux-yank
