@@ -158,8 +158,6 @@ files:
   - target: ~/.local/bin/claude-statusline
     source: machines/Ivans-Mac-mini/.local/bin/claude-statusline
     mode: "0755"
-  - target: ~/.config/env/env.sh
-    source: machines/Ivans-Mac-mini/.config/env/env.sh
   - target: "~/Library/Application Support/Muxy 2/settings.toml"
     source:
       "machines/Ivans-Mac-mini/Library/Application Support/Muxy 2/settings.toml"

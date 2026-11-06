@@ -16,6 +16,8 @@ load-env {
     UV_PYTHON_INSTALL_DIR: "${externalStoragePath}/.local/share/uv/python"
     UV_TOOL_BIN_DIR: "${externalStoragePath}/.local/bin"
     UV_TOOL_DIR: "${externalStoragePath}/.local/share/uv/tools"
+    UV_CACHE_DIR: "${externalStoragePath}/.cache/uv"
+    UV_PYTHON_PREFERENCE: "only-managed"
 }
 
 $env.PATH = (

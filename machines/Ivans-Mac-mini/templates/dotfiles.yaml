@@ -39,3 +39,7 @@ templates:
     path: ~/.config/tmuxinator/Ivans-Mac-mini-dev.yml
     file: machines/Ivans-Mac-mini/.config/tmuxinator/Ivans-Mac-mini-dev.yml
     mode: "0644"
+  env-sh:
+    path: ~/.config/env/env.sh
+    file: machines/Ivans-Mac-mini/.config/env/env.sh
+    mode: "0644"
