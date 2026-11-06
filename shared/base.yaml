@@ -24,7 +24,8 @@ go:
       binary: rclone
 
 files:
-  - dir: dotfiles
+  - source: dotfiles/.config/uv/uv.toml
+    target: ~/.config/uv/uv.toml
 
 templates:
   claude-settings:

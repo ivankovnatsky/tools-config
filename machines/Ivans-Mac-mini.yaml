@@ -87,8 +87,6 @@ curlShell:
   "https://antigravity.google/cli/install.sh": bash
 
 files:
-  # Inherit the shared dir-walk for dotfiles. YAML lists replace on
-  # deep-merge, so we restate it here alongside the per-file entries.
   - dir: dotfiles
   - target: ~/.local/bin/claude-statusline
     source: machines/Ivans-Mac-mini/.local/bin/claude-statusline
