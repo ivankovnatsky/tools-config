@@ -27,6 +27,10 @@ templates:
           remote: origin
           remoteUrl: https://github.com/ivankovnatsky/tools.git
           branch: main
+        - path: ${home}/Sources/github.com/ivankovnatsky/tools-config
+          remote: origin
+          remoteUrl: https://github.com/ivankovnatsky/tools-config.git
+          branch: main
         - path: ${home}/Sources/github.com/ivankovnatsky/podservice
           remote: origin
           remoteUrl: https://github.com/ivankovnatsky/podservice.git
