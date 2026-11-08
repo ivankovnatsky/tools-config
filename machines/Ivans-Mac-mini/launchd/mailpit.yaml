@@ -1,0 +1,24 @@
+launchd:
+  services:
+    mailpit:
+      domain: system
+      waitForSecrets: true
+      extraDirs:
+        - /var/lib/mailpit/certs
+      # Stable names for mailpit; Caddy's cert path embeds the domain.
+      preStart: |
+        /bin/chmod 700 /var/lib/mailpit
+
+        DOMAIN=$(cat ${sopsPath:external-domain})
+        WILDCARD_DIR="/var/lib/caddy/certificates/acme-v02.api.letsencrypt.org-directory/wildcard_.$DOMAIN"
+
+        /bin/ln -sf "$WILDCARD_DIR/wildcard_.$DOMAIN.crt" /var/lib/mailpit/certs/cert.crt
+        /bin/ln -sf "$WILDCARD_DIR/wildcard_.$DOMAIN.key" /var/lib/mailpit/certs/cert.key
+      command: |-
+        /opt/homebrew/bin/mailpit \
+        --database /var/lib/mailpit/mailpit.db \
+        --listen ${bindAddress}:8025 \
+        --ui-auth-file ${renderedDir}/mailpit-ui-auth \
+        --smtp ${bindAddress}:25 \
+        --smtp-tls-cert /var/lib/mailpit/certs/cert.crt \
+        --smtp-tls-key /var/lib/mailpit/certs/cert.key

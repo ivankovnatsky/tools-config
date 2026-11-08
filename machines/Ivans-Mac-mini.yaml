@@ -7,6 +7,7 @@ include:
   - Ivans-Mac-mini/templates/forgejo.yaml
   - Ivans-Mac-mini/templates/gatus.yaml
   - Ivans-Mac-mini/templates/ghorg.yaml
+  - Ivans-Mac-mini/templates/mailpit.yaml
   - Ivans-Mac-mini/templates/miniserve.yaml
   - Ivans-Mac-mini/templates/pi.yaml
   - Ivans-Mac-mini/templates/podservice.yaml
@@ -22,6 +23,8 @@ include:
   - Ivans-Mac-mini/launchd/forgejo.yaml
   - Ivans-Mac-mini/launchd/gatus.yaml
   - Ivans-Mac-mini/launchd/jellyfin.yaml
+  - Ivans-Mac-mini/launchd/mailpit.yaml
+  - Ivans-Mac-mini/launchd/mailpit-restart.yaml
   - Ivans-Mac-mini/launchd/miniserve.yaml
   - Ivans-Mac-mini/launchd/navidrome.yaml
   - Ivans-Mac-mini/launchd/notes.yaml
@@ -515,3 +518,4 @@ dock:
 
 launchd:
   labelPrefix: com.ivankovnatsky
+  sudo: true

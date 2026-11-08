@@ -1,0 +1,10 @@
+launchd:
+  services:
+    # mailpit loads the TLS cert only at startup; restart weekly to pick up
+    # Caddy's renewals (issued ~30 days before expiry).
+    mailpit-restart:
+      domain: system
+      runAtLoad: false
+      keepAlive: false
+      startCalendarInterval: { weekday: 0, hour: 4, minute: 0 }
+      command: /bin/launchctl kickstart -k system/com.ivankovnatsky.mailpit

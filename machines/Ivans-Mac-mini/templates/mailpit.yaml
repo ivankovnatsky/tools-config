@@ -1,0 +1,5 @@
+templates:
+  mailpit-ui-auth:
+    path: ${renderedDir}/mailpit-ui-auth
+    content: |
+      ${sops:mailpit-ui-username}:${sops:mailpit-ui-password}
