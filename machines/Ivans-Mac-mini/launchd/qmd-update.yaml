@@ -9,13 +9,22 @@ launchd:
       startCalendarInterval: { minute: 30 }
       environment:
         PATH: ${npmBin}:/opt/homebrew/bin:/usr/bin:/bin
+      # Re-adds a collection whose path changed; qmd has no path update and
+      # stores the realpath, so compare against that or a symlinked path
+      # re-adds every run.
       preStart: |
         /bin/mkdir -p "${agentSessionsDir}/md"
         ${uvBin}/agent-sessions ${renderedDir}/agent-sessions.json || echo "agent-sessions failed"
-        if ! qmd collection show notes >/dev/null 2>&1; then
+        current=$(qmd collection show notes 2>&1 | sed -n 's/^ *Path: *//p')
+        want=$(realpath -q "${home}/Notes" || echo "${home}/Notes")
+        if [ "$current" != "$want" ]; then
+          if [ -n "$current" ]; then qmd collection remove notes; fi
           qmd collection add "${home}/Notes" --name notes
         fi
-        if ! qmd collection show sessions >/dev/null 2>&1; then
+        current=$(qmd collection show sessions 2>&1 | sed -n 's/^ *Path: *//p')
+        want=$(realpath -q "${agentSessionsDir}/md" || echo "${agentSessionsDir}/md")
+        if [ "$current" != "$want" ]; then
+          if [ -n "$current" ]; then qmd collection remove sessions; fi
           qmd collection add "${agentSessionsDir}/md" --name sessions
           qmd context add qmd://sessions 'Past agent sessions (Claude Code, Codex, Grok, pi): user and assistant text only'
         fi
