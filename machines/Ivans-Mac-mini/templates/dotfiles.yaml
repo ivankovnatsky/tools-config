@@ -43,3 +43,8 @@ templates:
     path: ~/.config/env/env.sh
     file: machines/Ivans-Mac-mini/.config/env/env.sh
     mode: "0644"
+  hammerspoon:
+    path: ~/.hammerspoon/init.lua
+    file: machines/Ivans-Mac-mini/.hammerspoon/init.lua
+    mode: "0644"
+    onChange: pkill -x Hammerspoon; open -g -a Hammerspoon
