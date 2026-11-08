@@ -18,6 +18,7 @@ hidden_worktrees = []
 language = ""
 layout = "project_focused"
 light_theme = "Muxy Light"
+pane_headers = false
 sidebar_collapsed_style = "icons"
 sidebar_expanded = true
 sidebar_vibrancy = true
