@@ -144,6 +144,10 @@ ext.cache.bar.menu:setClickCallback(function()
   end
 end)
 
+if not hs.application.get("com.amethyst.Amethyst") then
+  hs.application.launchOrFocusByBundleID("com.amethyst.Amethyst")
+end
+
 ext.cache.sys = {
   cpu = "–",
   mem = "–",
@@ -151,7 +155,7 @@ ext.cache.sys = {
   disk = "–",
   extra = {},
   extraDisks = {
-    { icon = "\u{F01BC}", path = "/Volumes/Storage" }
+    { icon = "\u{F01BC}", path = "${externalVolume}" }
   },
 }
 

@@ -47,7 +47,8 @@ include:
   - Ivans-Mac-mini/mgmt/syncthing.yaml
 
 vars:
-  externalStoragePath: /Volumes/Storage/Data
+  externalVolume: /Volumes/Storage
+  externalStoragePath: ${externalVolume}/Data
   hostName: Ivans-Mac-mini
   miniIp: 192.168.50.4
   miniWifiIp: 192.168.50.12
@@ -180,9 +181,10 @@ files:
   - target: ~/.grok/config.toml
     source: machines/Ivans-Mac-mini/.grok/config.toml
     mode: "0644"
-  - target: ~/.hammerspoon/init.lua
-    source: machines/Ivans-Mac-mini/.hammerspoon/init.lua
-    onChange: pkill -x Hammerspoon; open -g -a Hammerspoon
+  - target: ~/.config/amethyst/amethyst.yml
+    source: machines/Ivans-Mac-mini/.config/amethyst/amethyst.yml
+    mode: "0644"
+    onChange: pkill -x Amethyst; open -g -b com.amethyst.Amethyst
   - target: ~/.gnupg
     directory: true
     mode: "0700"
@@ -388,6 +390,7 @@ brew:
     - zoxide
     - zsh
   casks:
+    - amethyst
     - chromium
     - firefox
     - firefox@developer-edition
@@ -460,6 +463,9 @@ defaults:
     com.apple.CloudSubscriptionFeatures.optIn:
       auto_opt_in: false
       device: false
+    com.amethyst.Amethyst:
+      SUEnableAutomaticChecks: false
+      SUAutomaticallyUpdate: false
     com.vincent-neo.LosslessSwitcher:
       PreferSampleRateMultiples: false
       com.vincent-neo.LosslessSwitcher-Key-BitDepthDetection: true
