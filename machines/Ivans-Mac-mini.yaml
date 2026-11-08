@@ -71,7 +71,7 @@ vars:
   rabbitmqDir: ${externalStoragePath}/.rabbitmq
   podserviceDir: ${externalStoragePath}/.podservice
   transmissionDir: ${externalStoragePath}/.transmission
-  agentSessionsDir: ${home}/.local/share/agent-sessions
+  agentSessionsDir: ${externalStoragePath}/.local/share/agent-sessions
 
 paths:
   uv: /opt/homebrew/bin
