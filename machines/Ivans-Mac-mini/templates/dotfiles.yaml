@@ -15,6 +15,11 @@ templates:
     path: ~/.bunfig.toml
     file: machines/Ivans-Mac-mini/.bunfig.toml
     mode: "0644"
+  # ranger does not expand ~ in preview_script.
+  ranger:
+    path: ~/.config/ranger/rc.conf
+    file: machines/Ivans-Mac-mini/.config/ranger/rc.conf
+    mode: "0644"
   kitty:
     path: ~/.config/kitty/kitty.conf
     file: machines/Ivans-Mac-mini/.config/kitty/kitty.conf
