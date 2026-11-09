@@ -395,6 +395,7 @@ brew:
     - zsh
   casks:
     - amethyst
+    - bitwarden
     - chromium
     - firefox
     - firefox@developer-edition
@@ -417,7 +418,6 @@ brew:
   masApps:
     Numbers: 409203825
     Pages: 409201541
-    Bitwarden: 1352778147
     TaskForge - Obsidian Tasks: 6744716215
 
 defaults:
