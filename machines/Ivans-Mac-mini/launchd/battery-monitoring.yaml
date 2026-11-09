@@ -1,6 +1,7 @@
 launchd:
   agents:
     battery-monitoring-serve:
+      waitForPath: ${externalStoragePath}
       waitForSecrets: true
       command: |-
         ${uvBin}/battery-monitoring serve \
@@ -11,6 +12,7 @@ launchd:
 
     # Needs Automation (TCC) permission to control System Events for turnoff.
     battery-monitoring-check:
+      waitForPath: ${externalStoragePath}
       waitForSecrets: true
       command: |-
         ${uvBin}/battery-monitoring check \

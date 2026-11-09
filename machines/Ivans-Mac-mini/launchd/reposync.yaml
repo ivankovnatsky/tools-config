@@ -3,6 +3,7 @@ launchd:
     # REPOSYNC_TIMER=1 marks a timer run: reposync waits out the first
     # minutes after boot.
     reposync:
+      waitForPath: ${externalStoragePath}
       runAtLoad: false
       keepAlive: false
       waitForSecrets: true
