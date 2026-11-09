@@ -224,6 +224,10 @@ files:
   - target: ~/.config/bat/config
     source: dotfiles/.config/bat/config
     onChange: if command -v bat >/dev/null; then bat cache --build; fi
+  - target: ~/.config/nvim/lua/config/pack.lua
+    source: dotfiles/.config/nvim/lua/config/pack.lua
+    onChange: nvim --headless +qa
+    onUpdate: nvim --headless "+lua vim.pack.update(nil, { force = true })" +qa
 
 gitRepos:
   ~/.local/share/fish-plugins/autopair: https://github.com/jorgebucaran/autopair.fish
