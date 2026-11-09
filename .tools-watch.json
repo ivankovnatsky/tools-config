@@ -1,0 +1,14 @@
+{
+  "ignore_patterns": [
+    "README.md",
+    ".DS_Store",
+    ".claude",
+    ".direnv",
+    ".gitignore",
+    "*.sync-conflict-*",
+    "*.swp",
+    "*~",
+    "justfile",
+    "treefmt.toml"
+  ]
+}
