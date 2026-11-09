@@ -4,8 +4,6 @@ local border = "rounded"
 
 vim.diagnostic.config({ float = { border = border } })
 
-require("lspconfig.ui.windows").default_options = { border = border }
-
 local function on_attach(client, bufnr)
   require("lsp-format").on_attach(client, bufnr)
 end
