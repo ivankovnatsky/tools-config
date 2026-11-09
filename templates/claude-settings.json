@@ -1,5 +1,9 @@
 {
-  "attribution": false,
+  "attribution": {
+    "commit": "",
+    "pr": "",
+    "sessionUrl": false
+  },
   "autoMemoryEnabled": false,
   "cleanupPeriodDays": 30,
   "editorMode": "vim",
@@ -54,5 +58,6 @@
     "command": "${home}/.local/bin/claude-statusline",
     "type": "command"
   },
+  "theme": "dark",
   "tui": "default"
 }
