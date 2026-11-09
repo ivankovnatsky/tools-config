@@ -32,6 +32,21 @@ local function gh(repo)
   return "https://github.com/" .. repo
 end
 
+-- Headless installs can time out mid-clone, leaving a repo without HEAD that breaks vim.pack.
+if #vim.api.nvim_list_uis() == 0 then
+  for dir in vim.fs.dir(vim.fn.stdpath("data") .. "/site/pack/core/opt") do
+    local path = vim.fn.stdpath("data") .. "/site/pack/core/opt/" .. dir
+    -- Clean env: inherited GIT_* variables could point git at another repo or index.
+    local opts = { clear_env = true, env = { PATH = vim.env.PATH, HOME = vim.env.HOME } }
+    local top = vim.system({ "git", "-C", path, "rev-parse", "--show-toplevel" }, opts):wait()
+    local own = top.code == 0 and vim.fn.resolve(vim.trim(top.stdout)) == vim.fn.resolve(path)
+    local out = own and vim.system({ "git", "-C", path, "ls-files" }, opts):wait()
+    if out and out.code == 0 and out.stdout == "" then
+      vim.fs.rm(path, { recursive = true, force = true })
+    end
+  end
+end
+
 vim.pack.add({
   gh("folke/tokyonight.nvim"),
   gh("dasupradyumna/midnight.nvim"),
