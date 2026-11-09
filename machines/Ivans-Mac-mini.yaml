@@ -267,8 +267,6 @@ brew:
   onActivation:
     autoUpdate: false
     cleanup: zap
-  caskArgs:
-    no_quarantine: true
   taps:
     - pomdtr/homebrew-tap
     - ivankovnatsky/homebrew-tap
