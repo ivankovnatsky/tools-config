@@ -194,6 +194,7 @@ files:
   - target: ~/.gnupg/gpg-agent.conf
     source: machines/Ivans-Mac-mini/.gnupg/gpg-agent.conf
     mode: "0600"
+    onChange: if command -v gpgconf >/dev/null; then gpgconf --reload gpg-agent; fi
   - target: ${externalStoragePath}/.opentofu/plugin-cache
     directory: true
   - target: ~/.ssh/config
