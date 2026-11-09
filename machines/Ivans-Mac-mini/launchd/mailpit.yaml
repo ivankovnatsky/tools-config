@@ -1,7 +1,6 @@
 launchd:
-  services:
+  daemons:
     mailpit:
-      domain: system
       waitForSecrets: true
       extraDirs:
         - /var/lib/mailpit/certs

@@ -1,5 +1,5 @@
 launchd:
-  services:
+  agents:
     settings-daemon:
       throttleInterval: 30
       command: |-

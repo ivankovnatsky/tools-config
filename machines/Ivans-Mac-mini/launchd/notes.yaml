@@ -1,5 +1,5 @@
 launchd:
-  services:
+  agents:
     # Profile options on the command line: archives are keyed by roots, so
     # history from the old ~/.unison/notes.prf runs carries over.
     unison-notes:

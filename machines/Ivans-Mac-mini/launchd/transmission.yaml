@@ -1,5 +1,5 @@
 launchd:
-  services:
+  agents:
     # transmission-daemon rewrites settings.json on exit, so it gets a copy.
     transmission:
       waitForPath: ${externalStoragePath}

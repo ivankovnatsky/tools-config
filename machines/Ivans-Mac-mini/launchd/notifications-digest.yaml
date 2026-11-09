@@ -1,5 +1,5 @@
 launchd:
-  services:
+  agents:
     notifications-digest:
       runAtLoad: false
       keepAlive: false

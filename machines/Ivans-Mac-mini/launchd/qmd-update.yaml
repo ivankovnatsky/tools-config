@@ -1,5 +1,5 @@
 launchd:
-  services:
+  agents:
     # No `qmd cleanup`: on 2.8.3 it permanently drops docs that a run with
     # the vault path missing marked inactive (tobi/qmd#989).
     qmd-update:

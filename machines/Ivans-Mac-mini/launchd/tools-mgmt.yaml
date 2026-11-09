@@ -1,5 +1,5 @@
 launchd:
-  services:
+  agents:
     # Replaces the nix *-mgmt agents (arr, beszel, forgejo, jellyfin,
     # nextdns, syncthing): at load, then every 3h like forgejo-mgmt.
     # preStart waits for the slow-starting APIs after boot.

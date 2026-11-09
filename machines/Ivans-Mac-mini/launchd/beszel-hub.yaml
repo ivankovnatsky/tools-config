@@ -1,5 +1,5 @@
 launchd:
-  services:
+  agents:
     # A config.yml in dataDir would make the hub prune every system
     # beszel mgmt does not list, so keep none there.
     beszel-hub:

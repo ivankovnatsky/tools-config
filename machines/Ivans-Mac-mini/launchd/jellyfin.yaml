@@ -1,5 +1,5 @@
 launchd:
-  services:
+  agents:
     # The cask keeps the web client in Resources, so --webdir is required.
     jellyfin:
       waitForPath: ${externalStoragePath}

@@ -1,5 +1,5 @@
 launchd:
-  services:
+  agents:
     syncthing:
       throttleInterval: 10
       command: |-

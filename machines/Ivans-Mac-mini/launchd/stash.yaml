@@ -1,5 +1,5 @@
 launchd:
-  services:
+  agents:
     # Stash bcrypt-compares the login against config `password`, so hash a
     # plaintext secret. script(1) gives stash a pty, which suppresses its
     # menubar icon.

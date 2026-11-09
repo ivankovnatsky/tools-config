@@ -1,5 +1,5 @@
 launchd:
-  services:
+  agents:
     miniserve:
       waitForPath: ${externalStoragePath}
       waitForSecrets: true

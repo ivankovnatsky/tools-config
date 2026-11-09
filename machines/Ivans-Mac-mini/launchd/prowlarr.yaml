@@ -1,5 +1,5 @@
 launchd:
-  services:
+  agents:
     # config.xml is rewritten at start: BindAddress "*" so a missing interface
     # can't stop the service, ApiKey from sops so arr services and Prowlarr's
     # app sync share it.

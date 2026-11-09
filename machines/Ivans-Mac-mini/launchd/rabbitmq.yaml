@@ -1,5 +1,5 @@
 launchd:
-  services:
+  agents:
     rabbitmq:
       waitForPath: ${externalStoragePath}
       dataDir: ${rabbitmqDir}
