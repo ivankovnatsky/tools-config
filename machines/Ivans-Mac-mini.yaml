@@ -518,4 +518,3 @@ dock:
 
 launchd:
   labelPrefix: com.ivankovnatsky
-  sudo: true
