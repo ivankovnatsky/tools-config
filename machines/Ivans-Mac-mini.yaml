@@ -172,6 +172,11 @@ fetch:
 
 files:
   - dir: dotfiles
+  # Overrides dotfiles/.config/uv/uv.toml; launchd jobs and GUI apps read
+  # this, not the shell-only UV_* vars.
+  - target: ~/.config/uv/uv.toml
+    source: machines/Ivans-Mac-mini/.config/uv/uv.toml
+    mode: "0644"
   - target: ~/.local/bin/claude-statusline
     source: machines/Ivans-Mac-mini/.local/bin/claude-statusline
     mode: "0755"
