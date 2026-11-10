@@ -27,5 +27,5 @@ launchd:
         chmod 600 "${stashDataDir}/config/config.yml"
       command: |-
         script \
-        -q /dev/null ${localBin}/stash \
+        -q /dev/null ${externalStoragePath}/.local/bin/stash \
         --config ${stashDataDir}/config/config.yml

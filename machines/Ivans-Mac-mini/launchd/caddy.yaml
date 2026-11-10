@@ -1,8 +1,9 @@
 launchd:
   daemons:
-    # ${localBin}/caddy must be caddy built with
+    # ${externalStoragePath}/.local/bin/caddy must be caddy built with
     # github.com/caddy-dns/cloudflare@v0.2.4; nothing installs it yet.
     caddy:
+      waitForPath: ${externalStoragePath}
       waitForSecrets: true
       extraDirs:
         - /tmp/log/caddy
@@ -34,6 +35,6 @@ launchd:
 
         chmod 600 /var/lib/caddy/Caddyfile
       command: |-
-        ${localBin}/caddy run \
+        ${externalStoragePath}/.local/bin/caddy run \
         --config /var/lib/caddy/Caddyfile \
         --adapter=caddyfile

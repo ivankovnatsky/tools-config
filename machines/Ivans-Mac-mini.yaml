@@ -71,8 +71,6 @@ vars:
   uvBin: ${externalStoragePath}/.local/bin
   npmBin: ${externalStoragePath}/.npm/bin
   goBin: ${externalStoragePath}/.go/bin
-  # Release binaries with no brew formula or go-installable source.
-  localBin: ${home}/.local/bin
   toolsConfigPath: ${home}/Sources/github.com/ivankovnatsky/tools-config
   secretsDir: ${home}/.local/state/tools/secrets
   renderedDir: ${secretsDir}/rendered
@@ -165,6 +163,12 @@ pi:
 curlShell:
   "https://claude.ai/install.sh": bash
   "https://antigravity.google/cli/install.sh": bash
+
+fetch:
+  /Volumes/Storage/Data/.local/bin/stash:
+    url: https://github.com/stashapp/stash/releases/download/v0.29.1/stash-macos
+    sha256: b8c54d619021b97ee8c6f230f31d430009f45518e9d868505b413351011a7f35
+    mode: "0755"
 
 files:
   - dir: dotfiles
@@ -439,7 +443,6 @@ brew:
     - radarr
     - silicon-labs-vcp-driver
     - sonarr
-    - stash
     - whatsapp
   masApps:
     Numbers: 409203825

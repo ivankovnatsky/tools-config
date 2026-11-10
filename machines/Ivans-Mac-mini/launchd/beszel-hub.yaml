@@ -6,6 +6,6 @@ launchd:
       waitForPath: ${externalStoragePath}
       dataDir: ${externalStoragePath}/.beszel-hub
       command: |-
-        ${localBin}/beszel-hub serve \
+        ${externalStoragePath}/.local/bin/beszel-hub serve \
         --http ${bindAddress}:8090 \
         --dir ${externalStoragePath}/.beszel-hub

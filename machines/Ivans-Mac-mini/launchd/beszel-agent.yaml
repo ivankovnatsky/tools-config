@@ -1,9 +1,10 @@
 launchd:
   daemons:
-    # ${localBin}/beszel-agent: nothing installs it yet, as with beszel-hub.
+    # ${externalStoragePath}/.local/bin/beszel-agent: nothing installs it yet, as with beszel-hub.
     beszel-agent:
+      waitForPath: ${externalStoragePath}
       waitForSecrets: true
       environment:
         LISTEN: ${bindAddress}:45876
         KEY_FILE: ${sopsPath:beszel-hub-public-key}
-      command: ${localBin}/beszel-agent
+      command: ${externalStoragePath}/.local/bin/beszel-agent
