@@ -234,6 +234,10 @@ files:
       "machines/Ivans-Mac-mini/Library/Application
       Support/Firefox/Profiles/default/user.js"
     mode: "0644"
+  - target: "~/Library/Application Support/Firefox/profiles.ini"
+    source:
+      "machines/Ivans-Mac-mini/Library/Application Support/Firefox/profiles.ini"
+    mode: "0644"
   - target: ~/.pi/agent/settings.json
     source: machines/Ivans-Mac-mini/.pi/agent/settings.json
     mode: "0644"
@@ -259,6 +263,12 @@ files:
   - target: ~/.ssh/config
     source: dotfiles/.ssh/config
     mode: "0600"
+  - target: ~/.ssh/authorized_keys
+    source: machines/Ivans-Mac-mini/.ssh/authorized_keys
+    mode: "0600"
+  - target: ~/Screenshots
+    directory: true
+    mode: "0755"
   - target: ~/.config/kitty/quick-access-terminal.conf
     source: machines/Ivans-Mac-mini/.config/kitty/quick-access-terminal.conf
     mode: "0644"
@@ -319,6 +329,11 @@ gitRepos:
   ~/.local/share/tmux-plugins/tmux-yank: https://github.com/tmux-plugins/tmux-yank
   # yazi loads <name>.yazi dirs from here; piper.yazi is used by yazi.toml.
   ~/.config/yazi/plugins: https://github.com/yazi-rs/plugins
+
+fetch:
+  "~/Library/Application Support/Firefox/Profiles/default/extensions/addon@darkreader.org.xpi":
+    url: https://addons.mozilla.org/firefox/downloads/file/5055786/darkreader-4.9.133.xpi
+    sha256: eb06c5096d761616c7f1d954c11524ca4bff4fe7229044dc1fce288a8c0853ab
 
 links:
   - source: ~/.codex/AGENTS.md
@@ -558,6 +573,8 @@ defaults:
       AlwaysPromptForDownloadFolder: true
     org.gpgtools.pinentry-mac:
       UseKeychain: false
+    org.mozilla.firefox:
+      EnterprisePoliciesEnabled: true
   restart:
     com.apple.screencapture: screencaptureui
 
