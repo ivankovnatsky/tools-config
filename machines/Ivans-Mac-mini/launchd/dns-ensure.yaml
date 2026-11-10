@@ -1,0 +1,16 @@
+launchd:
+  daemons:
+    dns-ensure:
+      keepAlive: false
+      startInterval: 60
+      programArguments:
+        - /bin/bash
+        - -c
+        - |
+          set -e
+
+          /usr/sbin/networksetup -setdnsservers "AX88179A" 127.0.0.1
+          /usr/sbin/networksetup -setdnsservers "Ethernet" 127.0.0.1
+          /usr/sbin/networksetup -setdnsservers "Thunderbolt Ethernet Slot 1" 127.0.0.1
+          /usr/sbin/networksetup -setdnsservers "Thunderbolt Bridge" 127.0.0.1
+          /usr/sbin/networksetup -setdnsservers "Wi-Fi" 127.0.0.1

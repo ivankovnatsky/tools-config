@@ -1,0 +1,39 @@
+launchd:
+  daemons:
+    # ${localBin}/caddy must be caddy built with
+    # github.com/caddy-dns/cloudflare@v0.2.4; nothing installs it yet.
+    caddy:
+      waitForSecrets: true
+      extraDirs:
+        - /tmp/log/caddy
+        - /var/lib/caddy
+      environment:
+        HOME: /var/lib/caddy
+      preStart: |
+        umask 077
+
+        while [ ! -f "${sopsPath:external-domain}" ] || \
+              [ ! -f "${sopsPath:lets-encrypt-email}" ] || \
+              [ ! -f "${sopsPath:cloudflare-api-token}" ]; do
+          sleep 1
+        done
+
+        external_domain=$(cat ${sopsPath:external-domain})
+        lets_encrypt_email=$(cat ${sopsPath:lets-encrypt-email})
+        cloudflare_api_token=$(cat ${sopsPath:cloudflare-api-token})
+
+        /usr/bin/sed \
+          -e "s|@bindAddress@|${bindAddress}|g" \
+          -e "s|@externalDomain@|$external_domain|g" \
+          -e "s|@letsEncryptEmail@|$lets_encrypt_email|g" \
+          -e "s|@cloudflareApiToken@|$cloudflare_api_token|g" \
+          -e "s|@machineIp@|${localAddress}|g" \
+          -e "s|@a3Ip@|${a3Ip}|g" \
+          -e "s|@logPathPrefix@|/tmp/log|g" \
+          /etc/caddy/Caddyfile.template > /var/lib/caddy/Caddyfile
+
+        chmod 600 /var/lib/caddy/Caddyfile
+      command: |-
+        ${localBin}/caddy run \
+        --config /var/lib/caddy/Caddyfile \
+        --adapter=caddyfile

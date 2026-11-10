@@ -1,0 +1,6 @@
+launchd:
+  daemons:
+    dns-cache-flush:
+      keepAlive: false
+      command: |-
+        /bin/bash -c 'sleep 2m && /usr/bin/dscacheutil -flushcache && /usr/bin/killall -HUP mDNSResponder'

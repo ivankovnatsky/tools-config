@@ -65,3 +65,9 @@ sops:
     podservice-s3-prefix: { key: podservice/s3/prefix }
     podservice-s3-access-key-id: { key: podservice/s3/accessKeyId }
     podservice-s3-secret-access-key: { key: podservice/s3/secretAccessKey }
+    nextdns-endpoint-mini: { key: nextDNS/Mini/dotHostname }
+    nextdns-server-mini-1: { key: nextDNS/Mini/IPs/0 }
+    nextdns-server-mini-2: { key: nextDNS/Mini/IPs/1 }
+    cloudflare-api-token: { key: cloudflareApiToken }
+    lets-encrypt-email: { key: letsEncryptEmail }
+    beszel-hub-public-key: { key: beszel/hubPublicKey }

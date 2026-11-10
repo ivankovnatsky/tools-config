@@ -17,9 +17,15 @@ include:
   - Ivans-Mac-mini/templates/stash.yaml
   - Ivans-Mac-mini/templates/transmission.yaml
   - Ivans-Mac-mini/templates/dotfiles.yaml
+  - Ivans-Mac-mini/templates/dns.yaml
   - Ivans-Mac-mini/launchd/auto-poweroff.yaml
   - Ivans-Mac-mini/launchd/battery-monitoring.yaml
+  - Ivans-Mac-mini/launchd/beszel-agent.yaml
   - Ivans-Mac-mini/launchd/beszel-hub.yaml
+  - Ivans-Mac-mini/launchd/caddy.yaml
+  - Ivans-Mac-mini/launchd/dns-cache-flush.yaml
+  - Ivans-Mac-mini/launchd/dns-ensure.yaml
+  - Ivans-Mac-mini/launchd/dnsmasq.yaml
   - Ivans-Mac-mini/launchd/forgejo.yaml
   - Ivans-Mac-mini/launchd/gatus.yaml
   - Ivans-Mac-mini/launchd/jellyfin.yaml
@@ -29,6 +35,7 @@ include:
   - Ivans-Mac-mini/launchd/navidrome.yaml
   - Ivans-Mac-mini/launchd/notes.yaml
   - Ivans-Mac-mini/launchd/notifications-digest.yaml
+  - Ivans-Mac-mini/launchd/pmset-mgmt.yaml
   - Ivans-Mac-mini/launchd/podservice.yaml
   - Ivans-Mac-mini/launchd/prowlarr.yaml
   - Ivans-Mac-mini/launchd/qmd-update.yaml
@@ -38,8 +45,10 @@ include:
   - Ivans-Mac-mini/launchd/reposync.yaml
   - Ivans-Mac-mini/launchd/settings-daemon.yaml
   - Ivans-Mac-mini/launchd/sonarr.yaml
+  - Ivans-Mac-mini/launchd/stubby.yaml
   - Ivans-Mac-mini/launchd/stash.yaml
   - Ivans-Mac-mini/launchd/syncthing.yaml
+  - Ivans-Mac-mini/launchd/tailscaled.yaml
   - Ivans-Mac-mini/launchd/tools-mgmt.yaml
   - Ivans-Mac-mini/launchd/transmission.yaml
   - Ivans-Mac-mini/mgmt/arr.yaml
@@ -228,6 +237,12 @@ files:
     source: dotfiles/.config/nvim/lua/config/pack.lua
     onChange: nvim --headless +qa
     onUpdate: nvim --headless "+lua vim.pack.update(nil, { force = true })" +qa
+  - source: templates/Caddyfile
+    target: /etc/caddy/Caddyfile.template
+    mode: "0644"
+  - source: machines/Ivans-Mac-mini/etc/resolver/ts.net
+    target: /etc/resolver/ts.net
+    mode: "0644"
 
 gitRepos:
   ~/.local/share/fish-plugins/autopair: https://github.com/jorgebucaran/autopair.fish

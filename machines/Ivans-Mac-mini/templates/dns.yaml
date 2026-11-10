@@ -1,0 +1,46 @@
+templates:
+  stubby.yml:
+    path: ${renderedDir}/stubby.yml
+    content: |
+      resolution_type: GETDNS_RESOLUTION_STUB
+      dns_transport_list:
+        - GETDNS_TRANSPORT_TLS
+      tls_authentication: GETDNS_AUTHENTICATION_REQUIRED
+      tls_query_padding_blocksize: 128
+      round_robin_upstreams: 1
+      idle_timeout: 10000
+      listen_addresses:
+        - ${bindAddress}@5453
+      upstream_recursive_servers:
+        - address_data: ${sops:nextdns-server-mini-1}
+          tls_auth_name: ${sops:nextdns-endpoint-mini}
+        - address_data: ${sops:nextdns-server-mini-2}
+          tls_auth_name: ${sops:nextdns-endpoint-mini}
+  dnsmasq.conf:
+    path: ${renderedDir}/dnsmasq.conf
+    content: |
+      bogus-priv
+      conf-file=${renderedDir}/dnsmasq-domain.conf
+      dns-forward-max=150
+      domain-needed
+      expand-hosts
+      listen-address=0.0.0.0
+      local-service=net
+      max-ttl=60
+      no-resolv
+      server=127.0.0.1#5453
+      server=1.1.1.1
+      server=1.0.0.1
+      strict-order
+  dnsmasq-domain.conf:
+    path: ${renderedDir}/dnsmasq-domain.conf
+    content: |
+      domain=${sops:external-domain}
+      local=/${sops:external-domain}/
+      dhcp-option=option:domain-search,${sops:external-domain}
+      address=/${sops:external-domain}/${miniIp}
+      address=/${sops:external-domain}/${miniWifiIp}
+      address=/${sops:external-domain}/${a3Ip}
+      mx-host=${sops:external-domain},${sops:external-domain},10
+      # Public R2 feed host: resolve upstream instead of the homelab wildcard.
+      server=/${sops:podservice-s3-public-host}/1.1.1.1

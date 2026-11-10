@@ -1,0 +1,202 @@
+# Global settingscaddy
+{
+	# Log configuration
+	log {
+		output file @logPathPrefix@/caddy/caddy.log {
+			roll_size 10MB
+			roll_keep 10
+			roll_keep_for 48h
+		}
+		format json
+		level INFO
+	}
+
+	# Configure storage location explicitly
+	storage file_system {
+		root /var/lib/caddy
+	}
+
+	# Configure ACME for external domains
+	email @letsEncryptEmail@
+
+	# Default ACME configuration - use cloudflare DNS challenge globally
+	acme_dns cloudflare @cloudflareApiToken@
+}
+
+# Single wildcard certificate for all subdomains
+# Use *.externalDomain to request a wildcard certificate
+*.@externalDomain@ {
+	bind @bindAddress@
+
+	# Enable proper TLS with Let's Encrypt using DNS challenge for wildcard cert
+	# https://caddyserver.com/docs/automatic-https#wildcard-certificates
+	# https://caddy.community/t/how-to-use-dns-provider-modules-in-caddy-2/8148
+	tls {
+		dns cloudflare @cloudflareApiToken@
+		# Use external DNS resolvers for ACME challenges
+		# https://caddy.community/t/could-not-determine-zone-for-domain/18720/7
+		resolvers 1.1.1.1 8.8.8.8
+	}
+
+	@prowlarr host prowlarr.@externalDomain@
+	reverse_proxy @prowlarr @machineIp@:9696 {
+		header_up X-Real-IP {remote_host}
+		header_up Host {host}
+	}
+
+	@radarr host radarr.@externalDomain@
+	reverse_proxy @radarr @machineIp@:7878 {
+		header_up X-Real-IP {remote_host}
+		header_up Host {host}
+	}
+
+	@sonarr host sonarr.@externalDomain@
+	reverse_proxy @sonarr @machineIp@:8989 {
+		header_up X-Real-IP {remote_host}
+		header_up Host {host}
+	}
+
+	@transmission host transmission.@externalDomain@
+	reverse_proxy @transmission @machineIp@:9091 {
+		header_up X-Real-IP {remote_host}
+		header_up Host {host}
+	}
+
+	@jellyfin host jellyfin.@externalDomain@
+	reverse_proxy @jellyfin @machineIp@:8096 {
+		# Enable WebSocket support
+		header_up X-Real-IP {remote_host}
+		header_up Host {host}
+		# Increase timeouts for streaming
+		transport http {
+			keepalive 12h
+			keepalive_idle_conns 100
+		}
+	}
+
+	# Beszel monitoring hub
+	@beszel host beszel.@externalDomain@
+	reverse_proxy @beszel @machineIp@:8090 {
+		header_up X-Real-IP {remote_host}
+		header_up Host {host}
+	}
+
+	# Gatus health dashboard on mini
+	@gatus host gatus.@externalDomain@
+	reverse_proxy @gatus @machineIp@:8086
+
+	@battery host battery.@externalDomain@
+	reverse_proxy @battery @machineIp@:8787
+
+	@syncthing host syncthing.@externalDomain@
+	reverse_proxy @syncthing @a3Ip@:8384
+
+	# Miniserve on mini
+	@miniserve host miniserve.@externalDomain@
+	reverse_proxy @miniserve @machineIp@:8080 {
+		# Headers for proper operation
+		header_up X-Real-IP {remote_host}
+		header_up Host {host}
+		# Increase timeouts and buffer sizes for large directories and files
+		transport http {
+			keepalive 30s
+			response_header_timeout 30s
+		}
+	}
+
+	@podservice host podservice.@externalDomain@
+	reverse_proxy @podservice @machineIp@:8083 {
+		header_up X-Real-IP {remote_host}
+		header_up Host {host}
+	}
+
+	@ollama host ollama.@externalDomain@
+	reverse_proxy @ollama @a3Ip@:11434 {
+		header_up X-Real-IP {remote_host}
+		header_up Host {host}
+
+		# Increase timeouts for large model responses
+		transport http {
+			keepalive 300s
+			response_header_timeout 300s
+			read_timeout 300s
+		}
+	}
+
+	@openwebui host openwebui.@externalDomain@
+	reverse_proxy @openwebui @a3Ip@:8091 {
+		# Enable WebSocket support for real-time updates
+		header_up X-Real-IP {remote_host}
+		header_up Host {host}
+		# Increase timeouts for large model responses and WebSocket connections
+		transport http {
+			keepalive 12h
+			keepalive_idle_conns 100
+			response_header_timeout 300s
+		}
+	}
+
+	@navidrome host navidrome.@externalDomain@
+	reverse_proxy @navidrome @machineIp@:4533 {
+		header_up X-Real-IP {remote_host}
+		header_up Host {host}
+		# Streaming support
+		transport http {
+			keepalive 12h
+			keepalive_idle_conns 100
+		}
+	}
+
+	@stash host stash.@externalDomain@
+	reverse_proxy @stash @machineIp@:9999 {
+		# Enable WebSocket support
+		header_up X-Real-IP {remote_host}
+		header_up Host {host}
+		# Increase timeouts for streaming
+		transport http {
+			keepalive 12h
+			keepalive_idle_conns 100
+		}
+	}
+
+	@mailpit host mailpit.@externalDomain@
+	reverse_proxy @mailpit @machineIp@:8025 {
+		header_up X-Real-IP {remote_host}
+		header_up Host {host}
+	}
+
+	@forgejo host forgejo.@externalDomain@
+	reverse_proxy @forgejo @machineIp@:3300 {
+		header_up X-Real-IP {remote_host}
+		header_up Host {host}
+		transport http {
+			keepalive 30s
+		}
+	}
+
+	@openclaw host openclaw.@externalDomain@
+	reverse_proxy @openclaw @a3Ip@:18789 {
+		header_up X-Real-IP {remote_host}
+		header_up Host {host}
+	}
+
+	@immich host immich.@externalDomain@
+	reverse_proxy @immich @a3Ip@:2283 {
+		header_up X-Real-IP {remote_host}
+		header_up Host {host}
+		# Mobile sync and video uploads need generous timeouts + body size.
+		transport http {
+			keepalive 12h
+			keepalive_idle_conns 100
+			response_header_timeout 300s
+		}
+	}
+
+	# Logging for ACME and DNS services
+	log {
+		output file @logPathPrefix@/caddy/dns.log {
+			roll_size 10MB
+			roll_keep 5
+		}
+	}
+}

@@ -1,0 +1,8 @@
+launchd:
+  daemons:
+    stubby:
+      waitForSecrets: true
+      command: /opt/homebrew/bin/stubby -C ${renderedDir}/stubby.yml -v 6
+      extraServiceConfig:
+        AbandonProcessGroup: false
+        SoftResourceLimits: { NumberOfFiles: 1024 }

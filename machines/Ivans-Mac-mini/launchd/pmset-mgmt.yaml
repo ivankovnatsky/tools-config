@@ -1,0 +1,24 @@
+launchd:
+  daemons:
+    pmset-mgmt:
+      keepAlive: false
+      programArguments:
+        - /bin/bash
+        - -c
+        - |
+          set -e
+          echo "Starting pmset management..."
+
+          echo "Setting auto restart on power connect: enabled"
+          /usr/bin/pmset -a autorestartatconnect 1
+
+          echo "Verifying power mode settings:"
+          /usr/bin/pmset -g custom
+
+          echo "Cancelling existing power management schedules"
+          /usr/bin/pmset repeat cancel
+
+          echo "Verifying schedules:"
+          /usr/bin/pmset -g sched
+
+          echo "pmset management completed"
