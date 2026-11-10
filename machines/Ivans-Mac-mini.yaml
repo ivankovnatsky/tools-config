@@ -243,6 +243,15 @@ files:
   - source: machines/Ivans-Mac-mini/etc/resolver/ts.net
     target: /etc/resolver/ts.net
     mode: "0644"
+  - target: /etc/shells
+    source: machines/Ivans-Mac-mini/etc/shells
+    mode: "0644"
+  - target: /etc/pam.d/sudo_local
+    source: machines/Ivans-Mac-mini/etc/pam.d/sudo_local
+    mode: "0444"
+  - target: /etc/gitconfig
+    source: machines/Ivans-Mac-mini/etc/gitconfig
+    mode: "0644"
 
 gitRepos:
   ~/.local/share/fish-plugins/autopair: https://github.com/jorgebucaran/autopair.fish
