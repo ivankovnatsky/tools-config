@@ -184,7 +184,7 @@ local function cpuPct()
   return pct((busy - prev.busy) / (all - prev.all) * 100)
 end
 
--- Activity Monitor's Physical Memory, Memory Used, Cached Files, Swap Used.
+-- Activity Monitor's Memory Used, Cached Files, Swap Used.
 local function memStats()
   local v = hs.host.vmStat()
   local function gb(bytes)
@@ -194,7 +194,7 @@ local function memStats()
   local free = (v.pagesFree + v.pagesSpeculative) * v.pageSize
   local used = v.memSize - cached - free
   local swap = tonumber(hs.execute("/usr/sbin/sysctl -n vm.swapusage"):match("used = ([%d.]+)M"))
-  return table.concat({ gb(v.memSize), gb(used), gb(cached), swap and gb(swap * 2^20) or "–" }, ", ")
+  return table.concat({ gb(used), gb(cached), swap and gb(swap * 2^20) or "–" }, ", ")
 end
 
 function ext.app.updateSysDisks()
