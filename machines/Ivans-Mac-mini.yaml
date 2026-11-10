@@ -194,6 +194,9 @@ go:
     username:
       source: github.com/ivankovnatsky/username
       binary: username
+    xcaddy:
+      source: github.com/caddyserver/xcaddy/cmd/xcaddy
+      binary: xcaddy
 
 pi:
   packages:
@@ -297,6 +300,14 @@ files:
     source: dotfiles/.config/nvim/lua/config/pack.lua
     onChange: nvim --headless +qa
     onUpdate: nvim --headless "+lua vim.pack.update(nil, { force = true })" +qa
+  - target: ${externalStoragePath}/.local/share/caddy/build.env
+    source: machines/Ivans-Mac-mini/.local/share/caddy/build.env
+    mode: "0644"
+    onChange: >-
+      . ${externalStoragePath}/.local/share/caddy/build.env &&
+      ${goBin}/xcaddy build "$CADDY_VERSION"
+      --with "github.com/caddy-dns/cloudflare@$CADDY_DNS_CLOUDFLARE_VERSION"
+      --output ${externalStoragePath}/.local/bin/caddy
   - source: templates/Caddyfile
     target: /etc/caddy/Caddyfile.template
     mode: "0644"

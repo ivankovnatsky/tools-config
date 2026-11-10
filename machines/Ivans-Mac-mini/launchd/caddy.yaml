@@ -1,7 +1,6 @@
 launchd:
   daemons:
-    # ${externalStoragePath}/.local/bin/caddy must be caddy built with
-    # github.com/caddy-dns/cloudflare@v0.2.4; nothing installs it yet.
+    # The binary is built by the build.env files entry's onChange (xcaddy).
     caddy:
       waitForPath: ${externalStoragePath}
       waitForSecrets: true
