@@ -223,6 +223,8 @@ files:
     source:
       "machines/Ivans-Mac-mini/Library/Application Support/Muxy 2/settings.toml"
     mode: "0644"
+    # Muxy rewrites it; set false for one deploy to push repo changes.
+    skip: true
   - target: "~/Library/Application Support/Muxy 2/terminal.toml"
     source:
       "machines/Ivans-Mac-mini/Library/Application Support/Muxy 2/terminal.toml"
