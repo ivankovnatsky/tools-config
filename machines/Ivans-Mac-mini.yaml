@@ -211,6 +211,65 @@ fetch:
     url: https://github.com/stashapp/stash/releases/download/v0.29.1/stash-macos
     sha256: b8c54d619021b97ee8c6f230f31d430009f45518e9d868505b413351011a7f35
     mode: "0755"
+  /Volumes/Storage/Data/.local/bin/eat:
+    url: https://raw.githubusercontent.com/ivankovnatsky/tools/012331c2d5e05a307740acc107c873a1ffcee365/packages/eat/eat.sh
+    sha256: 4858b1075b3002de759ec37ac25f9664be7f548d53227ef45862fb9fee4dea0c
+    mode: "0755"
+  /Volumes/Storage/Data/.local/bin/find-grep:
+    url: https://raw.githubusercontent.com/ivankovnatsky/tools/012331c2d5e05a307740acc107c873a1ffcee365/packages/find-grep/find-grep.sh
+    sha256: dea009e1a40f890e36f82e2985ffac700e597f3e5dbb80dc94236df854170243
+    mode: "0755"
+  /Volumes/Storage/Data/.local/bin/ghq-cd:
+    url: https://raw.githubusercontent.com/ivankovnatsky/tools/012331c2d5e05a307740acc107c873a1ffcee365/packages/ghq-cd/ghq-cd.sh
+    sha256: 56962759e6230ef9bcfd2395fa62fa5c08ca3c852d38b443098e9fc08d5bed62
+    mode: "0755"
+  /Volumes/Storage/Data/.local/bin/go-lint-wrapper:
+    url: https://raw.githubusercontent.com/ivankovnatsky/tools/012331c2d5e05a307740acc107c873a1ffcee365/packages/go-lint-wrapper/go-lint-wrapper.sh
+    sha256: c2c2961243a1e415af66ebd8918db9abc94a75ea7d25c4c0bab2e02902740dbe
+    mode: "0755"
+  /Volumes/Storage/Data/.local/bin/gpg-edit:
+    url: https://raw.githubusercontent.com/ivankovnatsky/tools/012331c2d5e05a307740acc107c873a1ffcee365/packages/gpg-edit/gpg-edit.sh
+    sha256: 50edcfeb4ba920412c61cfa49e0affd07e2e062292fa726d42ea293f4ef74f7b
+    mode: "0755"
+  /Volumes/Storage/Data/.local/bin/gwq-merge:
+    url: https://raw.githubusercontent.com/ivankovnatsky/tools/012331c2d5e05a307740acc107c873a1ffcee365/packages/gwq-merge/gwq-merge.sh
+    sha256: 7f57eef04cd5cc27448992235ce709d19b1c18633302b30ea3dc1105375799cb
+    mode: "0755"
+  /Volumes/Storage/Data/.local/bin/image-meta:
+    url: https://raw.githubusercontent.com/ivankovnatsky/tools/012331c2d5e05a307740acc107c873a1ffcee365/packages/image-meta/image-meta.sh
+    sha256: caf7c89b16e51b7f08f15a777fd138faf0b60a7b666b82610597d0152c2f1c98
+    mode: "0755"
+  /Volumes/Storage/Data/.local/bin/nvim-edit-staged:
+    url: https://raw.githubusercontent.com/ivankovnatsky/tools/012331c2d5e05a307740acc107c873a1ffcee365/packages/nvim-edit-staged/nvim-edit-staged.sh
+    sha256: 84fb50a7bd4a451243a2a2cfa92663ce55713156f3f50ce6d24aa7e43074bf04
+    mode: "0755"
+  /Volumes/Storage/Data/.local/bin/nvim-find-edit:
+    url: https://raw.githubusercontent.com/ivankovnatsky/tools/012331c2d5e05a307740acc107c873a1ffcee365/packages/nvim-find-edit/nvim-find-edit.sh
+    sha256: 2d676e5159138b042aad2377abf4a0f901fa5fadad4b438beb4d9b0764e47c58
+    mode: "0755"
+  /Volumes/Storage/Data/.local/bin/path-copy:
+    url: https://raw.githubusercontent.com/ivankovnatsky/tools/012331c2d5e05a307740acc107c873a1ffcee365/packages/path-copy/path-copy.sh
+    sha256: e776645872f7fd6d3cd19ad96f4b5340a7868d07d5a1725fa55f95281f982167
+    mode: "0755"
+  /Volumes/Storage/Data/.local/bin/reboot:
+    url: https://raw.githubusercontent.com/ivankovnatsky/tools/012331c2d5e05a307740acc107c873a1ffcee365/packages/reboot/reboot.sh
+    sha256: 7fd79727d1e12f69c9ab942a1f53463792950834c3a398f8fe06f8a18290b7c6
+    mode: "0755"
+  /Volumes/Storage/Data/.local/bin/tac:
+    url: https://raw.githubusercontent.com/ivankovnatsky/tools/012331c2d5e05a307740acc107c873a1ffcee365/packages/tac/tac.sh
+    sha256: 6f615f5ee5fee7fa71c2b052cdd0a8c29936e1b56feeca19fc610cbcc09f8fbf
+    mode: "0755"
+  /Volumes/Storage/Data/.local/bin/tmux-attach:
+    url: https://raw.githubusercontent.com/ivankovnatsky/tools/012331c2d5e05a307740acc107c873a1ffcee365/packages/tmux-attach/tmux-attach.sh
+    sha256: 1530255fd2d2789ad5182af1543d60d54b17306f3f5f578c6a2b1b5598f6dd8e
+    mode: "0755"
+  /Volumes/Storage/Data/.local/bin/torrent-dl:
+    url: https://raw.githubusercontent.com/ivankovnatsky/tools/012331c2d5e05a307740acc107c873a1ffcee365/packages/torrent-dl/torrent-dl.fish
+    sha256: d5668b1b9a8ae56aefac723ab914ae1d20e4b796c090f1edc89a0a7732a8f554
+    mode: "0755"
+  "~/Library/Application Support/Firefox/Profiles/default/extensions/addon@darkreader.org.xpi":
+    url: https://addons.mozilla.org/firefox/downloads/file/5055786/darkreader-4.9.133.xpi
+    sha256: eb06c5096d761616c7f1d954c11524ca4bff4fe7229044dc1fce288a8c0853ab
 
 files:
   - dir: dotfiles
@@ -340,11 +399,6 @@ gitRepos:
   ~/.local/share/tmux-plugins/tmux-yank: https://github.com/tmux-plugins/tmux-yank
   # yazi loads <name>.yazi dirs from here; piper.yazi is used by yazi.toml.
   ~/.config/yazi/plugins: https://github.com/yazi-rs/plugins
-
-fetch:
-  "~/Library/Application Support/Firefox/Profiles/default/extensions/addon@darkreader.org.xpi":
-    url: https://addons.mozilla.org/firefox/downloads/file/5055786/darkreader-4.9.133.xpi
-    sha256: eb06c5096d761616c7f1d954c11524ca4bff4fe7229044dc1fce288a8c0853ab
 
 links:
   - source: ~/.codex/AGENTS.md
