@@ -5,6 +5,8 @@ launchd:
     caddy:
       waitForPath: ${externalStoragePath}
       waitForSecrets: true
+      restartOn:
+        - /etc/caddy/Caddyfile.template
       extraDirs:
         - /tmp/log/caddy
         - /var/lib/caddy

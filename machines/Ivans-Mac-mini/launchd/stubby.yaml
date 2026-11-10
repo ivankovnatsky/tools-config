@@ -2,6 +2,8 @@ launchd:
   daemons:
     stubby:
       waitForSecrets: true
+      restartOn:
+        - ${renderedDir}/stubby.yml
       command: /opt/homebrew/bin/stubby -C ${renderedDir}/stubby.yml -v 6
       extraServiceConfig:
         AbandonProcessGroup: false
