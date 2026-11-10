@@ -137,6 +137,42 @@ uv:
     gh-pr:
       source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/gh-pr
       binary: gh-pr
+    asusrouter-cli:
+      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/asusrouter-cli
+      binary: asusrouter-cli
+    backup-home:
+      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/backup-home
+      binary: backup-home
+    cleanup-home:
+      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/cleanup-home
+      binary: cleanup-home
+    dns:
+      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/dns
+      binary: dns
+    gh-notifications:
+      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/gh-notifications
+      binary: gh-notifications
+    git-restore:
+      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/git-restore
+      binary: git-restore
+    gpg-pass:
+      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/gpg-pass
+      binary: gpg-pass
+    launchd-mgmt:
+      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/launchd-mgmt
+      binary: launchd-mgmt
+    ps-top:
+      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/ps-top
+      binary: ps-top
+    subs:
+      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/subs
+      binary: subs
+    tasks:
+      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/tasks
+      binary: tasks
+    youtube:
+      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/youtube
+      binary: youtube
     podservice:
       source: git+https://github.com/ivankovnatsky/podservice.git
       binary: podservice
@@ -155,6 +191,9 @@ go:
     gatus:
       source: github.com/TwiN/gatus/v5
       binary: gatus
+    username:
+      source: github.com/ivankovnatsky/username
+      binary: username
 
 pi:
   packages:
