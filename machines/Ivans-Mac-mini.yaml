@@ -592,5 +592,23 @@ dock:
     - ~/Downloads
     - ~/Screenshots
 
+settingsctl:
+  fullDiskAccess:
+    - bash
+    - kitty
+    - Muxy
+    - smbd
+    - Terminal
+  accessibility:
+    - Hammerspoon
+    - Mac Mouse Fix Helper
+    - Muxy
+    - Terminal
+    - kitty
+  loginItems:
+    - Hammerspoon
+    - Mac Mouse Fix
+    - LosslessSwitcher
+
 launchd:
   labelPrefix: com.ivankovnatsky
