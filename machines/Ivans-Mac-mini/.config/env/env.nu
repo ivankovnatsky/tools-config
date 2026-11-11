@@ -18,14 +18,22 @@ load-env {
     UV_TOOL_DIR: "${externalStoragePath}/.local/share/uv/tools"
     UV_CACHE_DIR: "${externalStoragePath}/.cache/uv"
     UV_PYTHON_PREFERENCE: "only-managed"
+    GPG_TTY: (do { ^tty } | complete | get stdout | str trim)
 }
 
 $env.PATH = (
     $env.PATH
     | split row (char esep)
-    | prepend "${externalStoragePath}/.go/bin"
+    | prepend ["/opt/homebrew/bin" "${externalStoragePath}/.go/bin"]
     | append (
-        ["${externalStoragePath}/.npm/bin" "${externalStoragePath}/.bun/bin" "${externalStoragePath}/.local/bin"]
+        [
+            "${externalStoragePath}/.npm/bin"
+            "${externalStoragePath}/.bun/bin"
+            "${externalStoragePath}/.local/bin"
+            ($env.HOME | path join "bin")
+            ($env.HOME | path join ".local" "bin")
+            "/Applications/Obsidian.app/Contents/MacOS"
+        ]
         | where {|dir| $dir | path exists }
     )
     | uniq

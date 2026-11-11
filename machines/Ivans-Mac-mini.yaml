@@ -94,6 +94,14 @@ paths:
   goPath: ${externalStoragePath}/.go
   goBin: ${externalStoragePath}/.go/bin
 
+# Shell env files are the env-* templates; this section only exports into
+# tools' own process (uv installs) and the launchd user domain.
+env:
+  vars:
+    UV_PYTHON_INSTALL_DIR: ${externalStoragePath}/.local/share/uv/python
+  shells: []
+  launchd: true
+
 npm:
   packages:
     "@earendil-works/pi-coding-agent": {}
