@@ -267,6 +267,9 @@ fetch:
     url: https://raw.githubusercontent.com/ivankovnatsky/tools/012331c2d5e05a307740acc107c873a1ffcee365/packages/torrent-dl/torrent-dl.fish
     sha256: d5668b1b9a8ae56aefac723ab914ae1d20e4b796c090f1edc89a0a7732a8f554
     mode: "0755"
+  ~/.config/nvim/spell/uk.utf-8.spl:
+    url: https://ftp.nluug.nl/vim/runtime/spell/uk.utf-8.spl
+    sha256: e1686ca4a54d7068fe66e9a6921f3bad29ccbf14046bf7048598cbe6ec072814
   "~/Library/Application Support/Firefox/Profiles/default/extensions/addon@darkreader.org.xpi":
     url: https://addons.mozilla.org/firefox/downloads/file/5055786/darkreader-4.9.133.xpi
     sha256: eb06c5096d761616c7f1d954c11524ca4bff4fe7229044dc1fce288a8c0853ab
@@ -316,6 +319,9 @@ files:
   - target: ~/.gnupg
     directory: true
     mode: "0700"
+  - target: ~/.gnupg/gpg.conf
+    source: machines/Ivans-Mac-mini/.gnupg/gpg.conf
+    mode: "0600"
   - target: ~/.gnupg/gpg-agent.conf
     source: machines/Ivans-Mac-mini/.gnupg/gpg-agent.conf
     mode: "0600"

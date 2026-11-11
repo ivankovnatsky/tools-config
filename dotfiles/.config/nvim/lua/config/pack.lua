@@ -108,6 +108,7 @@ vim.pack.add({
   gh("nvim-neo-tree/neo-tree.nvim"),
   gh("stevearc/oil.nvim"),
   gh("JezerM/oil-lsp-diagnostics.nvim"),
+  gh("mikesmithgh/kitty-scrollback.nvim"),
 }, { confirm = #vim.api.nvim_list_uis() > 0 })
 
 -- One failing setup (e.g. fzf-native not built) must not abort the rest of init.
