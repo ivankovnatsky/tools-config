@@ -15,6 +15,7 @@ set -gx OLLAMA_BASE_URL 'http://192.168.50.6:11434/v1'
 set -gx _ZL_HYPHEN 1
 
 set -gx GOPATH ${externalStoragePath}/.go
+set -gx CARGO_HOME ${externalStoragePath}/.cargo
 set -gx HF_HOME ${externalStoragePath}/.cache/huggingface
 set -gx UV_PYTHON_INSTALL_DIR ${externalStoragePath}/.local/share/uv/python
 set -gx UV_TOOL_BIN_DIR ${externalStoragePath}/.local/bin
@@ -22,7 +23,7 @@ set -gx UV_TOOL_DIR ${externalStoragePath}/.local/share/uv/tools
 set -gx UV_CACHE_DIR ${externalStoragePath}/.cache/uv
 set -gx UV_PYTHON_PREFERENCE only-managed
 
-set -gx PATH ${externalStoragePath}/.go/bin $PATH
+set -gx PATH ${externalStoragePath}/.go/bin ${externalStoragePath}/.cargo/bin $PATH
 for dir in ${externalStoragePath}/.npm/bin ${externalStoragePath}/.bun/bin ${externalStoragePath}/.local/bin
     if test -d $dir
         set -gx PATH $PATH $dir

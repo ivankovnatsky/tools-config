@@ -93,6 +93,7 @@ paths:
   bun: ${externalStoragePath}/.bun/bin
   goPath: ${externalStoragePath}/.go
   goBin: ${externalStoragePath}/.go/bin
+  cargoHome: ${externalStoragePath}/.cargo
 
 # Shell env files are the env-* templates; this section only exports into
 # tools' own process (uv installs) and the launchd user domain.
@@ -202,6 +203,11 @@ go:
     xcaddy:
       source: github.com/caddyserver/xcaddy/cmd/xcaddy
       binary: xcaddy
+
+cargo:
+  packages:
+    genpass:
+      version: 0.5.1
 
 pi:
   packages:

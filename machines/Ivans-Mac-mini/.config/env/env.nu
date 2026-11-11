@@ -12,6 +12,7 @@ load-env {
     OLLAMA_BASE_URL: "http://192.168.50.6:11434/v1"
     _ZL_HYPHEN: "1"
     GOPATH: "${externalStoragePath}/.go"
+    CARGO_HOME: "${externalStoragePath}/.cargo"
     HF_HOME: "${externalStoragePath}/.cache/huggingface"
     UV_PYTHON_INSTALL_DIR: "${externalStoragePath}/.local/share/uv/python"
     UV_TOOL_BIN_DIR: "${externalStoragePath}/.local/bin"
@@ -24,7 +25,7 @@ load-env {
 $env.PATH = (
     $env.PATH
     | split row (char esep)
-    | prepend ["/opt/homebrew/bin" "${externalStoragePath}/.go/bin"]
+    | prepend ["/opt/homebrew/bin" "${externalStoragePath}/.go/bin" "${externalStoragePath}/.cargo/bin"]
     | append (
         [
             "${externalStoragePath}/.npm/bin"
