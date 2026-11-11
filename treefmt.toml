@@ -2,3 +2,4 @@
 command = "prettier"
 options = ["--write", "--prose-wrap", "always"]
 includes = ["*.md", "*.yaml", "*.yml"]
+excludes = ["secrets/*", ".sops.yaml"]
