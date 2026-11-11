@@ -281,6 +281,52 @@ fetch:
   ~/.config/nvim/spell/uk.utf-8.spl:
     url: https://ftp.nluug.nl/vim/runtime/spell/uk.utf-8.spl
     sha256: e1686ca4a54d7068fe66e9a6921f3bad29ccbf14046bf7048598cbe6ec072814
+  /Volumes/Storage/Data/.local/bin/beszel-agent:
+    url: https://github.com/henrygd/beszel/releases/download/v0.21.1/beszel-agent_darwin_arm64.tar.gz
+    sha256: 9246065f680cdb0af2885b7bf5876dc45b754019f2c90eb28550cf45db978eb8
+    install: |
+      tar -xzf "$src" beszel-agent
+      mv beszel-agent "$out"
+    mode: "0755"
+    restartUnits:
+      - launchd:com.ivankovnatsky.beszel-agent
+  /Volumes/Storage/Data/.local/bin/beszel-hub:
+    url: https://github.com/henrygd/beszel/releases/download/v0.21.1/beszel_darwin_arm64.tar.gz
+    sha256: 39778df5354656697ef49f01422910c89b7300126cd38ece007b504821ecded9
+    install: |
+      tar -xzf "$src" beszel
+      mv beszel "$out"
+    mode: "0755"
+    restartUnits:
+      - launchd:com.ivankovnatsky.beszel-hub
+  # Upstream executables are unsigned; Apple Silicon refuses unsigned arm64 code.
+  /Applications/Prowlarr.app:
+    url: https://github.com/Prowlarr/Prowlarr/releases/download/v2.6.5.5623/Prowlarr.master.2.6.5.5623.osx-app-core-arm64.zip
+    sha256: cd3401b34a11256fcb5e49c26e20382ca4d3f14c1d2c102247a4a46e66a5ab24
+    install: |
+      ditto -x -k "$src" .
+      codesign --force --deep -s - Prowlarr.app
+      mv Prowlarr.app "$out"
+    restartUnits:
+      - launchd:com.ivankovnatsky.prowlarr
+  /Applications/Radarr.app:
+    url: https://github.com/Radarr/Radarr/releases/download/v6.4.4.10685/Radarr.master.6.4.4.10685.osx-app-core-arm64.zip
+    sha256: fda0e0750717cbde378775f60b25e328a8fb8677f6a070b7c84c5f212827ec8b
+    install: |
+      ditto -x -k "$src" .
+      codesign --force --deep -s - Radarr.app
+      mv Radarr.app "$out"
+    restartUnits:
+      - launchd:com.ivankovnatsky.radarr
+  /Applications/Sonarr.app:
+    url: https://github.com/Sonarr/Sonarr/releases/download/v4.0.20.3014/Sonarr.main.4.0.20.3014.osx-arm64-app.zip
+    sha256: cee10454f117605faf8db2e8c6acb938c0cfa4907eb302cc159b7e8cafe564c0
+    install: |
+      ditto -x -k "$src" .
+      codesign --force --deep -s - Sonarr.app
+      mv Sonarr.app "$out"
+    restartUnits:
+      - launchd:com.ivankovnatsky.sonarr
   "~/Library/Application Support/Firefox/Profiles/default/extensions/addon@darkreader.org.xpi":
     url: https://addons.mozilla.org/firefox/downloads/file/5055786/darkreader-4.9.133.xpi
     sha256: eb06c5096d761616c7f1d954c11524ca4bff4fe7229044dc1fce288a8c0853ab
@@ -582,10 +628,7 @@ brew:
     - mullvad-vpn
     - muxy-app/tap/muxy
     - obsidian
-    - prowlarr
-    - radarr
     - silicon-labs-vcp-driver
-    - sonarr
     - whatsapp
   masApps:
     Numbers: 409203825

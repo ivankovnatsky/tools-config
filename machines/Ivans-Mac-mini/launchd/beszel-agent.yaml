@@ -1,6 +1,5 @@
 launchd:
   daemons:
-    # ${externalStoragePath}/.local/bin/beszel-agent: nothing installs it yet, as with beszel-hub.
     beszel-agent:
       waitForPath: ${externalStoragePath}
       waitForSecrets: true
