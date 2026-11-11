@@ -56,15 +56,30 @@ sops:
     forgejo-user-email: { key: forgejo/users/forgejoUser/email }
     forgejo-user-gpg-key: { key: forgejo/users/forgejoUser/gpgPublicKey }
     jellyfin-api-key: { key: jellyfin/apiKey }
-    arr-radarr-api-key: { key: arr/radarr/apiKey }
-    arr-sonarr-api-key: { key: arr/sonarr/apiKey }
-    arr-prowlarr-api-key: { key: arr/prowlarr/apiKey }
+    arr-radarr-api-key:
+      key: arr/radarr/apiKey
+      restartUnits:
+        - launchd:com.ivankovnatsky.radarr
+    arr-sonarr-api-key:
+      key: arr/sonarr/apiKey
+      restartUnits:
+        - launchd:com.ivankovnatsky.sonarr
+    arr-prowlarr-api-key:
+      key: arr/prowlarr/apiKey
+      restartUnits:
+        - launchd:com.ivankovnatsky.prowlarr
     arr-toloka-username: { key: arr/indexers/toloka/username }
     arr-toloka-password: { key: arr/indexers/toloka/password }
     transmission-username: { key: transmission/username }
     transmission-password: { key: transmission/password }
-    lastFm-api-key: { key: lastFm/apiKey }
-    lastFm-secret: { key: lastFm/secret }
+    lastFm-api-key:
+      key: lastFm/apiKey
+      restartUnits:
+        - launchd:com.ivankovnatsky.navidrome
+    lastFm-secret:
+      key: lastFm/secret
+      restartUnits:
+        - launchd:com.ivankovnatsky.navidrome
     stash-username: { key: stash/username }
     stash-password:
       key: stash/password

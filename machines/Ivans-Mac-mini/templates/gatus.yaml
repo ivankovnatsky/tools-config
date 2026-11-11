@@ -1,6 +1,8 @@
 templates:
   gatus-config:
     path: ${renderedDir}/gatus-config.yaml
+    restartUnits:
+      - launchd:com.ivankovnatsky.gatus
     format: yaml
     content:
       web: { address: "${bindAddress}", port: 8086 }
