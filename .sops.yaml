@@ -6,26 +6,8 @@ keys:
   - &mini-user age1s7wndc459u3azqegj66wcj5y9yydymnpwt7vzazsxagv3sjcwsfs2enwdu
   - &macbook-air age13sfhwx56gvfzprjzg2guzf5l27jsk5szu2n54tfc80q7s84w8etsfw550z
   - &macbook-air-user age13qs0kqn9gnyuv30xehzls8cvshs372j0g02lthfvn36s53erp4tsy2n854
-  # Separate Mooing identity: only the Mooing machines can read their secrets,
-  # and they are not recipients of the shared secrets/default.yaml.
-  - &mooings-macbook-pro age1rmjy5v2zgh6uqmhc0d05acusfexu6vcg0vqs6u2nv7xdpe8ckfnsms6jmw
-  - &mooing 96AD12B9B3F7D65047FDC1095662DFA75DBE66B9
-  - &mooings-macbook-pro-user age1cxxw85gqay2ltggz605hulzv7jk8ejzna54hqcd4ja9pejgpvcgswmekdy
-  - &mooings-macbook-air age1h2nc87pmhgy5h40gysa0wv82tfj06vv049y549afx9l08sldfqrsnzpd0a
-  - &mooings-macbook-air-user age1ms32wqejsmx5urq5eph0y3khffmjtjllvultk8qjl37n44jjraxqp72dna
 
 creation_rules:
-  # Must come before the generic rule below: sops uses the first match, and
-  # `secrets/.*\.yaml$` would match this path too.
-  - path_regex: machines/\.mooing/secrets/.*\.yaml$
-    key_groups:
-    - pgp:
-      - *mooing
-      age:
-      - *mooings-macbook-pro
-      - *mooings-macbook-pro-user
-      - *mooings-macbook-air
-      - *mooings-macbook-air-user
   - path_regex: secrets/.*\.yaml$
     key_groups:
     - pgp:
