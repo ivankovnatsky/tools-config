@@ -751,6 +751,21 @@ settingsctl:
     - Hammerspoon
     - Mac Mouse Fix
     - LosslessSwitcher
+  appearanceInit: true
+  defaultBrowser: firefoxdeveloperedition
+  hostName: ${hostName}
+  localHostName: ${hostName}
+  timeZone: Europe/Uzhgorod
+  sleep:
+    computer: never
+    display: 10
+    disk: never
+  remoteLogin: true
+
+plist:
+  # The app writes this file itself (it also holds the license); set only this key.
+  ~/Library/Application Support/com.nuebling.mac-mouse-fix/config.plist:
+    General:showMenuBarItem: false
 
 launchd:
   labelPrefix: com.ivankovnatsky
