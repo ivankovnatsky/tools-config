@@ -182,9 +182,6 @@ go:
     go-grip:
       source: github.com/chrishrb/go-grip
       binary: go-grip
-    ssh-to-age:
-      source: github.com/Mic92/ssh-to-age/cmd/ssh-to-age
-      binary: ssh-to-age
     gwq:
       source: github.com/d-kuro/gwq/cmd/gwq
       binary: gwq
