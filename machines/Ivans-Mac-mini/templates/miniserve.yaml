@@ -1,5 +1,7 @@
 templates:
   miniserve-auth:
     path: ${renderedDir}/miniserve-auth
+    restartUnits:
+      - launchd:com.ivankovnatsky.miniserve
     content: |
       ${sops:miniserve-username}:${sops:miniserve-password}

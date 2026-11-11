@@ -2,9 +2,6 @@ launchd:
   daemons:
     dnsmasq:
       waitForSecrets: true
-      restartOn:
-        - ${renderedDir}/dnsmasq.conf
-        - ${renderedDir}/dnsmasq-domain.conf
       command: /opt/homebrew/sbin/dnsmasq -k -C ${renderedDir}/dnsmasq.conf
       extraServiceConfig:
         AbandonProcessGroup: false

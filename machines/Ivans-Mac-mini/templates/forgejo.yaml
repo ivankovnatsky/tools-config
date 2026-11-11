@@ -14,6 +14,8 @@ templates:
 
   forgejo-app-ini:
     path: ${renderedDir}/forgejo-app.ini
+    restartUnits:
+      - launchd:com.ivankovnatsky.forgejo
     format: ini
     mode: "0600"
     content:

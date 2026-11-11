@@ -1,6 +1,8 @@
 templates:
   rabbitmq-config:
     path: ${renderedDir}/rabbitmq.conf
+    restartUnits:
+      - launchd:com.ivankovnatsky.rabbitmq
     mode: "0444"
     content: |
       listeners.tcp.default = 127.0.0.1:5672
@@ -9,6 +11,8 @@ templates:
 
   rabbitmq-enabled-plugins:
     path: ${renderedDir}/rabbitmq-enabled-plugins
+    restartUnits:
+      - launchd:com.ivankovnatsky.rabbitmq
     mode: "0444"
     content: |
       [rabbitmq_management].

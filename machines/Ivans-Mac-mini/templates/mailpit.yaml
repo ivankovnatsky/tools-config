@@ -1,5 +1,7 @@
 templates:
   mailpit-ui-auth:
     path: ${renderedDir}/mailpit-ui-auth
+    restartUnits:
+      - launchd:com.ivankovnatsky.mailpit
     content: |
       ${sops:mailpit-ui-username}:${sops:mailpit-ui-password}

@@ -1,6 +1,8 @@
 templates:
   stubby.yml:
     path: ${renderedDir}/stubby.yml
+    restartUnits:
+      - launchd:com.ivankovnatsky.stubby
     content: |
       resolution_type: GETDNS_RESOLUTION_STUB
       dns_transport_list:
@@ -18,6 +20,8 @@ templates:
           tls_auth_name: ${sops:nextdns-endpoint-mini}
   dnsmasq.conf:
     path: ${renderedDir}/dnsmasq.conf
+    restartUnits:
+      - launchd:com.ivankovnatsky.dnsmasq
     content: |
       bogus-priv
       conf-file=${renderedDir}/dnsmasq-domain.conf
@@ -34,6 +38,8 @@ templates:
       strict-order
   dnsmasq-domain.conf:
     path: ${renderedDir}/dnsmasq-domain.conf
+    restartUnits:
+      - launchd:com.ivankovnatsky.dnsmasq
     content: |
       domain=${sops:external-domain}
       local=/${sops:external-domain}/

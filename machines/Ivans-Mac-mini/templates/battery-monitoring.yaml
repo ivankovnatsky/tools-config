@@ -1,6 +1,8 @@
 templates:
   battery-monitoring-secrets:
     path: ${renderedDir}/battery-monitoring-secrets
+    restartUnits:
+      - launchd:com.ivankovnatsky.battery-monitoring-serve
     format: yaml
     content:
       email: ${sops:battery-monitoring-email}

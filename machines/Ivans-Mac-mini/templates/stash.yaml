@@ -2,4 +2,6 @@ templates:
   # Password stays @password@: preStart bcrypt-hashes it into the live config.
   stash-config:
     path: ${renderedDir}/stash-config.yml
+    restartUnits:
+      - launchd:com.ivankovnatsky.stash
     file: templates/stash-config.yml

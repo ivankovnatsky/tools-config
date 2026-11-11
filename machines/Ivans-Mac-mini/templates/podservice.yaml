@@ -1,6 +1,8 @@
 templates:
   podservice-config:
     path: ${renderedDir}/podservice-config.yaml
+    restartUnits:
+      - launchd:com.ivankovnatsky.podservice
     format: yaml
     content:
       server:

@@ -1,6 +1,8 @@
 templates:
   transmission-settings:
     path: ${renderedDir}/transmission-settings.json
+    restartUnits:
+      - launchd:com.ivankovnatsky.transmission
     format: json
     content:
       rpc-enabled: true

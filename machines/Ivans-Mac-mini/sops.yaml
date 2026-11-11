@@ -8,7 +8,11 @@ sops:
     openai-api-key: { key: openaiApiKey }
     anthropic-api-key: { key: anthropicApiKey }
     github-token: { key: githubToken }
-    external-domain: { key: externalDomain }
+    external-domain:
+      key: externalDomain
+      restartUnits:
+        - launchd:com.ivankovnatsky.caddy
+        - launchd:com.ivankovnatsky.mailpit
     bitwarden-session: { key: bitwardenSession }
     gh-mcp-token: { key: ghMcpToken }
     miniserve-username: { key: miniserve/mini/username }
@@ -34,7 +38,11 @@ sops:
     battery-monitoring-email: { key: anker/email }
     battery-monitoring-password: { key: anker/password }
     battery-monitoring-country: { key: anker/country }
-    battery-monitoring-discord-webhook: { key: discord/webhooks/notifications }
+    battery-monitoring-discord-webhook:
+      key: discord/webhooks/notifications
+      restartUnits:
+        - launchd:com.ivankovnatsky.battery-monitoring-serve
+        - launchd:com.ivankovnatsky.battery-monitoring-check
     beszel-email: { key: beszel/email }
     beszel-password: { key: beszel/password }
     discord-webhook-beszel: { key: discord/webhooks/monitoringBeszel }
@@ -58,16 +66,34 @@ sops:
     lastFm-api-key: { key: lastFm/apiKey }
     lastFm-secret: { key: lastFm/secret }
     stash-username: { key: stash/username }
-    stash-password: { key: stash/password }
+    stash-password:
+      key: stash/password
+      restartUnits:
+        - launchd:com.ivankovnatsky.stash
     podservice-s3-endpoint-url: { key: podservice/s3/endpointUrl }
     podservice-s3-bucket: { key: podservice/s3/bucket }
     podservice-s3-public-host: { key: podservice/s3/publicHost }
     podservice-s3-prefix: { key: podservice/s3/prefix }
-    podservice-s3-access-key-id: { key: podservice/s3/accessKeyId }
-    podservice-s3-secret-access-key: { key: podservice/s3/secretAccessKey }
+    podservice-s3-access-key-id:
+      key: podservice/s3/accessKeyId
+      restartUnits:
+        - launchd:com.ivankovnatsky.podservice
+    podservice-s3-secret-access-key:
+      key: podservice/s3/secretAccessKey
+      restartUnits:
+        - launchd:com.ivankovnatsky.podservice
     nextdns-endpoint-mini: { key: nextDNS/Mini/dotHostname }
     nextdns-server-mini-1: { key: nextDNS/Mini/IPs/0 }
     nextdns-server-mini-2: { key: nextDNS/Mini/IPs/1 }
-    cloudflare-api-token: { key: cloudflareApiToken }
-    lets-encrypt-email: { key: letsEncryptEmail }
-    beszel-hub-public-key: { key: beszel/hubPublicKey }
+    cloudflare-api-token:
+      key: cloudflareApiToken
+      restartUnits:
+        - launchd:com.ivankovnatsky.caddy
+    lets-encrypt-email:
+      key: letsEncryptEmail
+      restartUnits:
+        - launchd:com.ivankovnatsky.caddy
+    beszel-hub-public-key:
+      key: beszel/hubPublicKey
+      restartUnits:
+        - launchd:com.ivankovnatsky.beszel-agent
