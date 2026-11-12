@@ -45,6 +45,7 @@ include:
   - Ivans-Mac-mini/launchd/reposync.yaml
   - Ivans-Mac-mini/launchd/settings-daemon.yaml
   - Ivans-Mac-mini/launchd/sonarr.yaml
+  - Ivans-Mac-mini/launchd/sops-secrets.yaml
   - Ivans-Mac-mini/launchd/stubby.yaml
   - Ivans-Mac-mini/launchd/stash.yaml
   - Ivans-Mac-mini/launchd/syncthing.yaml
@@ -171,6 +172,24 @@ uv:
     launchd-mgmt:
       source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/launchd-mgmt
       binary: launchd-mgmt
+    arr-mgmt:
+      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/arr-mgmt
+      binary: arr-mgmt
+    beszel-mgmt:
+      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/beszel-mgmt
+      binary: beszel-mgmt
+    forgejo-mgmt:
+      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/forgejo-mgmt
+      binary: forgejo-mgmt
+    jellyfin-mgmt:
+      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/jellyfin-mgmt
+      binary: jellyfin-mgmt
+    nextdns-mgmt:
+      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/nextdns-mgmt
+      binary: nextdns-mgmt
+    syncthing-mgmt:
+      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/syncthing-mgmt
+      binary: syncthing-mgmt
     ps-top:
       source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/ps-top
       binary: ps-top
@@ -356,12 +375,16 @@ files:
   - target: ~/.local/bin/claude-statusline
     source: machines/Ivans-Mac-mini/.local/bin/claude-statusline
     mode: "0755"
+  - target: ~/.local/bin/diff-deep
+    source: machines/Ivans-Mac-mini/.local/bin/diff-deep
+    mode: "0755"
   - target: "~/Library/Application Support/Muxy 2/settings.toml"
     source:
       "machines/Ivans-Mac-mini/Library/Application Support/Muxy 2/settings.toml"
     mode: "0644"
     # Muxy rewrites it; set false for one deploy to push repo changes.
     skip: true
+    backup: false
   - target: "~/Library/Application Support/Muxy 2/terminal.toml"
     source:
       "machines/Ivans-Mac-mini/Library/Application Support/Muxy 2/terminal.toml"
@@ -378,6 +401,7 @@ files:
   - target: ~/.pi/agent/settings.json
     source: machines/Ivans-Mac-mini/.pi/agent/settings.json
     mode: "0644"
+    backup: false
   - target: ~/.pi/agent/models.json
     source: machines/Ivans-Mac-mini/.pi/agent/models.json
     mode: "0644"
