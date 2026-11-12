@@ -125,6 +125,7 @@ uv:
       source: yt-dlp[default,curl-cffi]
     mlx-whisper: {}
     gallery-dl: {}
+    xlsx2csv: {}
     agent-sessions:
       source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/agent-sessions
       binary: agent-sessions
@@ -197,6 +198,9 @@ go:
     gatus:
       source: github.com/TwiN/gatus/v5
       binary: gatus
+    stc:
+      source: github.com/tenox7/stc
+      binary: stc
     username:
       source: github.com/ivankovnatsky/username
       binary: username
@@ -208,6 +212,9 @@ cargo:
   packages:
     genpass:
       version: 0.5.1
+    nil:
+      source: https://github.com/oxalica/nil
+      commit: dbbb5c24f9215476992aa1bd305f8e5398e89654
 
 pi:
   packages:
@@ -269,6 +276,14 @@ fetch:
   /Volumes/Storage/Data/.local/bin/tac:
     url: https://raw.githubusercontent.com/ivankovnatsky/tools/012331c2d5e05a307740acc107c873a1ffcee365/packages/tac/tac.sh
     sha256: 6f615f5ee5fee7fa71c2b052cdd0a8c29936e1b56feeca19fc610cbcc09f8fbf
+    mode: "0755"
+  /Volumes/Storage/Data/.local/bin/rbw-fzf:
+    url: https://raw.githubusercontent.com/doy/rbw/1.15.0/bin/rbw-fzf
+    sha256: a0328919dbbdb3c3a2431643a5b64a53914befcf25efb0fc489b33eee46d2f7b
+    mode: "0755"
+  /Volumes/Storage/Data/.local/bin/git-credential-rbw:
+    url: https://raw.githubusercontent.com/doy/rbw/1.15.0/bin/git-credential-rbw
+    sha256: 0207c0da6385d16ec307848bc8e01fc09c497e37700340596e5177a8ca558920
     mode: "0755"
   /Volumes/Storage/Data/.local/bin/tmux-attach:
     url: https://raw.githubusercontent.com/ivankovnatsky/tools/012331c2d5e05a307740acc107c873a1ffcee365/packages/tmux-attach/tmux-attach.sh
@@ -537,6 +552,7 @@ brew:
     - git-filter-repo
     - gitleaks
     - gnu-sed
+    - gnu-tar
     - gnupg
     - go
     - gofumpt
@@ -562,6 +578,7 @@ brew:
     - nixfmt
     - node
     - nushell
+    - odt2txt
     - ollama
     - pam-reattach
     - pandoc
@@ -582,6 +599,7 @@ brew:
     - rumdl
     - rust
     - rust-analyzer
+    - sevenzip
     - shellcheck
     - shfmt
     - sops
@@ -615,11 +633,9 @@ brew:
   casks:
     - amethyst
     - bitwarden
-    - chromium
     - firefox
     - firefox@developer-edition
     - font-hack-nerd-font
-    - ghostty
     - hammerspoon
     - jellyfin
     - kitty
@@ -631,8 +647,6 @@ brew:
     - silicon-labs-vcp-driver
     - whatsapp
   masApps:
-    Numbers: 409203825
-    Pages: 409201541
     TaskForge - Obsidian Tasks: 6744716215
 
 defaults:
