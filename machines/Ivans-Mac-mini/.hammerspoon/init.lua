@@ -236,7 +236,7 @@ local function updateTemp()
         t = v
       end
     end
-    s.temp = t and (math.floor(t + 0.5) .. "°") or "–"
+    s.temp = t and (math.floor(t + 0.5) .. "°C") or "–"
     renderSysStats()
   end, { "pipe", "-s", "1", "-i", "500" })
   if not (s.tempTask and s.tempTask:start()) then

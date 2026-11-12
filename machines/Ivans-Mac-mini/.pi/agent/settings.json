@@ -1,7 +1,7 @@
 {
   "defaultModel": "claude-opus-5-5",
   "defaultProvider": "anthropic",
-  "lastChangelogVersion": "1.4.0",
+  "lastChangelogVersion": "1.5.2",
   "packages": [
     "npm:pi-antigravity"
   ],
