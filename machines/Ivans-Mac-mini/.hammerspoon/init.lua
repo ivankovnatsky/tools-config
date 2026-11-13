@@ -153,6 +153,7 @@ ext.cache.sys = {
   mem = "–",
   temp = "–",
   disk = "–",
+  net = "–",
   extra = {},
   extraDisks = {
     { icon = "\u{F01BC}", path = "${externalVolume}" }
@@ -161,6 +162,15 @@ ext.cache.sys = {
 
 local function pct(x)
   return math.floor(x + 0.5) .. "%"
+end
+
+local function rate(bps)
+  if bps >= 1e6 then
+    return string.format("%.1fM", bps / 1e6)
+  elseif bps >= 1e3 then
+    return string.format("%dK", math.floor(bps / 1e3 + 0.5))
+  end
+  return string.format("%dB", math.floor(bps + 0.5))
 end
 
 local function volumePct(path)
@@ -195,6 +205,38 @@ local function memStats()
   return table.concat({ gb(cached), swap and gb(swap * 2^20) or "–" }, ", ")
 end
 
+local function netRates()
+  local iface = hs.network.primaryInterfaces()
+  if not iface then
+    ext.cache.sys.netPrev = nil
+    return "↓– ↑–"
+  end
+  local out = hs.execute("/usr/sbin/netstat -ibn -I " .. iface)
+  local rx, tx
+  for line in out:gmatch("[^\n]+") do
+    if line:find("<Link#") then
+      local cols = {}
+      for c in line:gmatch("%S+") do
+        table.insert(cols, c)
+      end
+      -- Name Mtu Network Address Ipkts Ierrs Ibytes Opkts Oerrs Obytes Coll
+      rx, tx = tonumber(cols[7]), tonumber(cols[10])
+      break
+    end
+  end
+  if not rx or not tx then
+    return "↓– ↑–"
+  end
+  local now = hs.timer.secondsSinceEpoch()
+  local prev = ext.cache.sys.netPrev
+  ext.cache.sys.netPrev = { rx = rx, tx = tx, t = now, iface = iface }
+  if not prev or prev.iface ~= iface or now <= prev.t then
+    return "↓– ↑–"
+  end
+  local dt = now - prev.t
+  return "↓" .. rate(math.max(rx - prev.rx, 0) / dt) .. " ↑" .. rate(math.max(tx - prev.tx, 0) / dt)
+end
+
 function ext.app.updateSysDisks()
   local s = ext.cache.sys
   s.disk = volumePct("/")
@@ -205,7 +247,7 @@ end
 
 local function renderSysStats()
   local s = ext.cache.sys
-  -- Nerd Font: oct-cpu, fa-thermometer_half, fa-memory, md-harddisk.
+  -- Nerd Font: oct-cpu, fa-thermometer_half, fa-memory, md-harddisk, md-web.
   local items = {
     { "\u{F4BC}", s.cpu }, { "\u{F2C9}", s.temp }, { "\u{EFC5}", s.mem }, { "\u{F02CA}", s.disk },
   }
@@ -214,6 +256,8 @@ local function renderSysStats()
     table.insert(items, { d.icon, s.extra[i] or "–" })
     table.insert(tips, d.path)
   end
+  table.insert(items, { "\u{F059F}", s.net })
+  table.insert(tips, "Network")
   local parts = {}
   for _, it in ipairs(items) do
     table.insert(parts, it[1] .. " " .. it[2])
@@ -248,6 +292,7 @@ function ext.app.updateSysStats()
   local s = ext.cache.sys
   s.cpu = cpuPct()
   s.mem = memStats()
+  s.net = netRates()
   renderSysStats()
   updateTemp()
 end
