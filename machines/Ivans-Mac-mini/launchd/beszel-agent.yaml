@@ -1,7 +1,8 @@
 launchd:
   daemons:
     beszel-agent:
-      waitForPath: ${externalStoragePath}
+      waitForMounts:
+        - ${externalVolume}
       waitForSecrets: true
       environment:
         LISTEN: ${bindAddress}:45876

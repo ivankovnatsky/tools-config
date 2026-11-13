@@ -1,7 +1,8 @@
 launchd:
   agents:
     rabbitmq:
-      waitForPath: ${externalStoragePath}
+      waitForMounts:
+        - ${externalVolume}
       dataDir: ${rabbitmqDir}
       extraDirs:
         - ${rabbitmqDir}/log

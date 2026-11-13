@@ -2,7 +2,8 @@ launchd:
   daemons:
     # The binary is built by the build.env files entry's onChange (xcaddy).
     caddy:
-      waitForPath: ${externalStoragePath}
+      waitForMounts:
+        - ${externalVolume}
       waitForSecrets: true
       restartOn:
         - /etc/caddy/Caddyfile.template

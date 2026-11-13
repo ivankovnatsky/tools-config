@@ -133,6 +133,9 @@ uv:
     battery-monitoring:
       source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/battery-monitoring
       binary: battery-monitoring
+      restartUnits:
+        - launchd:com.ivankovnatsky.battery-monitoring-serve
+        - launchd:com.ivankovnatsky.battery-monitoring-check
     homelab:
       source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/homelab
       binary: homelab
@@ -217,6 +220,7 @@ go:
     gatus:
       source: github.com/TwiN/gatus/v5
       binary: gatus
+      restartUnits: [launchd:com.ivankovnatsky.gatus]
     stc:
       source: github.com/tenox7/stc
       binary: stc
@@ -469,6 +473,7 @@ files:
       ${goBin}/xcaddy build "$CADDY_VERSION"
       --with "github.com/caddy-dns/cloudflare@$CADDY_DNS_CLOUDFLARE_VERSION"
       --output ${externalStoragePath}/.local/bin/caddy
+    restartUnits: [launchd:com.ivankovnatsky.caddy]
   - source: templates/Caddyfile
     target: /etc/caddy/Caddyfile.template
     mode: "0644"

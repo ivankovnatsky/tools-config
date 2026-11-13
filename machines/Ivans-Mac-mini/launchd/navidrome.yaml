@@ -1,7 +1,8 @@
 launchd:
   agents:
     navidrome:
-      waitForPath: ${externalStoragePath}
+      waitForMounts:
+        - ${externalVolume}
       waitForSecrets: true
       dataDir: ${externalStoragePath}/.navidrome
       extraDirs:

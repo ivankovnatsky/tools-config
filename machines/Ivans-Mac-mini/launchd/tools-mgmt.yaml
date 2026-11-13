@@ -4,7 +4,8 @@ launchd:
     # nextdns, syncthing): at load, then every 3h like forgejo-mgmt.
     # preStart waits for the slow-starting APIs after boot.
     tools-mgmt:
-      waitForPath: ${externalStoragePath}
+      waitForMounts:
+        - ${externalVolume}
       keepAlive: false
       waitForSecrets: true
       startInterval: 10800

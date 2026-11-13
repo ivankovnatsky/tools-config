@@ -1,7 +1,8 @@
 launchd:
   agents:
     gatus:
-      waitForPath: ${externalStoragePath}
+      waitForMounts:
+        - ${externalVolume}
       waitForSecrets: true
       dataDir: ${externalStoragePath}/.gatus
       environment:

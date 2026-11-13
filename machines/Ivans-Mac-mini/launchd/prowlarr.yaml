@@ -4,7 +4,8 @@ launchd:
     # can't stop the service, ApiKey from sops so arr services and Prowlarr's
     # app sync share it.
     prowlarr:
-      waitForPath: ${externalStoragePath}
+      waitForMounts:
+        - ${externalVolume}
       waitForSecrets: true
       dataDir: ${externalStoragePath}/.prowlarr
       preStart: |

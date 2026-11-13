@@ -1,7 +1,8 @@
 launchd:
   agents:
     notifications-digest:
-      waitForPath: ${externalStoragePath}
+      waitForMounts:
+        - ${externalVolume}
       runAtLoad: false
       keepAlive: false
       waitForSecrets: true

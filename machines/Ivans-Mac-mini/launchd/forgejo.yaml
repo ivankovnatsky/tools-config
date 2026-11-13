@@ -1,7 +1,8 @@
 launchd:
   agents:
     forgejo:
-      waitForPath: ${externalStoragePath}
+      waitForMounts:
+        - ${externalVolume}
       waitForSecrets: true
       dataDir: ${forgejoDir}
       extraDirs:

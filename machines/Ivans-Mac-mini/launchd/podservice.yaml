@@ -1,7 +1,8 @@
 launchd:
   agents:
     podservice:
-      waitForPath: ${externalStoragePath}
+      waitForMounts:
+        - ${externalVolume}
       waitForSecrets: true
       dataDir: ${podserviceDir}
       extraDirs:

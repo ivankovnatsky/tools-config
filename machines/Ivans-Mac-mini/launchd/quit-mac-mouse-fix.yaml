@@ -2,6 +2,7 @@ launchd:
   agents:
     # Requires Accessibility permission for the launching process.
     quit-mac-mouse-fix:
-      waitForPath: ${externalStoragePath}
+      waitForMounts:
+        - ${externalVolume}
       keepAlive: false
       command: ${uvBin}/settings windows quit --wait 10 'Mac Mouse Fix'

@@ -1,7 +1,8 @@
 launchd:
   agents:
     settings-daemon:
-      waitForPath: ${externalStoragePath}
+      waitForMounts:
+        - ${externalVolume}
       throttleInterval: 30
       command: |-
         ${uvBin}/settings daemon run --autovolume \

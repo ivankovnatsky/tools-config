@@ -1,7 +1,8 @@
 launchd:
   agents:
     sonarr:
-      waitForPath: ${externalStoragePath}
+      waitForMounts:
+        - ${externalVolume}
       waitForSecrets: true
       dataDir: ${externalStoragePath}/.sonarr
       extraDirs:

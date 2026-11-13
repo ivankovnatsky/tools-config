@@ -4,7 +4,8 @@ launchd:
     # the vault path missing marked inactive (tobi/qmd#989).
     qmd-update:
       keepAlive: false
-      waitForPath: ${externalStoragePath}
+      waitForMounts:
+        - ${externalVolume}
       dataDir: ${externalStoragePath}/.cache/qmd
       startCalendarInterval: { minute: 30 }
       environment:

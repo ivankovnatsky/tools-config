@@ -1,7 +1,8 @@
 launchd:
   agents:
     radarr:
-      waitForPath: ${externalStoragePath}
+      waitForMounts:
+        - ${externalVolume}
       waitForSecrets: true
       dataDir: ${externalStoragePath}/.radarr
       extraDirs:

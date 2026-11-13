@@ -1,14 +1,16 @@
 launchd:
   agents:
     auto-poweroff:
-      waitForPath: ${externalStoragePath}
+      waitForMounts:
+        - ${externalVolume}
       runAtLoad: false
       keepAlive: false
       startCalendarInterval: { hour: 22, minute: 20 }
       command: ${uvBin}/homelab auto-shutdown
 
     auto-poweroff-notify:
-      waitForPath: ${externalStoragePath}
+      waitForMounts:
+        - ${externalVolume}
       runAtLoad: false
       keepAlive: false
       startCalendarInterval: { hour: 22, minute: 10 }

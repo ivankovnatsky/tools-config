@@ -4,6 +4,8 @@ launchd:
     # plaintext secret. script(1) gives stash a pty, which suppresses its
     # menubar icon.
     stash:
+      waitForMounts:
+        - ${externalVolume}
       waitForPath: ${stashDir}
       waitForSecrets: true
       dataDir: ${stashDataDir}
