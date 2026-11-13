@@ -152,6 +152,7 @@ ext.cache.sys = {
   cpu = "–",
   mem = "–",
   temp = "–",
+  watt = "–",
   disk = "–",
   net = "–",
   extra = {},
@@ -247,11 +248,11 @@ end
 
 local function renderSysStats()
   local s = ext.cache.sys
-  -- Nerd Font: oct-cpu, fa-thermometer_half, fa-memory, md-harddisk, md-web.
+  -- Nerd Font: oct-cpu, fa-thermometer_half, fa-bolt, fa-memory, md-harddisk, md-web.
   local items = {
-    { "\u{F4BC}", s.cpu }, { "\u{F2C9}", s.temp }, { "\u{EFC5}", s.mem }, { "\u{F02CA}", s.disk },
+    { "\u{F4BC}", s.cpu }, { "\u{F2C9}", s.temp }, { "\u{F0E7}", s.watt }, { "\u{EFC5}", s.mem }, { "\u{F02CA}", s.disk },
   }
-  local tips = { "CPU", "Temp (max of CPU/GPU)", "Memory", "Disk" }
+  local tips = { "CPU", "Temp (max of CPU/GPU)", "Power (system)", "Memory", "Disk" }
   for i, d in ipairs(s.extraDisks) do
     table.insert(items, { d.icon, s.extra[i] or "–" })
     table.insert(tips, d.path)
@@ -281,10 +282,13 @@ local function updateTemp()
       end
     end
     s.temp = t and (math.floor(t + 0.5) .. "°C") or "–"
+    local w = code == 0 and ok and type(data) == "table" and data.sys_power
+    s.watt = type(w) == "number" and (math.floor(w + 0.5) .. "W") or "–"
     renderSysStats()
   end, { "pipe", "-s", "1", "-i", "500" })
   if not (s.tempTask and s.tempTask:start()) then
     s.temp = "–"
+    s.watt = "–"
   end
 end
 
