@@ -26,7 +26,7 @@ sidebar_vibrancy_level = 50
 status_bar_visible = true
 tab_focused_focus = false
 tab_focused_project_order = "manual"
-tips_visible = true
+tips_visible = false
 worktree_recent = ["4eaf68a04ff347da8862c2fef7870fdb"]
 worktree_show_unread = true
 
