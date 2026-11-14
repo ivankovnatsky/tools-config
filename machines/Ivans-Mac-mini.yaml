@@ -532,7 +532,6 @@ brew:
     cleanup: zap
   taps:
     - pomdtr/homebrew-tap
-    - ivankovnatsky/homebrew-tap
     - keith/homebrew-formulae
     - antoniorodr/homebrew-memo
     - xwmx/homebrew-taps
@@ -664,7 +663,6 @@ brew:
   casks:
     - amethyst
     - bitwarden
-    - firefox
     - firefox@developer-edition
     - font-hack-nerd-font
     - hammerspoon
