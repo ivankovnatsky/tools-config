@@ -111,6 +111,8 @@ npm:
     "@steipete/summarize": {}
     "@xai-official/grok": {}
     "@tobilu/qmd": {}
+    taskforge-md:
+      binary: taskforge
     openclaw:
       binary: openclaw
       version: latest
