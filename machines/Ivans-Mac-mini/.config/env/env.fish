@@ -17,6 +17,7 @@ set -gx _ZL_HYPHEN 1
 set -gx GOPATH ${externalStoragePath}/.go
 set -gx CARGO_HOME ${externalStoragePath}/.cargo
 set -gx HF_HOME ${externalStoragePath}/.cache/huggingface
+set -gx TASKFORGE_VAULT ${home}/Notes
 set -gx UV_PYTHON_INSTALL_DIR ${externalStoragePath}/.local/share/uv/python
 set -gx UV_TOOL_BIN_DIR ${externalStoragePath}/.local/bin
 set -gx UV_TOOL_DIR ${externalStoragePath}/.local/share/uv/tools

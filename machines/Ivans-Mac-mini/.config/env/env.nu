@@ -14,6 +14,7 @@ load-env {
     GOPATH: "${externalStoragePath}/.go"
     CARGO_HOME: "${externalStoragePath}/.cargo"
     HF_HOME: "${externalStoragePath}/.cache/huggingface"
+    TASKFORGE_VAULT: "${home}/Notes"
     UV_PYTHON_INSTALL_DIR: "${externalStoragePath}/.local/share/uv/python"
     UV_TOOL_BIN_DIR: "${externalStoragePath}/.local/bin"
     UV_TOOL_DIR: "${externalStoragePath}/.local/share/uv/tools"
