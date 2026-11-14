@@ -736,6 +736,7 @@ defaults:
       com.vincent-neo.LosslessSwitcher-Key-UserPreferIconStatusBarItem: false
     com.apple.Safari:
       AutoOpenSafeDownloads: false
+      CloudTabsOnStartPageConsent: true
       DeveloperPreferences: 836
       ShowFullURLInSmartSearchField: true
       ShowStandaloneTabBar: true
