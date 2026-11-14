@@ -743,8 +743,19 @@ defaults:
       UseKeychain: false
     org.mozilla.firefox:
       EnterprisePoliciesEnabled: true
+    com.apple.Spotlight:
+      NSStatusItem VisibleCC Item-0: false
+    org.hammerspoon.Hammerspoon:
+      SUEnableAutomaticChecks: false
+      SUAutomaticallyUpdate: false
+      SUSendProfileInfo: false
+      MJShowDockIconKey: false
+      MJShowMenuIconKey: false
+      MJKeepConsoleOnTopKey: false
+      HSUploadCrashData: false
   restart:
     com.apple.screencapture: screencaptureui
+    com.apple.Spotlight: ControlCenter
 
 dock:
   apps:
@@ -793,7 +804,6 @@ settingsctl:
   loginItems:
     - Hammerspoon
     - Mac Mouse Fix
-    - LosslessSwitcher
   appearanceInit: true
   defaultBrowser: firefoxdeveloperedition
   hostName: ${hostName}

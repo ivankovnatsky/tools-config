@@ -352,3 +352,5 @@ end
 ext.app.barOnClick(ext.app.updateBatterySoc)
 ext.cache.batteryTimer = hs.timer.doEvery(60, ext.app.updateBatterySoc)
 ext.app.updateBatterySoc()
+
+hs.menuIcon(false)
