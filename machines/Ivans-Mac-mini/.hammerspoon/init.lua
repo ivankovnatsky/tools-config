@@ -307,12 +307,13 @@ ext.app.updateSysStats()
 ext.cache.sysTimer = hs.timer.doEvery(20, ext.app.updateSysStats)
 ext.cache.sysDiskTimer = hs.timer.doEvery(600, ext.app.updateSysDisks)
 
-ext.app.barSet("battery", 30, "🔋…")
+-- Nerd Font: md-battery, md-battery_10, md-power_plug, md-arrow_up_bold.
+ext.app.barSet("battery", 30, "\u{F0079} …")
 
 function ext.app.updateBatterySoc()
   hs.http.asyncGet("http://127.0.0.1:8787/soc", nil, function(status, body)
     if status ~= 200 then
-      ext.app.barSet("battery", 30, "🔋?",
+      ext.app.barSet("battery", 30, "\u{F0079} ?",
         "battery-monitoring unreachable (HTTP " .. tostring(status) .. ")")
       return
     end
@@ -331,15 +332,15 @@ function ext.app.updateBatterySoc()
       end
     end
     if not dev or dev.soc == nil then
-      ext.app.barSet("battery", 30, "🔋?", "no primary device reading")
+      ext.app.barSet("battery", 30, "\u{F0079} ?", "no primary device reading")
       return
     end
     local st = type(dev.status) == "table" and dev.status or {}
     local outW = tonumber(st.output_power_total) or tonumber(dev.ac_w) or 0
     local inW = (tonumber(st.ac_input_power_total) or tonumber(dev.ac_in_w) or 0)
       + (tonumber(st.dc_input_power_total) or 0)
-    local batt = dev.soc <= 20 and "🪫" or "🔋"
-    local title = string.format("⚡+%dW %s%d%% \u{2B06}\u{FE0E} -%dW",
+    local batt = dev.soc <= 20 and "\u{F007A}" or "\u{F0079}"
+    local title = string.format("\u{F06A5} +%dW  %s %d%%  \u{F0737} -%dW",
       math.floor(inW + 0.5), batt, math.floor(dev.soc), math.floor(outW + 0.5))
     if dev.stale then
       title = title .. "*"
