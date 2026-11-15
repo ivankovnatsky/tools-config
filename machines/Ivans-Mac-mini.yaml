@@ -791,9 +791,11 @@ dock:
 settingsctl:
   fullDiskAccess:
     - bash
+    - determinate-nixd
     - kitty
     - Muxy
     - smbd
+    - sops-install-secrets
     - Terminal
   accessibility:
     - Hammerspoon
