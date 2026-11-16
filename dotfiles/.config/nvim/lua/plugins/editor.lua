@@ -10,5 +10,5 @@ require("obsidian").setup({
   frontmatter = { enabled = false },
   legacy_commands = false,
   ui = { enable = false },
-  workspaces = { { name = "Notes", path = "~/Notes" } },
+  workspaces = { { name = "Notes", path = "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Notes" } },
 })
