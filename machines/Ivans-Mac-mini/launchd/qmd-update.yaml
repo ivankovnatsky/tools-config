@@ -17,10 +17,10 @@ launchd:
         /bin/mkdir -p "${agentSessionsDir}/md"
         ${uvBin}/agent-sessions ${renderedDir}/agent-sessions.json || echo "agent-sessions failed"
         current=$(qmd collection show notes 2>&1 | sed -n 's/^ *Path: *//p')
-        want=$(realpath -q "${home}/Notes" || echo "${home}/Notes")
+        want=$(realpath -q "${home}/Library/Mobile Documents/iCloud~md~obsidian/Documents/Notes" || echo "${home}/Library/Mobile Documents/iCloud~md~obsidian/Documents/Notes")
         if [ "$current" != "$want" ]; then
           if [ -n "$current" ]; then qmd collection remove notes; fi
-          qmd collection add "${home}/Notes" --name notes
+          qmd collection add "${home}/Library/Mobile Documents/iCloud~md~obsidian/Documents/Notes" --name notes
         fi
         current=$(qmd collection show sessions 2>&1 | sed -n 's/^ *Path: *//p')
         want=$(realpath -q "${agentSessionsDir}/md" || echo "${agentSessionsDir}/md")
