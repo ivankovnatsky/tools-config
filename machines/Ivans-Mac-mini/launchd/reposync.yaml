@@ -14,4 +14,4 @@ launchd:
         REPOSYNC_TIMER: "1"
       command: |-
         ${uvBin}/reposync sync \
-        --config-file ${renderedDir}/reposync-config.json
+        --config-file ${home}/.config/reposync/config.json

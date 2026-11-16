@@ -1,6 +1,6 @@
 templates:
   reposync-config:
-    path: ${renderedDir}/reposync-config.json
+    path: ~/.config/reposync/config.json
     format: json
     content:
       alertRepeatSeconds: 10800
