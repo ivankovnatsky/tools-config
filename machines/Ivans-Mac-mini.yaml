@@ -97,12 +97,11 @@ paths:
   cargoHome: ${externalStoragePath}/.cargo
 
 # Shell env files are the env-* templates; this section only exports into
-# tools' own process (uv installs) and the launchd user domain.
+# tools' own process (uv installs).
 env:
   vars:
     UV_PYTHON_INSTALL_DIR: ${externalStoragePath}/.local/share/uv/python
   shells: []
-  launchd: true
 
 npm:
   packages:
@@ -122,8 +121,6 @@ uv:
   packages:
     osxphotos:
       binary: osxphotos
-    ruff:
-      binary: ruff
     yt-dlp:
       source: yt-dlp[default,curl-cffi]
     mlx-whisper: {}
@@ -150,6 +147,12 @@ uv:
     settingsctl:
       source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/settingsctl
       binary: settings
+    nix-find-orphans:
+      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/nix-find-orphans
+      binary: nix-find-orphans
+    nix-sort-imports:
+      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/nix-sort-imports
+      binary: nix-sort-imports
     gh-pr:
       source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/gh-pr
       binary: gh-pr
@@ -235,6 +238,8 @@ go:
 
 cargo:
   packages:
+    deadnix:
+      version: 1.3.1
     genpass:
       version: 0.5.1
     nil:
@@ -246,14 +251,25 @@ pi:
     npm:pi-antigravity: {}
 
 curlShell:
-  "https://claude.ai/install.sh": bash
-  "https://antigravity.google/cli/install.sh": bash
+  "https://claude.ai/install.sh":
+    shell: bash
+    uninstall: >-
+      for p in ~/.local/bin/claude ~/.local/share/claude ~/.local/state/claude
+      ~/.cache/claude ~/.claude/downloads; do
+      if [ -e "$p" ] || [ -L "$p" ]; then trash "$p"; fi; done
+  "https://antigravity.google/cli/install.sh":
+    shell: bash
+    uninstall: >-
+      for p in ~/.local/bin/agy ~/.cache/antigravity; do
+      if [ -e "$p" ] || [ -L "$p" ]; then trash "$p"; fi; done
 
 fetch:
   /Volumes/Storage/Data/.local/bin/stash:
     url: https://github.com/stashapp/stash/releases/download/v0.29.1/stash-macos
     sha256: b8c54d619021b97ee8c6f230f31d430009f45518e9d868505b413351011a7f35
     mode: "0755"
+    restartUnits:
+      - launchd:com.ivankovnatsky.stash
   /Volumes/Storage/Data/.local/bin/eat:
     url: https://raw.githubusercontent.com/ivankovnatsky/tools/012331c2d5e05a307740acc107c873a1ffcee365/packages/eat/eat.sh
     sha256: 4858b1075b3002de759ec37ac25f9664be7f548d53227ef45862fb9fee4dea0c
@@ -269,6 +285,10 @@ fetch:
   /Volumes/Storage/Data/.local/bin/go-lint-wrapper:
     url: https://raw.githubusercontent.com/ivankovnatsky/tools/012331c2d5e05a307740acc107c873a1ffcee365/packages/go-lint-wrapper/go-lint-wrapper.sh
     sha256: c2c2961243a1e415af66ebd8918db9abc94a75ea7d25c4c0bab2e02902740dbe
+    mode: "0755"
+  /Volumes/Storage/Data/.local/bin/statix-wrapper:
+    url: https://raw.githubusercontent.com/ivankovnatsky/tools/012331c2d5e05a307740acc107c873a1ffcee365/packages/statix-wrapper/statix-wrapper.sh
+    sha256: 09e88c4713b775a0c5ecce1daf40ffa9d1ed759d69d8326165d86f37474eabb7
     mode: "0755"
   /Volumes/Storage/Data/.local/bin/gpg-edit:
     url: https://raw.githubusercontent.com/ivankovnatsky/tools/012331c2d5e05a307740acc107c873a1ffcee365/packages/gpg-edit/gpg-edit.sh
@@ -416,7 +436,10 @@ files:
   - target: ~/.config/amethyst/amethyst.yml
     source: machines/Ivans-Mac-mini/.config/amethyst/amethyst.yml
     mode: "0644"
-    onChange: pkill -x Amethyst; open -g -b com.amethyst.Amethyst
+    onChange: >-
+      pkill -x Amethyst; for i in 1 2 3 4 5 6 7 8 9 10; do
+      pgrep -xq Amethyst || break; sleep 0.5; done;
+      open -g -b com.amethyst.Amethyst
   - target: ~/.gnupg
     directory: true
     mode: "0700"
@@ -558,7 +581,8 @@ brew:
     - defaultbrowser
     - delve
     - direnv
-    - dnsmasq
+    - name: dnsmasq
+      restartUnits: [launchd:com.ivankovnatsky.dnsmasq]
     - duf
     - dust
     - erdtree
@@ -567,7 +591,8 @@ brew:
     - ffmpeg
     - ffmpegthumbnailer
     - fish
-    - forgejo
+    - name: forgejo
+      restartUnits: [launchd:com.ivankovnatsky.forgejo]
     - forgit
     - fzf
     - ggh
@@ -596,12 +621,15 @@ brew:
     - lua-language-server
     - macmon
     - magic-wormhole
-    - mailpit
+    - name: mailpit
+      restartUnits: [launchd:com.ivankovnatsky.mailpit]
     - make
     - mas
-    - miniserve
+    - name: miniserve
+      restartUnits: [launchd:com.ivankovnatsky.miniserve]
     - mpv
-    - navidrome
+    - name: navidrome
+      restartUnits: [launchd:com.ivankovnatsky.navidrome]
     - ncurses
     - neovim
     - nixfmt
@@ -619,7 +647,8 @@ brew:
     - prettier
     - pv
     - pyright
-    - rabbitmq
+    - name: rabbitmq
+      restartUnits: [launchd:com.ivankovnatsky.rabbitmq]
     - ranger
     - rbw
     - rclone
@@ -635,15 +664,19 @@ brew:
     - starship
     - staticcheck
     - statix
-    - stubby
+    - name: stubby
+      restartUnits: [launchd:com.ivankovnatsky.stubby]
     - stylua
     - swiftformat
-    - syncthing
-    - tailscale
+    - name: syncthing
+      restartUnits: [launchd:com.ivankovnatsky.syncthing]
+    - name: tailscale
+      restartUnits: [launchd:com.tailscale.tailscaled]
     - tinymist
     - tmux
     - tmuxinator
-    - transmission-cli
+    - name: transmission-cli
+      restartUnits: [launchd:com.ivankovnatsky.transmission]
     - tree
     - tree-sitter-cli
     - treefmt
@@ -665,7 +698,8 @@ brew:
     - firefox@developer-edition
     - font-hack-nerd-font
     - hammerspoon
-    - jellyfin
+    - name: jellyfin
+      restartUnits: [launchd:com.ivankovnatsky.jellyfin]
     - kitty
     - losslessswitcher
     - mac-mouse-fix
@@ -797,6 +831,7 @@ settingsctl:
     - sops-install-secrets
     - Terminal
   accessibility:
+    - Amethyst
     - Hammerspoon
     - Mac Mouse Fix Helper
     - Muxy
@@ -820,6 +855,11 @@ plist:
   # The app writes this file itself (it also holds the license); set only this key.
   ~/Library/Application Support/com.nuebling.mac-mouse-fix/config.plist:
     General:showMenuBarItem: false
+
+users:
+  ivan:
+    uid: 502
+    shell: /opt/homebrew/bin/fish
 
 launchd:
   labelPrefix: com.ivankovnatsky
