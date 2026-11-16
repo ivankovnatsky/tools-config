@@ -54,6 +54,7 @@
   },
   "skipAutoPermissionPrompt": true,
   "skipDangerousModePermissionPrompt": true,
+  "skipWorkflowUsageWarning": true,
   "statusLine": {
     "command": "${home}/.local/bin/claude-statusline",
     "type": "command"
