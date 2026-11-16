@@ -11,7 +11,7 @@ export FZF_DEFAULT_COMMAND="fd --type f --hidden --no-ignore --follow --exclude 
 export GIT_CONFIG_NOSYSTEM="true"
 export GNUPGHOME="$HOME/.gnupg"
 export STARSHIP_CONFIG="$HOME/.config/starship.toml"
-export OLLAMA_BASE_URL="http://192.168.50.6:11434/v1"
+export OLLAMA_BASE_URL="http://${a3Ip}:11434/v1"
 export _ZL_HYPHEN="1"
 
 export GOPATH="${externalStoragePath}/.go"
@@ -24,8 +24,7 @@ export UV_TOOL_DIR="${externalStoragePath}/.local/share/uv/tools"
 export UV_CACHE_DIR="${externalStoragePath}/.cache/uv"
 export UV_PYTHON_PREFERENCE="only-managed"
 
-export PATH="${externalStoragePath}/.go/bin:${externalStoragePath}/.cargo/bin${PATH:+:}$PATH"
-for dir in ${externalStoragePath}/.npm/bin ${externalStoragePath}/.bun/bin ${externalStoragePath}/.local/bin; do
+for dir in ${externalStoragePath}/.go/bin ${externalStoragePath}/.cargo/bin ${externalStoragePath}/.npm/bin ${externalStoragePath}/.bun/bin ${externalStoragePath}/.local/bin; do
   if [ -d "$dir" ]; then
     export PATH="$PATH:$dir"
   fi

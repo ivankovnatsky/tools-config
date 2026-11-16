@@ -9,7 +9,7 @@ load-env {
     GIT_CONFIG_NOSYSTEM: "true"
     GNUPGHOME: ($env.HOME | path join ".gnupg")
     STARSHIP_CONFIG: ($env.HOME | path join ".config" "starship.toml")
-    OLLAMA_BASE_URL: "http://192.168.50.6:11434/v1"
+    OLLAMA_BASE_URL: "http://${a3Ip}:11434/v1"
     _ZL_HYPHEN: "1"
     GOPATH: "${externalStoragePath}/.go"
     CARGO_HOME: "${externalStoragePath}/.cargo"
@@ -26,9 +26,11 @@ load-env {
 $env.PATH = (
     $env.PATH
     | split row (char esep)
-    | prepend ["/opt/homebrew/bin" "${externalStoragePath}/.go/bin" "${externalStoragePath}/.cargo/bin"]
+    | prepend ["/opt/homebrew/bin"]
     | append (
         [
+            "${externalStoragePath}/.go/bin"
+            "${externalStoragePath}/.cargo/bin"
             "${externalStoragePath}/.npm/bin"
             "${externalStoragePath}/.bun/bin"
             "${externalStoragePath}/.local/bin"
