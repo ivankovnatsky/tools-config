@@ -31,11 +31,8 @@ alias zh 'z -I -t .'
 alias zi 'z -i'
 alias zz 'z -c'
 
-if test -f /opt/homebrew/opt/fzf/shell/key-bindings.fish
-    source /opt/homebrew/opt/fzf/shell/key-bindings.fish
-end
-if test -f /opt/homebrew/opt/fzf/shell/completion.fish
-    source /opt/homebrew/opt/fzf/shell/completion.fish
+if type -q fzf
+    fzf --fish | source
 end
 
 set -gx GPG_TTY (tty)

@@ -31,13 +31,6 @@ if ("/opt/homebrew/bin/atuin" | path exists) {
   rm -f ($autoload_dir | path join "atuin.nu")
 }
 
-const fzf_bindings = "/opt/homebrew/opt/fzf/shell/key-bindings.nu"
-const fzf_bindings_source = if ($fzf_bindings | path exists) { $fzf_bindings } else { null }
-source $fzf_bindings_source
-const fzf_completion = "/opt/homebrew/opt/fzf/shell/completion.nu"
-const fzf_completion_source = if ($fzf_completion | path exists) { $fzf_completion } else { null }
-source $fzf_completion_source
-
 $env.config = ($env.config? | default {})
 $env.config.hooks = ($env.config.hooks? | default {})
 $env.config.hooks.pre_prompt = (
