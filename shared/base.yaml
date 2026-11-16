@@ -3,6 +3,7 @@ stateFile: ~/.local/state/tools/state.json
 vars:
   home: ${env:HOME}
   homeWorkPath: ${home}
+  toolsPath: ${home}/Sources/github.com/ivankovnatsky/tools
 
 npm:
   packages:
@@ -14,7 +15,7 @@ npm:
 uv:
   packages:
     tools:
-      source: git+https://github.com/ivankovnatsky/tools.git
+      source: git+file://${toolsPath}
       binary: tools
 
 templates:

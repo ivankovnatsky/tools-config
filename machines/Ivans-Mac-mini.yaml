@@ -127,88 +127,88 @@ uv:
     gallery-dl: {}
     xlsx2csv: {}
     agent-sessions:
-      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/agent-sessions
+      source: git+file://${toolsPath}#subdirectory=packages/agent-sessions
       binary: agent-sessions
     battery-monitoring:
-      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/battery-monitoring
+      source: git+file://${toolsPath}#subdirectory=packages/battery-monitoring
       binary: battery-monitoring
       restartUnits:
         - launchd:com.ivankovnatsky.battery-monitoring-serve
         - launchd:com.ivankovnatsky.battery-monitoring-check
     homelab:
-      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/homelab
+      source: git+file://${toolsPath}#subdirectory=packages/homelab
       binary: homelab
     notifications:
-      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/notifications
+      source: git+file://${toolsPath}#subdirectory=packages/notifications
       binary: notifications
     reposync:
-      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/reposync
+      source: git+file://${toolsPath}#subdirectory=packages/reposync
       binary: reposync
     settingsctl:
-      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/settingsctl
+      source: git+file://${toolsPath}#subdirectory=packages/settingsctl
       binary: settings
     nix-find-orphans:
-      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/nix-find-orphans
+      source: git+file://${toolsPath}#subdirectory=packages/nix-find-orphans
       binary: nix-find-orphans
     nix-sort-imports:
-      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/nix-sort-imports
+      source: git+file://${toolsPath}#subdirectory=packages/nix-sort-imports
       binary: nix-sort-imports
     gh-pr:
-      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/gh-pr
+      source: git+file://${toolsPath}#subdirectory=packages/gh-pr
       binary: gh-pr
     asusrouter-cli:
-      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/asusrouter-cli
+      source: git+file://${toolsPath}#subdirectory=packages/asusrouter-cli
       binary: asusrouter-cli
     backup-home:
-      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/backup-home
+      source: git+file://${toolsPath}#subdirectory=packages/backup-home
       binary: backup-home
     cleanup-home:
-      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/cleanup-home
+      source: git+file://${toolsPath}#subdirectory=packages/cleanup-home
       binary: cleanup-home
     dns:
-      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/dns
+      source: git+file://${toolsPath}#subdirectory=packages/dns
       binary: dns
     gh-notifications:
-      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/gh-notifications
+      source: git+file://${toolsPath}#subdirectory=packages/gh-notifications
       binary: gh-notifications
     git-restore:
-      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/git-restore
+      source: git+file://${toolsPath}#subdirectory=packages/git-restore
       binary: git-restore
     gpg-pass:
-      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/gpg-pass
+      source: git+file://${toolsPath}#subdirectory=packages/gpg-pass
       binary: gpg-pass
     launchd-mgmt:
-      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/launchd-mgmt
+      source: git+file://${toolsPath}#subdirectory=packages/launchd-mgmt
       binary: launchd-mgmt
     arr-mgmt:
-      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/arr-mgmt
+      source: git+file://${toolsPath}#subdirectory=packages/arr-mgmt
       binary: arr-mgmt
     beszel-mgmt:
-      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/beszel-mgmt
+      source: git+file://${toolsPath}#subdirectory=packages/beszel-mgmt
       binary: beszel-mgmt
     forgejo-mgmt:
-      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/forgejo-mgmt
+      source: git+file://${toolsPath}#subdirectory=packages/forgejo-mgmt
       binary: forgejo-mgmt
     jellyfin-mgmt:
-      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/jellyfin-mgmt
+      source: git+file://${toolsPath}#subdirectory=packages/jellyfin-mgmt
       binary: jellyfin-mgmt
     nextdns-mgmt:
-      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/nextdns-mgmt
+      source: git+file://${toolsPath}#subdirectory=packages/nextdns-mgmt
       binary: nextdns-mgmt
     syncthing-mgmt:
-      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/syncthing-mgmt
+      source: git+file://${toolsPath}#subdirectory=packages/syncthing-mgmt
       binary: syncthing-mgmt
     ps-top:
-      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/ps-top
+      source: git+file://${toolsPath}#subdirectory=packages/ps-top
       binary: ps-top
     subs:
-      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/subs
+      source: git+file://${toolsPath}#subdirectory=packages/subs
       binary: subs
     tasks:
-      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/tasks
+      source: git+file://${toolsPath}#subdirectory=packages/tasks
       binary: tasks
     youtube:
-      source: git+https://github.com/ivankovnatsky/tools.git#subdirectory=packages/youtube
+      source: git+file://${toolsPath}#subdirectory=packages/youtube
       binary: youtube
     podservice:
       source: git+https://github.com/ivankovnatsky/podservice.git
@@ -270,58 +270,6 @@ fetch:
     mode: "0755"
     restartUnits:
       - launchd:com.ivankovnatsky.stash
-  /Volumes/Storage/Data/.local/bin/eat:
-    url: https://raw.githubusercontent.com/ivankovnatsky/tools/012331c2d5e05a307740acc107c873a1ffcee365/packages/eat/eat.sh
-    sha256: 4858b1075b3002de759ec37ac25f9664be7f548d53227ef45862fb9fee4dea0c
-    mode: "0755"
-  /Volumes/Storage/Data/.local/bin/find-grep:
-    url: https://raw.githubusercontent.com/ivankovnatsky/tools/012331c2d5e05a307740acc107c873a1ffcee365/packages/find-grep/find-grep.sh
-    sha256: dea009e1a40f890e36f82e2985ffac700e597f3e5dbb80dc94236df854170243
-    mode: "0755"
-  /Volumes/Storage/Data/.local/bin/ghq-cd:
-    url: https://raw.githubusercontent.com/ivankovnatsky/tools/012331c2d5e05a307740acc107c873a1ffcee365/packages/ghq-cd/ghq-cd.sh
-    sha256: 56962759e6230ef9bcfd2395fa62fa5c08ca3c852d38b443098e9fc08d5bed62
-    mode: "0755"
-  /Volumes/Storage/Data/.local/bin/go-lint-wrapper:
-    url: https://raw.githubusercontent.com/ivankovnatsky/tools/012331c2d5e05a307740acc107c873a1ffcee365/packages/go-lint-wrapper/go-lint-wrapper.sh
-    sha256: c2c2961243a1e415af66ebd8918db9abc94a75ea7d25c4c0bab2e02902740dbe
-    mode: "0755"
-  /Volumes/Storage/Data/.local/bin/statix-wrapper:
-    url: https://raw.githubusercontent.com/ivankovnatsky/tools/012331c2d5e05a307740acc107c873a1ffcee365/packages/statix-wrapper/statix-wrapper.sh
-    sha256: 09e88c4713b775a0c5ecce1daf40ffa9d1ed759d69d8326165d86f37474eabb7
-    mode: "0755"
-  /Volumes/Storage/Data/.local/bin/gpg-edit:
-    url: https://raw.githubusercontent.com/ivankovnatsky/tools/012331c2d5e05a307740acc107c873a1ffcee365/packages/gpg-edit/gpg-edit.sh
-    sha256: 50edcfeb4ba920412c61cfa49e0affd07e2e062292fa726d42ea293f4ef74f7b
-    mode: "0755"
-  /Volumes/Storage/Data/.local/bin/gwq-merge:
-    url: https://raw.githubusercontent.com/ivankovnatsky/tools/012331c2d5e05a307740acc107c873a1ffcee365/packages/gwq-merge/gwq-merge.sh
-    sha256: 7f57eef04cd5cc27448992235ce709d19b1c18633302b30ea3dc1105375799cb
-    mode: "0755"
-  /Volumes/Storage/Data/.local/bin/image-meta:
-    url: https://raw.githubusercontent.com/ivankovnatsky/tools/012331c2d5e05a307740acc107c873a1ffcee365/packages/image-meta/image-meta.sh
-    sha256: caf7c89b16e51b7f08f15a777fd138faf0b60a7b666b82610597d0152c2f1c98
-    mode: "0755"
-  /Volumes/Storage/Data/.local/bin/nvim-edit-staged:
-    url: https://raw.githubusercontent.com/ivankovnatsky/tools/012331c2d5e05a307740acc107c873a1ffcee365/packages/nvim-edit-staged/nvim-edit-staged.sh
-    sha256: 84fb50a7bd4a451243a2a2cfa92663ce55713156f3f50ce6d24aa7e43074bf04
-    mode: "0755"
-  /Volumes/Storage/Data/.local/bin/nvim-find-edit:
-    url: https://raw.githubusercontent.com/ivankovnatsky/tools/012331c2d5e05a307740acc107c873a1ffcee365/packages/nvim-find-edit/nvim-find-edit.sh
-    sha256: 2d676e5159138b042aad2377abf4a0f901fa5fadad4b438beb4d9b0764e47c58
-    mode: "0755"
-  /Volumes/Storage/Data/.local/bin/path-copy:
-    url: https://raw.githubusercontent.com/ivankovnatsky/tools/012331c2d5e05a307740acc107c873a1ffcee365/packages/path-copy/path-copy.sh
-    sha256: e776645872f7fd6d3cd19ad96f4b5340a7868d07d5a1725fa55f95281f982167
-    mode: "0755"
-  /Volumes/Storage/Data/.local/bin/reboot:
-    url: https://raw.githubusercontent.com/ivankovnatsky/tools/012331c2d5e05a307740acc107c873a1ffcee365/packages/reboot/reboot.sh
-    sha256: 7fd79727d1e12f69c9ab942a1f53463792950834c3a398f8fe06f8a18290b7c6
-    mode: "0755"
-  /Volumes/Storage/Data/.local/bin/tac:
-    url: https://raw.githubusercontent.com/ivankovnatsky/tools/012331c2d5e05a307740acc107c873a1ffcee365/packages/tac/tac.sh
-    sha256: 6f615f5ee5fee7fa71c2b052cdd0a8c29936e1b56feeca19fc610cbcc09f8fbf
-    mode: "0755"
   /Volumes/Storage/Data/.local/bin/rbw-fzf:
     url: https://raw.githubusercontent.com/doy/rbw/1.15.0/bin/rbw-fzf
     sha256: a0328919dbbdb3c3a2431643a5b64a53914befcf25efb0fc489b33eee46d2f7b
@@ -329,14 +277,6 @@ fetch:
   /Volumes/Storage/Data/.local/bin/git-credential-rbw:
     url: https://raw.githubusercontent.com/doy/rbw/1.15.0/bin/git-credential-rbw
     sha256: 0207c0da6385d16ec307848bc8e01fc09c497e37700340596e5177a8ca558920
-    mode: "0755"
-  /Volumes/Storage/Data/.local/bin/tmux-attach:
-    url: https://raw.githubusercontent.com/ivankovnatsky/tools/012331c2d5e05a307740acc107c873a1ffcee365/packages/tmux-attach/tmux-attach.sh
-    sha256: 1530255fd2d2789ad5182af1543d60d54b17306f3f5f578c6a2b1b5598f6dd8e
-    mode: "0755"
-  /Volumes/Storage/Data/.local/bin/torrent-dl:
-    url: https://raw.githubusercontent.com/ivankovnatsky/tools/012331c2d5e05a307740acc107c873a1ffcee365/packages/torrent-dl/torrent-dl.fish
-    sha256: d5668b1b9a8ae56aefac723ab914ae1d20e4b796c090f1edc89a0a7732a8f554
     mode: "0755"
   ~/.config/nvim/spell/uk.utf-8.spl:
     url: https://ftp.nluug.nl/vim/runtime/spell/uk.utf-8.spl
@@ -513,6 +453,51 @@ files:
   - target: /etc/gitconfig
     source: machines/Ivans-Mac-mini/etc/gitconfig
     mode: "0644"
+  - source: ${toolsPath}/packages/eat/eat.sh
+    target: /Volumes/Storage/Data/.local/bin/eat
+    mode: "0755"
+  - source: ${toolsPath}/packages/find-grep/find-grep.sh
+    target: /Volumes/Storage/Data/.local/bin/find-grep
+    mode: "0755"
+  - source: ${toolsPath}/packages/ghq-cd/ghq-cd.sh
+    target: /Volumes/Storage/Data/.local/bin/ghq-cd
+    mode: "0755"
+  - source: ${toolsPath}/packages/go-lint-wrapper/go-lint-wrapper.sh
+    target: /Volumes/Storage/Data/.local/bin/go-lint-wrapper
+    mode: "0755"
+  - source: ${toolsPath}/packages/statix-wrapper/statix-wrapper.sh
+    target: /Volumes/Storage/Data/.local/bin/statix-wrapper
+    mode: "0755"
+  - source: ${toolsPath}/packages/gpg-edit/gpg-edit.sh
+    target: /Volumes/Storage/Data/.local/bin/gpg-edit
+    mode: "0755"
+  - source: ${toolsPath}/packages/gwq-merge/gwq-merge.sh
+    target: /Volumes/Storage/Data/.local/bin/gwq-merge
+    mode: "0755"
+  - source: ${toolsPath}/packages/image-meta/image-meta.sh
+    target: /Volumes/Storage/Data/.local/bin/image-meta
+    mode: "0755"
+  - source: ${toolsPath}/packages/nvim-edit-staged/nvim-edit-staged.sh
+    target: /Volumes/Storage/Data/.local/bin/nvim-edit-staged
+    mode: "0755"
+  - source: ${toolsPath}/packages/nvim-find-edit/nvim-find-edit.sh
+    target: /Volumes/Storage/Data/.local/bin/nvim-find-edit
+    mode: "0755"
+  - source: ${toolsPath}/packages/path-copy/path-copy.sh
+    target: /Volumes/Storage/Data/.local/bin/path-copy
+    mode: "0755"
+  - source: ${toolsPath}/packages/reboot/reboot.sh
+    target: /Volumes/Storage/Data/.local/bin/reboot
+    mode: "0755"
+  - source: ${toolsPath}/packages/tac/tac.sh
+    target: /Volumes/Storage/Data/.local/bin/tac
+    mode: "0755"
+  - source: ${toolsPath}/packages/tmux-attach/tmux-attach.sh
+    target: /Volumes/Storage/Data/.local/bin/tmux-attach
+    mode: "0755"
+  - source: ${toolsPath}/packages/torrent-dl/torrent-dl.fish
+    target: /Volumes/Storage/Data/.local/bin/torrent-dl
+    mode: "0755"
 
 gitRepos:
   ~/.local/share/fish-plugins/autopair: https://github.com/jorgebucaran/autopair.fish
