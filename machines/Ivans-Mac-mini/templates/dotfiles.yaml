@@ -47,4 +47,4 @@ templates:
     path: ~/.hammerspoon/init.lua
     file: machines/Ivans-Mac-mini/.hammerspoon/init.lua
     mode: "0644"
-    onChange: pkill -x Hammerspoon; open -g -a Hammerspoon
+    onChange: pkill -x Hammerspoon; for i in 1 2 3 4 5 6 7 8 9 10; do pgrep -xq Hammerspoon || break; sleep 0.5; done; open -g -a Hammerspoon
