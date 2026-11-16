@@ -17,16 +17,6 @@ uv:
       source: git+https://github.com/ivankovnatsky/tools.git
       binary: tools
 
-go:
-  packages:
-    rclone:
-      source: github.com/rclone/rclone
-      binary: rclone
-
-files:
-  - source: dotfiles/.config/uv/uv.toml
-    target: ~/.config/uv/uv.toml
-
 templates:
   claude-settings:
     path: ~/.claude/settings.json
