@@ -21,6 +21,10 @@ templates:
     path: ~/.claude/settings.json
     file: templates/claude-settings.json
     mode: "0644"
+  gwq:
+    path: ~/.config/gwq/config.toml
+    file: shared/home/.config/gwq/config.toml
+    mode: "0644"
 
 curlShell:
   "https://claude.ai/install.sh": bash

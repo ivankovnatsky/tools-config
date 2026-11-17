@@ -28,10 +28,6 @@ templates:
     path: ~/.config/env/env.nu
     file: shared/mooing/home/.config/env/env.nu
     mode: "0644"
-  gwq:
-    path: ~/.config/gwq/config.toml
-    file: machines/Ivans-Mac-mini/.config/gwq/config.toml
-    mode: "0644"
   mise:
     path: ~/.config/mise/config.toml
     format: toml

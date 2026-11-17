@@ -340,10 +340,10 @@ files:
     source: machines/Ivans-Mac-mini/.config/uv/uv.toml
     mode: "0644"
   - target: ~/.local/bin/claude-statusline
-    source: machines/Ivans-Mac-mini/.local/bin/claude-statusline
+    source: shared/home/.local/bin/claude-statusline
     mode: "0755"
   - target: ~/.local/bin/diff-deep
-    source: machines/Ivans-Mac-mini/.local/bin/diff-deep
+    source: shared/home/.local/bin/diff-deep
     mode: "0755"
   - target: "~/Library/Application Support/Muxy 2/settings.toml"
     source:
@@ -352,8 +352,7 @@ files:
     # Muxy rewrites it: overwrite each deploy, no .tools backup.
     backup: false
   - target: "~/Library/Application Support/Muxy 2/terminal.toml"
-    source:
-      "machines/Ivans-Mac-mini/Library/Application Support/Muxy 2/terminal.toml"
+    source: "shared/home/Library/Application Support/Muxy 2/terminal.toml"
     mode: "0644"
   - target: "~/Library/Application Support/Firefox/Profiles/default/user.js"
     source:
@@ -361,8 +360,7 @@ files:
       Support/Firefox/Profiles/default/user.js"
     mode: "0644"
   - target: "~/Library/Application Support/Firefox/profiles.ini"
-    source:
-      "machines/Ivans-Mac-mini/Library/Application Support/Firefox/profiles.ini"
+    source: "shared/home/Library/Application Support/Firefox/profiles.ini"
     mode: "0644"
     backup: false
   - target: ~/.pi/agent/settings.json
@@ -373,10 +371,10 @@ files:
     source: machines/Ivans-Mac-mini/.pi/agent/models.json
     mode: "0644"
   - target: ~/.grok/config.toml
-    source: machines/Ivans-Mac-mini/.grok/config.toml
+    source: shared/home/.grok/config.toml
     mode: "0644"
   - target: ~/.config/amethyst/amethyst.yml
-    source: machines/Ivans-Mac-mini/.config/amethyst/amethyst.yml
+    source: shared/home/.config/amethyst/amethyst.yml
     mode: "0644"
     onChange: >-
       pkill -x Amethyst; for i in 1 2 3 4 5 6 7 8 9 10; do
@@ -386,10 +384,10 @@ files:
     directory: true
     mode: "0700"
   - target: ~/.gnupg/gpg.conf
-    source: machines/Ivans-Mac-mini/.gnupg/gpg.conf
+    source: shared/home/.gnupg/gpg.conf
     mode: "0600"
   - target: ~/.gnupg/gpg-agent.conf
-    source: machines/Ivans-Mac-mini/.gnupg/gpg-agent.conf
+    source: shared/home/.gnupg/gpg-agent.conf
     mode: "0600"
     onChange: if command -v gpgconf >/dev/null; then gpgconf --reload gpg-agent; fi
   - target: ${externalStoragePath}/.opentofu/plugin-cache
@@ -404,25 +402,25 @@ files:
     directory: true
     mode: "0755"
   - target: ~/.config/kitty/quick-access-terminal.conf
-    source: machines/Ivans-Mac-mini/.config/kitty/quick-access-terminal.conf
+    source: shared/home/.config/kitty/quick-access-terminal.conf
     mode: "0644"
   - target: ~/.config/kitty/dark-theme.auto.conf
-    source: machines/Ivans-Mac-mini/.config/kitty/dark-theme.auto.conf
+    source: shared/home/.config/kitty/dark-theme.auto.conf
     mode: "0644"
   - target: ~/.config/kitty/light-theme.auto.conf
-    source: machines/Ivans-Mac-mini/.config/kitty/light-theme.auto.conf
+    source: shared/home/.config/kitty/light-theme.auto.conf
     mode: "0644"
   - target: ~/.config/kitty/no-preference-theme.auto.conf
-    source: machines/Ivans-Mac-mini/.config/kitty/no-preference-theme.auto.conf
+    source: shared/home/.config/kitty/no-preference-theme.auto.conf
     mode: "0644"
   - target: ~/.config/kitty/themes/default.conf
-    source: machines/Ivans-Mac-mini/.config/kitty/themes/default.conf
+    source: shared/home/.config/kitty/themes/default.conf
     mode: "0644"
   - target: ~/.config/kitty/themes/GitHub_Light.conf
-    source: machines/Ivans-Mac-mini/.config/kitty/themes/GitHub_Light.conf
+    source: shared/home/.config/kitty/themes/GitHub_Light.conf
     mode: "0644"
   - target: ~/.config/kitty/themes/Tokyo_Night_Moon.conf
-    source: machines/Ivans-Mac-mini/.config/kitty/themes/Tokyo_Night_Moon.conf
+    source: shared/home/.config/kitty/themes/Tokyo_Night_Moon.conf
     mode: "0644"
   - target: ~/.config/bat/config
     source: dotfiles/.config/bat/config
@@ -447,13 +445,13 @@ files:
     target: /etc/resolver/ts.net
     mode: "0644"
   - target: /etc/shells
-    source: machines/Ivans-Mac-mini/etc/shells
+    source: shared/etc/shells
     mode: "0644"
   - target: /etc/pam.d/sudo_local
-    source: machines/Ivans-Mac-mini/etc/pam.d/sudo_local
+    source: shared/etc/pam.d/sudo_local
     mode: "0444"
   - target: /etc/gitconfig
-    source: machines/Ivans-Mac-mini/etc/gitconfig
+    source: shared/etc/gitconfig
     mode: "0644"
   # Spotlight skips a volume with this marker; existing /nix/.Spotlight-V100
   # is not purged (system files take no onChange).
