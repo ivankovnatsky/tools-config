@@ -6,8 +6,12 @@ format:
 lint:
     treefmt --fail-on-change
 
-# Apply config for this host
+# Apply config for this host: user part, then system part as root
 apply:
+    sudo "$(command -v tools)" deploy --config .
+
+# Apply only the user part (no daemons, /etc files, system defaults, settingsctl, users)
+apply-user:
     tools deploy --config .
 
 # Dry-run — show what would change

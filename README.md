@@ -28,18 +28,25 @@ gh repo edit ivankovnatsky/tools-config --default-branch main
 ## Bootstrap
 
 ```console
-# Install uv (Python package manager)
-brew install uv
+# Install uv (Python package manager) and ghq
+brew install uv ghq
+
+# Clone tools where shared/base.yaml installs its packages from (toolsPath)
+GHQ_ROOT=~/Sources ghq get ivankovnatsky/tools
 
 # Install tools CLI into an isolated venv
-uv tool install git+https://github.com/ivankovnatsky/tools.git
+uv tool install "git+file://$HOME/Sources/github.com/ivankovnatsky/tools"
 ```
 
 ## Usage
 
 ```console
-# Apply config for this host
+# Apply config for this host (sudo: daemons, /etc files, system defaults,
+# settingsctl and users need root; tools drops to the user for the rest)
 just apply
+
+# Apply only the user part, no sudo
+just apply-user
 
 # Dry-run — show what would change
 just diff
