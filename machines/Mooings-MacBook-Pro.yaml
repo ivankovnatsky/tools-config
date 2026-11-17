@@ -1,0 +1,12 @@
+include:
+  - ../shared/base.yaml
+  - ../shared/darwin.yaml
+  - ../shared/mooing/base.yaml
+  - ../shared/mooing/packages.yaml
+  - ../shared/mooing/sops.yaml
+  - ../shared/mooing/files.yaml
+  - ../shared/mooing/templates.yaml
+  - ../shared/mooing/system.yaml
+
+vars:
+  hostName: Mooings-MacBook-Pro
