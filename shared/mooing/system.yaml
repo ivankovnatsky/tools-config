@@ -1,0 +1,171 @@
+# macOS settings, launchd jobs and mgmt shared by Mooings-MacBook-Air and
+# Mooings-MacBook-Pro (nix-config: darwin/, machines/.mooing).
+include:
+  - launchd/brctl-download-notes.yaml
+  - launchd/nextdns-mgmt-mooing.yaml
+  - launchd/qmd-update.yaml
+  - launchd/quit-mac-mouse-fix.yaml
+  - launchd/reposync.yaml
+  - launchd/settings-daemon.yaml
+  - launchd/sops-secrets.yaml
+  - launchd/syncthing.yaml
+  - launchd/xattr-pin-notes.yaml
+  - mgmt/nextdns.yaml
+
+defaults:
+  user:
+    NSGlobalDomain:
+      AppleIconAppearanceTheme: RegularAutomatic
+      AppleKeyboardUIMode: 3
+      AppleSpacesSwitchOnActivate: false
+      InitialKeyRepeat: 120
+      KeyRepeat: 120
+      NSUserKeyEquivalents:
+        Move focus to active or next window: "~`"
+      TISRomanSwitchState: 1
+    com.apple.dock:
+      autohide: false
+      autohide-delay: 1000.0
+      mru-spaces: true
+      tilesize: 64
+    com.apple.finder:
+      FXRemoveOldTrashItems: true
+    com.apple.spaces:
+      spans-displays: false
+    com.apple.WindowManager:
+      EnableTiledWindowMargins: true
+      EnableTilingByEdgeDrag: true
+      EnableTilingOptionAccelerator: true
+      EnableTopTilingByEdgeDrag: true
+    com.apple.HIToolbox:
+      AppleEnabledInputSources:
+        - InputSourceKind: Keyboard Layout
+          KeyboardLayout ID: 252
+          KeyboardLayout Name: ABC
+        - InputSourceKind: Keyboard Layout
+          KeyboardLayout ID: -2354
+          KeyboardLayout Name: Ukrainian-PC
+      AppleGlobalTextInputProperties:
+        TextInputGlobalPropertyPerContextInput: 1
+    # Not the -currentHost (<domain>.<UUID>) file: nix-darwin writes this path.
+    ~/Library/Preferences/ByHost/com.apple.controlcenter:
+      BatteryShowPercentage: true
+      Bluetooth: 24
+      Weather: 2
+    com.apple.screencapture:
+      location: ${env:HOME}/Screenshots
+      # macOS 27 screencapture reads per-target keys, not `location`.
+      location-screenrecording: ${env:HOME}/Screenshots
+      location-screenshot: ${env:HOME}/Screenshots
+    com.apple.Siri:
+      StatusMenuVisible: false
+    # Basic follows the system light/dark appearance. Font, shell exit and
+    # Option-as-Meta live inside the profile (nix-config sets them by script).
+    com.apple.Terminal:
+      Default Window Settings: Basic
+      Startup Window Settings: Basic
+    com.amethyst.Amethyst:
+      SUEnableAutomaticChecks: false
+      SUAutomaticallyUpdate: false
+    com.apple.Safari:
+      AutoOpenSafeDownloads: false
+      CloudTabsOnStartPageConsent: true
+      DeveloperPreferences: 836
+      ShowFullURLInSmartSearchField: true
+      ShowStandaloneTabBar: true
+    com.apple.Safari.SandboxBroker:
+      AlwaysPromptForDownloadFolder: true
+    org.gpgtools.pinentry-mac:
+      UseKeychain: false
+    org.hammerspoon.Hammerspoon:
+      SUEnableAutomaticChecks: false
+      SUAutomaticallyUpdate: false
+      SUSendProfileInfo: false
+      MJShowDockIconKey: false
+      MJShowMenuIconKey: false
+      MJKeepConsoleOnTopKey: false
+      HSUploadCrashData: false
+  system:
+    # Wi-Fi > Ask to join hotspots: Automatic.
+    /Library/Preferences/SystemConfiguration/com.apple.airport.preferences:
+      AutoHotspotMode: Automatic
+    # Firefox Developer Edition policies: Teams web opens msteams: links
+    # without the "Allow" prompt.
+    /Library/Preferences/org.mozilla.firefoxdeveloperedition:
+      EnterprisePoliciesEnabled: true
+      AutoLaunchProtocolsFromOrigins:
+        - protocol: msteams
+          allowed_origins:
+            - https://teams.microsoft.com
+            - https://teams.cloud.microsoft
+  restart:
+    com.apple.screencapture: screencaptureui
+
+dock:
+  apps:
+    - /System/Applications/Apps.app
+    - /Applications/Safari.app
+    - /System/Applications/Messages.app
+    - /System/Applications/Mail.app
+    - /System/Applications/Calendar.app
+    - /System/Applications/Contacts.app
+    - /System/Applications/iPhone Mirroring.app
+    - /System/Applications/App Store.app
+    - /System/Applications/System Settings.app
+    - spacer
+    - /System/Applications/Utilities/Terminal.app
+    - /System/Applications/Utilities/Activity Monitor.app
+    - /System/Applications/Passwords.app
+    - spacer
+    - /Applications/kitty.app
+    - /Applications/Muxy.app
+    - /Applications/Firefox Developer Edition.app
+    - /Applications/Bitwarden.app
+    - /Applications/Obsidian.app
+    - /Applications/TaskForge.app
+    - /Applications/WhatsApp.app
+    - /Applications/Microsoft Teams.app
+    - /Applications/Microsoft Excel.app
+    - /Applications/Microsoft Word.app
+  others:
+    - ~/Downloads
+    - ~/Screenshots
+
+settingsctl:
+  fullDiskAccess:
+    - kitty
+    - Muxy
+    - sshd-keygen-wrapper
+    - Terminal
+  accessibility:
+    - Amethyst
+    - bash
+    - Hammerspoon
+    - kitty
+    - Mac Mouse Fix Helper
+    - Muxy
+    - Terminal
+  loginItems:
+    - Amethyst
+    - Bitwarden
+    - Hammerspoon
+    - Mac Mouse Fix
+    - NextDNS
+  appearanceInit: true
+  defaultBrowser: firefoxdeveloperedition
+  hostName: ${hostName}
+  localHostName: ${hostName}
+  timeZone: Europe/Uzhgorod
+
+plist:
+  # The app writes this file itself (it also holds the license); set only this key.
+  ~/Library/Application Support/com.nuebling.mac-mouse-fix/config.plist:
+    General:showMenuBarItem: false
+
+launchd:
+  labelPrefix: com.ivankovnatsky
+
+# No uid: Air's mooing is 501, Pro's 502.
+users:
+  mooing:
+    shell: /opt/homebrew/bin/fish

@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# piper-uk IN.txt OUT.mp3 [VOICE]: text file to MP3. eSpeak reads some
+# symbols aloud (quotes as "лапки", "…" as "три крапки"), so strip or
+# replace them first.
+set -euo pipefail
+if [ $# -lt 2 ]; then
+  echo "usage: piper-uk IN.txt OUT.mp3 [VOICE]" >&2
+  exit 1
+fi
+voice="${3:-uk_UA-tetiana-high}"
+voices_dir="$HOME/.local/share/piper/voices"
+tmp="$(mktemp -d)"
+trap 'rm -rf "$tmp"' EXIT
+perl -CSD -Mutf8 -pe 's/[«»"„“”]//g; s/…/./g; s/\s*&\s*/ і /g; s/\// /g' "$1" > "$tmp/clean.txt"
+"$HOME/.local/bin/piper" -m "$voices_dir/$voice.onnx" -i "$tmp/clean.txt" -f "$tmp/out.wav" --sentence-silence 0.4
+ffmpeg -loglevel error -n -i "$tmp/out.wav" -ac 1 -b:a 64k "$2"

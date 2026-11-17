@@ -1,0 +1,23 @@
+# Mooing secrets (separate identity; see the secrets/mooing.yaml rule in
+# .sops.yaml). Decrypted with the user SSH key.
+sops:
+  age:
+    sshKeyPaths: [~/.ssh/id_ed25519]
+  secretsDir: ${secretsDir}
+  defaultSopsFile: ${toolsConfigPath}/secrets/mooing.yaml
+  secrets:
+    git-name: { key: git/name }
+    git-email: { key: git/email }
+    gh-host: { key: gh/host }
+    aws-sso-id: { key: aws/ssoId }
+    aws-region: { key: aws/region }
+    aws-role: { key: aws/role }
+    aws-account1: { key: aws/account1 }
+    aws-account2: { key: aws/account2 }
+    aws-profile1: { key: aws/profile1 }
+    aws-profile2: { key: aws/profile2 }
+    rbw-email: { key: rbw/email }
+    rbw-server: { key: rbw/server }
+    anthropic-api-key: { key: anthropicApiKey }
+    nextdns-api-key: { key: nextDNS/apiKey }
+    nextdns-profile-mooing: { key: nextDNS/profileId }

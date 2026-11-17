@@ -1,0 +1,250 @@
+# User files for Mooings-MacBook-Air and Mooings-MacBook-Pro
+# (nix-config: machines/.mooing/home plus the shared home/ modules).
+vars:
+  a3Ip: 192.168.50.6
+
+fetch:
+  ~/.local/bin/rbw-fzf:
+    url: https://raw.githubusercontent.com/doy/rbw/1.15.0/bin/rbw-fzf
+    sha256: a0328919dbbdb3c3a2431643a5b64a53914befcf25efb0fc489b33eee46d2f7b
+    mode: "0755"
+  ~/.local/bin/git-credential-rbw:
+    url: https://raw.githubusercontent.com/doy/rbw/1.15.0/bin/git-credential-rbw
+    sha256: 0207c0da6385d16ec307848bc8e01fc09c497e37700340596e5177a8ca558920
+    mode: "0755"
+  ~/.config/nvim/spell/uk.utf-8.spl:
+    url: https://ftp.nluug.nl/vim/runtime/spell/uk.utf-8.spl
+    sha256: e1686ca4a54d7068fe66e9a6921f3bad29ccbf14046bf7048598cbe6ec072814
+  "~/Library/Application Support/Firefox/Profiles/default/extensions/addon@darkreader.org.xpi":
+    url: https://addons.mozilla.org/firefox/downloads/file/5055786/darkreader-4.9.133.xpi
+    sha256: eb06c5096d761616c7f1d954c11524ca4bff4fe7229044dc1fce288a8c0853ab
+  "~/Library/Application Support/Firefox/Profiles/default/extensions/{446900e4-71c2-419f-a6a7-df9c091e268b}.xpi":
+    url: https://addons.mozilla.org/firefox/downloads/file/5125667/bitwarden_password_manager-2026.10.0.xpi
+    sha256: a25e02e961f4ffcecda12584f32f1993102ad7509e9ca84582e5287109f5bd20
+
+files:
+  - dir: dotfiles
+  - target: ~/.config/bat/config
+    source: dotfiles/.config/bat/config
+    onChange: if command -v bat >/dev/null; then bat cache --build; fi
+  - target: ~/.config/nvim/lua/config/pack.lua
+    source: dotfiles/.config/nvim/lua/config/pack.lua
+    onChange: nvim --headless +qa
+    onUpdate: nvim --headless "+lua vim.pack.update(nil, { force = true })" +qa
+  - target: ~/.ssh/config
+    source: dotfiles/.ssh/config
+    mode: "0600"
+  - target: ~/.config/fish/conf.d/mooing.fish
+    source: shared/mooing/home/.config/fish/conf.d/mooing.fish
+    mode: "0644"
+  - target: ~/.config/direnv/lib/mise.sh
+    source: shared/mooing/home/.config/direnv/lib/mise.sh
+    mode: "0644"
+  - target: ~/.grok/config.toml
+    source: machines/Ivans-Mac-mini/.grok/config.toml
+    mode: "0644"
+  - target: ~/.pi/agent/settings.json
+    source: shared/mooing/home/.pi/agent/settings.json
+    mode: "0644"
+    backup: false
+  - target: "~/Library/Application Support/Muxy 2/settings.toml"
+    source: "shared/mooing/home/Library/Application Support/Muxy 2/settings.toml"
+    mode: "0644"
+    # Muxy rewrites it; set false for one deploy to push repo changes.
+    skip: true
+    backup: false
+  - target: "~/Library/Application Support/Muxy 2/terminal.toml"
+    source: "machines/Ivans-Mac-mini/Library/Application Support/Muxy 2/terminal.toml"
+    mode: "0644"
+  - target: "~/Library/Application Support/Firefox/Profiles/default/user.js"
+    source: "shared/mooing/home/Library/Application Support/Firefox/Profiles/default/user.js"
+    mode: "0644"
+  - target: "~/Library/Application Support/Firefox/profiles.ini"
+    source: "machines/Ivans-Mac-mini/Library/Application Support/Firefox/profiles.ini"
+    mode: "0644"
+  - target: ~/.config/amethyst/amethyst.yml
+    source: machines/Ivans-Mac-mini/.config/amethyst/amethyst.yml
+    mode: "0644"
+    onChange: >-
+      pkill -x Amethyst; for i in 1 2 3 4 5 6 7 8 9 10; do
+      pgrep -xq Amethyst || break; sleep 0.5; done;
+      open -g -b com.amethyst.Amethyst
+  - target: ~/.hammerspoon/init.lua
+    source: shared/mooing/home/.hammerspoon/init.lua
+    mode: "0644"
+    onChange: >-
+      pkill -x Hammerspoon; for i in 1 2 3 4 5 6 7 8 9 10; do
+      pgrep -xq Hammerspoon || break; sleep 0.5; done;
+      open -g -a Hammerspoon
+  - target: ~/.gnupg
+    directory: true
+    mode: "0700"
+  - target: ~/.gnupg/gpg.conf
+    source: machines/Ivans-Mac-mini/.gnupg/gpg.conf
+    mode: "0600"
+  - target: ~/.gnupg/gpg-agent.conf
+    source: machines/Ivans-Mac-mini/.gnupg/gpg-agent.conf
+    mode: "0600"
+    onChange: if command -v gpgconf >/dev/null; then gpgconf --reload gpg-agent; fi
+  - target: ~/Screenshots
+    directory: true
+    mode: "0755"
+  - target: ~/.config/kitty/quick-access-terminal.conf
+    source: machines/Ivans-Mac-mini/.config/kitty/quick-access-terminal.conf
+    mode: "0644"
+  - target: ~/.config/kitty/dark-theme.auto.conf
+    source: machines/Ivans-Mac-mini/.config/kitty/dark-theme.auto.conf
+    mode: "0644"
+  - target: ~/.config/kitty/light-theme.auto.conf
+    source: machines/Ivans-Mac-mini/.config/kitty/light-theme.auto.conf
+    mode: "0644"
+  - target: ~/.config/kitty/no-preference-theme.auto.conf
+    source: machines/Ivans-Mac-mini/.config/kitty/no-preference-theme.auto.conf
+    mode: "0644"
+  - target: ~/.config/kitty/themes/default.conf
+    source: machines/Ivans-Mac-mini/.config/kitty/themes/default.conf
+    mode: "0644"
+  - target: ~/.config/kitty/themes/GitHub_Light.conf
+    source: machines/Ivans-Mac-mini/.config/kitty/themes/GitHub_Light.conf
+    mode: "0644"
+  - target: ~/.config/kitty/themes/Tokyo_Night_Moon.conf
+    source: machines/Ivans-Mac-mini/.config/kitty/themes/Tokyo_Night_Moon.conf
+    mode: "0644"
+  - target: /etc/shells
+    source: machines/Ivans-Mac-mini/etc/shells
+    mode: "0644"
+  - target: /etc/pam.d/sudo_local
+    source: machines/Ivans-Mac-mini/etc/pam.d/sudo_local
+    mode: "0444"
+  # Own scripts
+  - target: ${localBin}/claude-statusline
+    source: machines/Ivans-Mac-mini/.local/bin/claude-statusline
+    mode: "0755"
+  - target: ${localBin}/diff-deep
+    source: machines/Ivans-Mac-mini/.local/bin/diff-deep
+    mode: "0755"
+  - target: ${localBin}/turnoff
+    source: shared/mooing/home/.local/bin/turnoff
+    mode: "0755"
+  # Voice download as nix-config's piperVoices activation; piper-tts via uv.
+  - target: ${localBin}/piper-uk
+    source: shared/mooing/home/.local/bin/piper-uk
+    mode: "0755"
+    onChange: >-
+      v=${home}/.local/share/piper/voices; py=${home}/.local/share/uv/tools/piper-tts/bin/python;
+      if [ -x "$py" ] && [ ! -f "$v/uk_UA-tetiana-high.onnx" ]; then
+      "$py" -m piper.download_voices --data-dir "$v" uk_UA-tetiana-high; fi
+  - source: ${toolsPath}/packages/aws-profile/aws-profile.sh
+    target: ${localBin}/aws-profile
+    mode: "0755"
+  - source: ${toolsPath}/packages/eat/eat.sh
+    target: ${localBin}/eat
+    mode: "0755"
+  - source: ${toolsPath}/packages/find-grep/find-grep.sh
+    target: ${localBin}/find-grep
+    mode: "0755"
+  - source: ${toolsPath}/packages/ghq-cd/ghq-cd.sh
+    target: ${localBin}/ghq-cd
+    mode: "0755"
+  - source: ${toolsPath}/packages/go-lint-wrapper/go-lint-wrapper.sh
+    target: ${localBin}/go-lint-wrapper
+    mode: "0755"
+  - source: ${toolsPath}/packages/gpg-edit/gpg-edit.sh
+    target: ${localBin}/gpg-edit
+    mode: "0755"
+  - source: ${toolsPath}/packages/gwq-merge/gwq-merge.sh
+    target: ${localBin}/gwq-merge
+    mode: "0755"
+  - source: ${toolsPath}/packages/image-meta/image-meta.sh
+    target: ${localBin}/image-meta
+    mode: "0755"
+  - source: ${toolsPath}/packages/kitty-copy/kitty-copy.sh
+    target: ${localBin}/kitty-copy
+    mode: "0755"
+  - source: ${toolsPath}/packages/nix-gc/nix-gc.sh
+    target: ${localBin}/nix-gc
+    mode: "0755"
+  - source: ${toolsPath}/packages/nix-generate-sha/nix-generate-sha.sh
+    target: ${localBin}/nix-generate-sha
+    mode: "0755"
+  - source: ${toolsPath}/packages/nvim-edit-staged/nvim-edit-staged.sh
+    target: ${localBin}/nvim-edit-staged
+    mode: "0755"
+  - source: ${toolsPath}/packages/nvim-find-edit/nvim-find-edit.sh
+    target: ${localBin}/nvim-find-edit
+    mode: "0755"
+  - source: ${toolsPath}/packages/path-copy/path-copy.sh
+    target: ${localBin}/path-copy
+    mode: "0755"
+  - source: ${toolsPath}/packages/reboot/reboot.sh
+    target: ${localBin}/reboot
+    mode: "0755"
+  - source: ${toolsPath}/packages/statix-wrapper/statix-wrapper.sh
+    target: ${localBin}/statix-wrapper
+    mode: "0755"
+  - source: ${toolsPath}/packages/tac/tac.sh
+    target: ${localBin}/tac
+    mode: "0755"
+  - source: ${toolsPath}/packages/tmux-attach/tmux-attach.sh
+    target: ${localBin}/tmux-attach
+    mode: "0755"
+  - source: ${toolsPath}/packages/torrent-dl/torrent-dl.fish
+    target: ${localBin}/torrent-dl
+    mode: "0755"
+
+gitRepos:
+  ~/.local/share/fish-plugins/autopair: https://github.com/jorgebucaran/autopair.fish
+  ~/.local/share/fish-plugins/bass: https://github.com/edc/bass
+  ~/.local/share/fish-plugins/colored-man-pages: https://github.com/PatrickF1/colored_man_pages.fish
+  ~/.local/share/fish-plugins/done: https://github.com/franciscolourenco/done
+  ~/.local/share/fish-plugins/fish-bd: https://github.com/0rax/fish-bd
+  ~/.local/share/fish-plugins/fzf-fish: https://github.com/PatrickF1/fzf.fish
+  ~/.local/share/fish-plugins/git-abbr: https://github.com/lewisacidic/fish-git-abbr
+  ~/.local/share/fish-plugins/grc: https://github.com/oh-my-fish/plugin-grc
+  ~/.local/share/fish-plugins/macos: https://github.com/halostatue/fish-macos
+  ~/.local/share/fish-plugins/puffer: https://github.com/nickeb96/puffer-fish
+  ~/.local/share/tmux-plugins/tmux-continuum: https://github.com/tmux-plugins/tmux-continuum
+  ~/.local/share/tmux-plugins/tmux-sensible: https://github.com/tmux-plugins/tmux-sensible
+  ~/.local/share/tmux-plugins/tmux-yank: https://github.com/tmux-plugins/tmux-yank
+  # yazi loads <name>.yazi dirs from here; piper.yazi is used by yazi.toml.
+  ~/.config/yazi/plugins: https://github.com/yazi-rs/plugins
+
+links:
+  - source: ~/.codex/AGENTS.md
+    target: ~/.pi/agent/AGENTS.md
+  # Claude Code doesn't read ~/.agents/skills.
+  - source: ~/.agents/skills
+    target: ~/.claude/skills
+
+skills:
+  sources:
+    pulumi:
+      url: https://github.com/pulumi/agent-skills
+      subdir: pulumi/skills
+    pulumi-maintenance:
+      url: https://github.com/pulumi/agent-skills
+      subdir: package-maintenance/skills
+    gcx:
+      url: https://github.com/grafana/gcx
+      subdir: claude-plugin/skills
+    peekaboo:
+      url: https://github.com/openclaw/Peekaboo
+      subdir: skills
+    qmd:
+      url: https://github.com/tobi/qmd
+      subdir: skills
+    obsidian:
+      url: https://github.com/kepano/obsidian-skills
+      subdir: skills
+  targets: [~/.agents/skills]
+  enable:
+    - pulumi/*
+    - pulumi-maintenance/pulumi-upgrade-provider
+    - gcx/gcx
+    - peekaboo/peekaboo
+    - qmd/qmd
+    - obsidian/obsidian-markdown
+    - obsidian/obsidian-bases
+    - obsidian/json-canvas
+    - obsidian/obsidian-cli
+    - obsidian/defuddle

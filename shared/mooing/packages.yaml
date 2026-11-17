@@ -1,0 +1,345 @@
+# Packages for Mooings-MacBook-Air and Mooings-MacBook-Pro, ported from
+# nix-config (machines/.mooing/darwin/homebrew.nix, .mooing/home/*.nix,
+# home/packages*.nix, home/tools.nix). npm/uv/curlShell entries from
+# shared/base.yaml (codex, tools, claude installer) merge in as dict keys.
+#
+# Not ported (no brew/go/cargo/uv source that matches; install by hand or
+# add a section for them):
+# - helm-secrets (helm plugin; nix wrapped it into helm)
+# - kubectl-images, kubectl-view-secret (go install names the binary `cmd`;
+#   krew plugins `images` and `view-secret`)
+# - jcli (go install names it `jenkins-cli`; brew jenkins-cli is another tool)
+# - mkpasswd (brew whois does not build it)
+#
+# No pi packages on the laptops.
+
+npm:
+  packages:
+    "@earendil-works/pi-coding-agent": {}
+    "@bitwarden/cli": {}
+    "@steipete/summarize": {}
+    "@xai-official/grok": {}
+    "@tobilu/qmd": {}
+    defuddle: {}
+    taskforge-md:
+      binary: taskforge
+
+uv:
+  packages:
+    awscurl: {}
+    gallery-dl: {}
+    osxphotos:
+      binary: osxphotos
+    piper-tts:
+      binary: piper
+    supertonic:
+      binary: supertonic
+    yt-dlp: {}
+    # nix-config had it in a python3 env with the cli extra.
+    jira:
+      source: jira[cli]
+      binary: jirashell
+    agent-sessions:
+      source: git+file://${toolsPath}#subdirectory=packages/agent-sessions
+      binary: agent-sessions
+    arr-mgmt:
+      source: git+file://${toolsPath}#subdirectory=packages/arr-mgmt
+      binary: arr-mgmt
+    asusrouter-cli:
+      source: git+file://${toolsPath}#subdirectory=packages/asusrouter-cli
+      binary: asusrouter-cli
+    aws-console:
+      source: git+file://${toolsPath}#subdirectory=packages/aws-console
+      binary: aws-console
+    backup-home:
+      source: git+file://${toolsPath}#subdirectory=packages/backup-home
+      binary: backup-home
+    beszel-mgmt:
+      source: git+file://${toolsPath}#subdirectory=packages/beszel-mgmt
+      binary: beszel-mgmt
+    cleanup-home:
+      source: git+file://${toolsPath}#subdirectory=packages/cleanup-home
+      binary: cleanup-home
+    confluence:
+      source: git+file://${toolsPath}#subdirectory=packages/confluence
+      binary: confluence
+    dns:
+      source: git+file://${toolsPath}#subdirectory=packages/dns
+      binary: dns
+    forgejo-mgmt:
+      source: git+file://${toolsPath}#subdirectory=packages/forgejo-mgmt
+      binary: forgejo-mgmt
+    gh-notifications:
+      source: git+file://${toolsPath}#subdirectory=packages/gh-notifications
+      binary: gh-notifications
+    gh-pr:
+      source: git+file://${toolsPath}#subdirectory=packages/gh-pr
+      binary: gh-pr
+    git-restore:
+      source: git+file://${toolsPath}#subdirectory=packages/git-restore
+      binary: git-restore
+    git-worktree-init:
+      source: git+file://${toolsPath}#subdirectory=packages/git-worktree-init
+      binary: git-worktree-init
+    gpg-pass:
+      source: git+file://${toolsPath}#subdirectory=packages/gpg-pass
+      binary: gpg-pass
+    homelab:
+      source: git+file://${toolsPath}#subdirectory=packages/homelab
+      binary: homelab
+    jellyfin-mgmt:
+      source: git+file://${toolsPath}#subdirectory=packages/jellyfin-mgmt
+      binary: jellyfin-mgmt
+    jira-custom:
+      source: git+file://${toolsPath}#subdirectory=packages/jira-custom
+      binary: jira-custom
+    k8s-context:
+      source: git+file://${toolsPath}#subdirectory=packages/k8s-context
+      binary: k8s-context
+    launchd-mgmt:
+      source: git+file://${toolsPath}#subdirectory=packages/launchd-mgmt
+      binary: launchd-mgmt
+    nextdns-mgmt:
+      source: git+file://${toolsPath}#subdirectory=packages/nextdns-mgmt
+      binary: nextdns-mgmt
+    nix-find-orphans:
+      source: git+file://${toolsPath}#subdirectory=packages/nix-find-orphans
+      binary: nix-find-orphans
+    nix-sort-imports:
+      source: git+file://${toolsPath}#subdirectory=packages/nix-sort-imports
+      binary: nix-sort-imports
+    pblock:
+      source: git+file://${toolsPath}#subdirectory=packages/pblock
+      binary: pblock
+    ps-top:
+      source: git+file://${toolsPath}#subdirectory=packages/ps-top
+      binary: ps-top
+    rebuild:
+      source: git+file://${toolsPath}#subdirectory=packages/rebuild
+      binary: rebuild
+    reposync:
+      source: git+file://${toolsPath}#subdirectory=packages/reposync
+      binary: reposync
+    settingsctl:
+      source: git+file://${toolsPath}#subdirectory=packages/settingsctl
+      binary: settings
+    syncthing-mgmt:
+      source: git+file://${toolsPath}#subdirectory=packages/syncthing-mgmt
+      binary: syncthing-mgmt
+    tasks:
+      source: git+file://${toolsPath}#subdirectory=packages/tasks
+      binary: tasks
+    youtube:
+      source: git+file://${toolsPath}#subdirectory=packages/youtube
+      binary: youtube
+
+go:
+  packages:
+    aws-sso-creds:
+      source: github.com/jaxxstorm/aws-sso-creds/cmd/aws-sso-creds
+      binary: aws-sso-creds
+    eks-node-viewer:
+      source: github.com/awslabs/eks-node-viewer/cmd/eks-node-viewer
+      binary: eks-node-viewer
+    go-grip:
+      source: github.com/chrishrb/go-grip
+      binary: go-grip
+    gwq:
+      source: github.com/d-kuro/gwq/cmd/gwq
+      binary: gwq
+    kail:
+      source: github.com/boz/kail/cmd/kail
+      binary: kail
+    kubepug:
+      source: github.com/kubepug/kubepug
+      binary: kubepug
+    ssh-to-age:
+      source: github.com/Mic92/ssh-to-age/cmd/ssh-to-age
+      binary: ssh-to-age
+    username:
+      source: github.com/ivankovnatsky/username
+      binary: username
+
+cargo:
+  packages:
+    deadnix:
+      version: 1.3.1
+    genpass:
+      version: 0.5.1
+    # nil_ls for the nvim dotfiles (nixvim bundled it).
+    nil:
+      source: https://github.com/oxalica/nil
+      commit: dbbb5c24f9215476992aa1bd305f8e5398e89654
+
+curlShell:
+  "https://antigravity.google/cli/install.sh":
+    shell: bash
+    uninstall: >-
+      for p in ~/.local/bin/agy ~/.cache/antigravity; do
+      if [ -e "$p" ] || [ -L "$p" ]; then trash "$p"; fi; done
+
+brew:
+  environment:
+    HOMEBREW_NO_ENV_HINTS: "1"
+  onActivation:
+    autoUpdate: false
+    cleanup: zap
+  taps:
+    - antoniorodr/homebrew-memo
+    - keith/homebrew-formulae
+    - muxy-app/homebrew-tap
+    - openclaw/homebrew-tap
+    - pomdtr/homebrew-tap
+    - xwmx/homebrew-taps
+  trust:
+    taps:
+      - antoniorodr/memo
+      - keith/formulae
+      - muxy-app/tap
+      - openclaw/tap
+      - pomdtr/tap
+      - xwmx/taps
+  brews:
+    - age
+    - argocd
+    - aria2
+    - atuin
+    - aws-cdk
+    - aws-sso-cli
+    - awscli
+    - bash
+    - bash-preexec
+    - bat
+    - btop
+    - bun
+    - carapace
+    - coreutils
+    - curlie
+    - defaultbrowser
+    - delve
+    - direnv
+    - displayplacer
+    - dockutil
+    - doggo
+    - duf
+    - dust
+    - erdtree
+    - exiftool
+    - fd
+    - ffmpeg
+    - ffmpegthumbnailer
+    - fish
+    - forgit
+    - fzf
+    - gcx
+    - ggh
+    - gh
+    - ghorg
+    - ghq
+    - git
+    - git-crypt
+    - git-delta
+    - git-extras
+    - git-filter-repo
+    - gitleaks
+    - gnupg
+    - go
+    - gofumpt
+    - golangci-lint
+    - gopls
+    - grc
+    - grip
+    - hadolint
+    - helm
+    - hyperfine
+    - imagemagick
+    - jira-cli
+    - jq
+    - k9s
+    - krew
+    - kubecolor
+    - kubectx
+    - kubernetes-cli
+    - kustomize
+    - ldns
+    - lsd
+    - lua-language-server
+    - macmon
+    - magic-wormhole
+    - mas
+    - mise
+    - mpv
+    - ncurses
+    - neovim
+    - nixfmt
+    - node
+    - nushell
+    - openclaw/tap/peekaboo
+    - pam-reattach
+    - pandoc
+    - parallel
+    - pigz
+    - pinentry
+    - poppler
+    - pre-commit
+    - prettier
+    - pv
+    - pyright
+    - python-yq
+    - ranger
+    - rbw
+    - rclone
+    - ripgrep
+    - ruff
+    - rumdl
+    - rust
+    - rust-analyzer
+    - shellcheck
+    - shfmt
+    - sops
+    - starship
+    - staticcheck
+    - statix
+    - stylua
+    - swiftformat
+    - syncthing
+    - tinymist
+    - tmux
+    - tmuxinator
+    - tree
+    - tree-sitter-cli
+    - treefmt
+    - typos-cli
+    - typst
+    - typstyle
+    - uv
+    - vals
+    - watchman
+    - wget
+    - yazi
+    - z.lua
+    - zapp
+    - zoxide
+    - zsh
+    - zsh-autosuggestions
+    - zsh-history-substring-search
+    - zsh-syntax-highlighting
+  casks:
+    - amethyst
+    - bitwarden
+    - coconutbattery
+    - firefox@developer-edition
+    - font-hack-nerd-font
+    - hammerspoon
+    - kitty
+    - mac-mouse-fix
+    - microsoft-teams
+    - muxy-app/tap/muxy
+    - nextdns-app
+    - obsidian
+    - session-manager-plugin
+    - whatsapp
+  masApps:
+    Microsoft Excel: 462058435
+    Microsoft Word: 462054704
+    TaskForge - Obsidian Tasks: 6744716215

@@ -1,0 +1,9 @@
+launchd:
+  agents:
+    # Keeps these iCloud Drive folders downloaded ("Keep Downloaded").
+    xattr-pin-notes:
+      keepAlive: false
+      command: >-
+        /usr/bin/xattr -w "com.apple.fileprovider.pinned#PX" 1
+        "${home}/Library/Mobile Documents/iCloud~md~obsidian"
+        "${home}/Library/Mobile Documents/com~apple~CloudDocs/Data/Infra"

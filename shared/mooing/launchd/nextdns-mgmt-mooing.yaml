@@ -1,0 +1,14 @@
+launchd:
+  agents:
+    # Replaces nix-config's nextdns-mgmt-mooing: syncs mgmt (the NextDNS
+    # profile) at login.
+    nextdns-mgmt-mooing:
+      keepAlive: false
+      waitForSecrets: true
+      environment:
+        PATH: /opt/homebrew/bin:/usr/bin:/bin
+      command: |-
+        ${uvBin}/tools deploy \
+        --config ${toolsConfigPath} \
+        --scope mgmt \
+        --approve

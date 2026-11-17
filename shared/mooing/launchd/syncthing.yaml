@@ -1,0 +1,11 @@
+launchd:
+  agents:
+    # Laptops: GUI on localhost only.
+    syncthing:
+      throttleInterval: 10
+      command: |-
+        /opt/homebrew/bin/syncthing serve \
+        --no-browser \
+        --no-restart \
+        --no-upgrade \
+        --gui-address=127.0.0.1:8384

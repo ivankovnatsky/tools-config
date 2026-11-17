@@ -1,0 +1,10 @@
+launchd:
+  agents:
+    # Pulls the vault down from iCloud hourly, before qmd-update (:30).
+    brctl-download-notes:
+      keepAlive: false
+      startCalendarInterval: { minute: 0 }
+      command: >-
+        /bin/bash -c '/usr/bin/find "$HOME/Library/Mobile
+        Documents/iCloud~md~obsidian/Documents/Notes"
+        -exec /usr/bin/brctl download {} \;'

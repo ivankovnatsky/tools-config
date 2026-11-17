@@ -1,0 +1,22 @@
+# Shared by Mooings-MacBook-Air and Mooings-MacBook-Pro
+# (nix-config: machines/.mooing). Host files set hostName.
+vars:
+  localBin: ${home}/.local/bin
+  uvBin: ${localBin}
+  npmBin: ${home}/.npm/bin
+  goBin: ${home}/.go/bin
+  toolsConfigPath: ${home}/Sources/github.com/ivankovnatsky/tools-config
+  secretsDir: ${home}/.local/state/tools/secrets
+  renderedDir: ${secretsDir}/rendered
+
+paths:
+  uv: /opt/homebrew/bin
+  uvBin: ${uvBin}
+  uvToolDir: ${home}/.local/share/uv/tools
+  nodejs: /opt/homebrew/bin
+  npmBin: ${npmBin}
+  goPath: ${home}/.go
+  goBin: ${goBin}
+  cargoHome: ${home}/.cargo
+  # cargo bins go next to uv tools, so .cargo/bin stays off PATH.
+  cargoRoot: ${home}/.local

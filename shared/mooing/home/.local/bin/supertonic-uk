@@ -1,0 +1,44 @@
+#!${home}/.local/share/uv/tools/supertonic/bin/python -I
+import os, re, subprocess, sys, tempfile
+
+import numpy as np
+from supertonic import TTS
+
+if len(sys.argv) < 3:
+    sys.exit("usage: supertonic-uk IN.txt OUT.mp3 [VOICE] [SPEED]")
+src, out = sys.argv[1], sys.argv[2]
+voice = sys.argv[3] if len(sys.argv) > 3 else "F2"
+speed = float(sys.argv[4]) if len(sys.argv) > 4 else 1.0
+if os.path.exists(out):
+    sys.exit(f"{out} exists")
+
+text = open(src, encoding="utf-8").read()
+text = re.sub("[ʼ’‘`]", "'", text)
+tts = TTS(auto_download=False)
+ok, bad = tts.model.text_processor.validate_text(text)
+if not ok:
+    print(f"dropping unsupported characters: {bad}", file=sys.stderr)
+    text = "".join(c for c in text if c not in set(bad))
+
+# One call takes at most 100,000 characters: split at paragraphs
+chunks, cur = [], ""
+for para in text.split("\n"):
+    if cur and len(cur) + len(para) > 90_000:
+        chunks.append(cur)
+        cur = ""
+    cur += para + "\n"
+chunks.append(cur)
+
+style = tts.get_voice_style(voice_name=voice)
+parts = []
+for chunk in chunks:
+    if chunk.strip():
+        wav, _ = tts.synthesize(text=chunk, lang="uk", voice_style=style, speed=speed)
+        parts.append(wav)
+with tempfile.TemporaryDirectory() as tmp:
+    path = os.path.join(tmp, "out.wav")
+    tts.save_audio(np.concatenate(parts, axis=-1), path)
+    subprocess.run(
+        ["ffmpeg", "-loglevel", "error", "-n", "-i", path, "-ac", "1", "-b:a", "64k", out],
+        check=True,
+    )

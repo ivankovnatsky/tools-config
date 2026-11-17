@@ -1,0 +1,187 @@
+# Rendered files for the Mooing laptops. Work identifiers come only from sops.
+templates:
+  npmrc:
+    path: ~/.npmrc
+    content: |
+      prefix=${home}/.npm
+      cache=${home}/.npm-cache
+    mode: "0644"
+  go-env:
+    path: "~/Library/Application Support/go/env"
+    content: |
+      GO111MODULE=on
+      GOPATH=${home}/.go
+    mode: "0644"
+  kitty:
+    path: ~/.config/kitty/kitty.conf
+    file: shared/mooing/home/.config/kitty/kitty.conf
+    mode: "0644"
+  env-fish:
+    path: ~/.config/env/env.fish
+    file: shared/mooing/home/.config/env/env.fish
+    mode: "0644"
+  env-sh:
+    path: ~/.config/env/env.sh
+    file: shared/mooing/home/.config/env/env.sh
+    mode: "0644"
+  env-nu:
+    path: ~/.config/env/env.nu
+    file: shared/mooing/home/.config/env/env.nu
+    mode: "0644"
+  gwq:
+    path: ~/.config/gwq/config.toml
+    file: machines/Ivans-Mac-mini/.config/gwq/config.toml
+    mode: "0644"
+  mise:
+    path: ~/.config/mise/config.toml
+    format: toml
+    mode: "0644"
+    content:
+      settings:
+        trusted_config_paths:
+          - ${home}/Sources
+          - ${home}/Worktrees
+  holos-uk:
+    path: ${localBin}/holos-uk
+    file: shared/mooing/home/.local/bin/holos-uk
+    mode: "0755"
+  # Model download as nix-config's supertonicModel activation; supertonic via uv.
+  supertonic-uk:
+    path: ${localBin}/supertonic-uk
+    file: shared/mooing/home/.local/bin/supertonic-uk
+    mode: "0755"
+    onChange: >-
+      if [ -x ${localBin}/supertonic ] &&
+      [ ! -f ${home}/.cache/supertonic3/onnx/tts.json ]; then
+      ${localBin}/supertonic download; fi
+
+  # Mooing identity for GHE repos, GitHub identity (git/common) elsewhere.
+  git-identity:
+    path: ${renderedDir}/git-identity
+    mode: "0400"
+    content: |
+      [user]
+        name = ${sops:git-name}
+        email = ${sops:git-email}
+        signingKey = ${sops:git-email}
+  # Read after ~/.config/git/config; the GHE host is a secret.
+  gitconfig:
+    path: ~/.gitconfig
+    mode: "0600"
+    content: |
+      [credential "https://${sops:gh-host}"]
+        helper =
+        helper = /opt/homebrew/bin/gh auth git-credential
+      [includeIf "gitdir:~/Sources/${sops:gh-host}/"]
+        path = ${renderedDir}/git-identity
+
+  # https://github.com/gabrie30/ghorg/blob/master/sample-conf.yaml
+  ghorg-conf:
+    path: ~/.config/ghorg/conf.yaml
+    format: yaml
+    mode: "0600"
+    content:
+      GHORG_SCM_TYPE: github
+      GHORG_CLONE_PROTOCOL: https
+      GHORG_CLONE_TYPE: org
+      GHORG_NO_CLEAN: true
+      GHORG_FETCH_ALL: true
+      GHORG_QUIET: true
+      GHORG_ABSOLUTE_PATH_TO_CLONE_TO: ${home}/Sources/${sops:gh-host}
+      GHORG_SKIP_ARCHIVED: true
+      GHORG_SCM_BASE_URL: https://${sops:gh-host}
+      # Reuses the gh login (gh auth login --hostname <gh.host>).
+      GHORG_TOKEN_CMD: /opt/homebrew/bin/gh auth token --hostname ${sops:gh-host}
+
+  # https://synfinatic.github.io/aws-sso-cli/latest/config/
+  aws-sso-config:
+    path: ~/.aws-sso/config.yaml
+    mode: "0600"
+    content: |
+      SSOConfig:
+        Default:
+          SSORegion: ${sops:aws-region}
+          StartUrl: https://${sops:aws-sso-id}.awsapps.com/start
+          Accounts:
+            ${sops:aws-account1}:
+              Roles:
+                ${sops:aws-role}:
+                  Profile: ${sops:aws-profile1}
+            ${sops:aws-account2}:
+              Roles:
+                ${sops:aws-role}:
+                  Profile: ${sops:aws-profile2}
+      DefaultSSO: Default
+      DefaultRegion: ${sops:aws-region}
+      # Console session minutes; aws-sso caps at 720 (12h).
+      ConsoleDuration: 720
+
+  rbw-config:
+    path: ~/Library/Application Support/rbw/config.json
+    format: json
+    mode: "0600"
+    content:
+      email: ${sops:rbw-email}
+      # rbw derives /api, /identity and /notifications from base_url.
+      base_url: https://vault.${sops:rbw-server}
+      ui_url: https://vault.${sops:rbw-server}
+      lock_timeout: 2419200
+      sync_interval: 3600
+      pinentry: /opt/homebrew/bin/pinentry-tty
+
+  # pi runs a `!`-prefixed key as a command, so the key stays in its sops file.
+  pi-auth:
+    path: ~/.pi/agent/auth.json
+    format: json
+    mode: "0600"
+    content:
+      anthropic:
+        type: api_key
+        key: "!cat ${sopsPath:anthropic-api-key}"
+
+  agent-sessions-config:
+    path: ${renderedDir}/agent-sessions.json
+    format: json
+    mode: "0444"
+    content:
+      dir: ${home}/.local/share/agent-sessions
+      sources:
+        claude: ${home}/.claude/projects
+        codex: ${home}/.codex/sessions
+        pi: ${home}/.pi/agent/sessions
+        grok: ${home}/.grok/sessions
+
+  reposync-config:
+    path: ~/.config/reposync/config.json
+    format: json
+    content:
+      alertRepeatSeconds: 10800
+      repositories:
+        - path: ${home}/Sources/github.com/ivankovnatsky/nix-config
+          remote: origin
+          remoteUrl: https://github.com/ivankovnatsky/nix-config.git
+          branch: main
+        - path: ${home}/Sources/github.com/ivankovnatsky/tools
+          remote: origin
+          remoteUrl: https://github.com/ivankovnatsky/tools.git
+          branch: main
+        - path: ${home}/Sources/github.com/ivankovnatsky/tools-config
+          remote: origin
+          remoteUrl: https://github.com/ivankovnatsky/tools-config.git
+          branch: main
+        # Shared between the laptops through a git bundle on iCloud Drive.
+        # Nothing is tracked until force-added.
+        - path: ${home}
+          remote: icloud
+          branch: main
+          bundleFile: ${home}/Library/Mobile Documents/com~apple~CloudDocs/Data/GitSync/home/home.bundle
+          gitignore: ["*"]
+        # Obsidian vault on iCloud Drive; the git dir stays outside it.
+        - name: notes
+          path: ${home}/Library/Mobile Documents/iCloud~md~obsidian/Documents/Notes
+          gitDir: ${home}/Sources/local/notes.git
+          remote: icloud
+          branch: main
+          bundleFile: ${home}/Library/Mobile Documents/com~apple~CloudDocs/Data/GitSync/notes/notes.bundle
+          autoStage: true
+          gitignore: [".stfolder"]

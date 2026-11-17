@@ -1,0 +1,7 @@
+mgmt:
+  nextdns:
+    profiles:
+      mooing:
+        profileFile: templates/nextdns-profile-mooing.json
+        apiKeyFile: ${sopsPath:nextdns-api-key}
+        profileIdFile: ${sopsPath:nextdns-profile-mooing}

@@ -1,0 +1,345 @@
+hs.window.animationDuration = 0
+hs.window.setShadows(false)
+
+ext = {
+  frame = {},
+  win = {},
+  app = {},
+  utils = {},
+  cache = {},
+  watchers = {},
+}
+
+local mash = { "alt" }
+
+hs.fnutils.each({
+  { key = "1", app = "Finder" },
+  { key = "2", app = "Muxy" },
+  { key = "3", app = "Firefox Developer Edition" },
+  { key = "9", app = "System Settings" }
+}, function(object)
+  hs.hotkey.bind(mash, object.key, function()
+    local appToLaunch = object.app
+
+    ext.app.forceLaunchOrFocus(appToLaunch)
+  end)
+end)
+
+-- https://github.com/szymonkaliski/Dotfiles/blob/b5a640336efc9fde1e8048c2894529427746076f/Dotfiles/hammerspoon/init.lua#L411-L440
+function ext.app.forceLaunchOrFocus(appName)
+  -- first focus with hammerspoon
+  hs.application.launchOrFocus(appName)
+
+  -- clear timer if exists
+  if ext.cache.launchTimer then
+    ext.cache.launchTimer:stop()
+  end
+
+  -- wait 500ms for window to appear and try hard to show the window
+  ext.cache.launchTimer = hs.timer.doAfter(0.5, function()
+    local frontmostApp = hs.application.frontmostApplication()
+    local frontmostWindows = hs.fnutils.filter(frontmostApp:allWindows(), function(win)
+      return win:isStandard()
+    end)
+
+    -- break if this app is not frontmost (when/why?)
+    if frontmostApp:title() ~= appName then
+      print("Expected app in front: " .. appName .. " got: " .. frontmostApp:title())
+      return
+    end
+
+    if #frontmostWindows == 0 then
+      -- check if there's app name in window menu (Calendar, Messages, etc...)
+      if frontmostApp:findMenuItem({ "Window", appName }) then
+        -- select it, usually moves to space with this window
+        frontmostApp:selectMenuItem({ "Window", appName })
+      else
+        -- otherwise send cmd-n to create new window
+        hs.eventtap.keyStroke({ "cmd" }, "n")
+      end
+    end
+  end)
+end
+
+function reloadConfig(files)
+  doReload = false
+  for _, file in pairs(files) do
+    if file:sub(-4) == ".lua" then
+      doReload = true
+    end
+  end
+  if doReload then
+    hs.reload()
+  end
+end
+
+myWatcher = hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig):start()
+
+-- Quake-style kitty quick terminal (F12) - disabled
+-- hs.hotkey.bind({}, "F12", function()
+--   hs.execute("/opt/homebrew/bin/kitten quick-access-terminal", true)
+-- end)
+
+
+hs.menuIcon(false)
+
+-- Private-use codepoints (Nerd Font icons) render in HackNFP-Regular;
+-- everything else in the menu bar font.
+function ext.utils.menuTitle(text)
+  local base = hs.styledtext.defaultFonts.menuBar
+  local styles = {
+    [false] = { font = base, baselineOffset = -1 },
+    [true] = {
+      font = { name = "HackNFP-Regular", size = base.size },
+      baselineOffset = -1,
+    },
+  }
+  local out, run, runIcon = nil, {}, false
+  local function flush()
+    if #run > 0 then
+      local piece = hs.styledtext.new(table.concat(run), styles[runIcon])
+      out = out and out .. piece or piece
+      run = {}
+    end
+  end
+  for _, c in utf8.codes(text) do
+    local isIcon = (c >= 0xE000 and c <= 0xF8FF) or c >= 0xF0000
+    if isIcon ~= runIcon then
+      flush()
+      runIcon = isIcon
+    end
+    table.insert(run, utf8.char(c))
+  end
+  flush()
+  return out or hs.styledtext.new("", styles[false])
+end
+
+ext.cache.bar = { menu = hs.menubar.new(true, "hammerspoon"), seg = {}, refresh = {} }
+
+function ext.app.barSet(name, order, title, tooltip)
+  local b = ext.cache.bar
+  b.seg[name] = { order = order, title = title, tip = tooltip }
+  local list = {}
+  for _, v in pairs(b.seg) do
+    table.insert(list, v)
+  end
+  table.sort(list, function(x, y) return x.order < y.order end)
+  local titles, tips = {}, {}
+  for _, v in ipairs(list) do
+    table.insert(titles, v.title)
+    if v.tip then
+      table.insert(tips, v.tip)
+    end
+  end
+  b.menu:setTitle(ext.utils.menuTitle(table.concat(titles, "   ")))
+  b.menu:setTooltip(table.concat(tips, "\n"))
+end
+
+function ext.app.barOnClick(fn)
+  table.insert(ext.cache.bar.refresh, fn)
+end
+
+ext.cache.bar.menu:setClickCallback(function()
+  for _, fn in ipairs(ext.cache.bar.refresh) do
+    fn()
+  end
+end)
+
+function ext.utils.hasExternalScreen()
+  for _, screen in ipairs(hs.screen.allScreens()) do
+    if not (screen:name() or ""):match("^Built%-in") then
+      return true
+    end
+  end
+  return false
+end
+
+function ext.app.syncAmethyst()
+  local bundleID = "com.amethyst.Amethyst"
+  local amethyst = hs.application.get(bundleID)
+  local external = ext.utils.hasExternalScreen()
+  local launch = function()
+    hs.application.launchOrFocusByBundleID(bundleID)
+  end
+  if external then
+    if amethyst then
+      amethyst:kill()
+    end
+  elseif amethyst and ext.cache.amethystHadExternal then
+    amethyst:kill()
+    ext.cache.amethystRelaunchTimer = hs.timer.waitUntil(function()
+      return hs.application.get(bundleID) == nil
+    end, launch, 0.5)
+  elseif not amethyst then
+    launch()
+  end
+  ext.cache.amethystHadExternal = external
+end
+
+-- The watcher fires several times while displays change; act once they settle.
+ext.watchers.amethystScreens = hs.screen.watcher.new(function()
+  if ext.cache.amethystSyncTimer then
+    ext.cache.amethystSyncTimer:stop()
+  end
+  ext.cache.amethystSyncTimer = hs.timer.doAfter(5, ext.app.syncAmethyst)
+end):start()
+ext.app.syncAmethyst()
+
+ext.cache.sys = {
+  cpu = "–",
+  mem = "–",
+  temp = "–",
+  watt = "–",
+  disk = "–",
+  net = "–",
+  extra = {},
+  extraDisks = {
+    
+  },
+}
+
+local function pct(x)
+  return math.floor(x + 0.5) .. "%"
+end
+
+local function rate(bps)
+  if bps >= 1e6 then
+    return string.format("%.1fM", bps / 1e6)
+  elseif bps >= 1e3 then
+    return string.format("%dK", math.floor(bps / 1e3 + 0.5))
+  end
+  return string.format("%dB", math.floor(bps + 0.5))
+end
+
+local function volumePct(path)
+  local v = hs.fs.volume.allVolumes()[path]
+  if not v or not v.NSURLVolumeTotalCapacityKey or v.NSURLVolumeTotalCapacityKey == 0 then
+    return "–"
+  end
+  local total = v.NSURLVolumeTotalCapacityKey
+  return pct((total - (v.NSURLVolumeAvailableCapacityKey or 0)) / total * 100)
+end
+
+local function cpuPct()
+  local t = hs.host.cpuUsageTicks().overall
+  local busy = t.user + t.system + t.nice
+  local all = busy + t.idle
+  local prev = ext.cache.sys.cpuPrev
+  ext.cache.sys.cpuPrev = { busy = busy, all = all }
+  if not prev or all == prev.all then
+    return "–"
+  end
+  return pct((busy - prev.busy) / (all - prev.all) * 100)
+end
+
+-- Activity Monitor's Cached Files, Swap Used.
+local function memStats()
+  local v = hs.host.vmStat()
+  local function gb(bytes)
+    return string.format("%.1fGB", bytes / 2^30)
+  end
+  local cached = (v.fileBackedPages + v.pagesPurgeable) * v.pageSize
+  local swap = tonumber(hs.execute("/usr/sbin/sysctl -n vm.swapusage"):match("used = ([%d.]+)M"))
+  return table.concat({ gb(cached), swap and gb(swap * 2^20) or "–" }, ", ")
+end
+
+local function netRates()
+  local iface = hs.network.primaryInterfaces()
+  if not iface then
+    ext.cache.sys.netPrev = nil
+    return "↓– ↑–"
+  end
+  local out = hs.execute("/usr/sbin/netstat -ibn -I " .. iface)
+  local rx, tx
+  for line in out:gmatch("[^\n]+") do
+    if line:find("<Link#") then
+      local cols = {}
+      for c in line:gmatch("%S+") do
+        table.insert(cols, c)
+      end
+      -- Name Mtu Network Address Ipkts Ierrs Ibytes Opkts Oerrs Obytes Coll
+      rx, tx = tonumber(cols[7]), tonumber(cols[10])
+      break
+    end
+  end
+  if not rx or not tx then
+    return "↓– ↑–"
+  end
+  local now = hs.timer.secondsSinceEpoch()
+  local prev = ext.cache.sys.netPrev
+  ext.cache.sys.netPrev = { rx = rx, tx = tx, t = now, iface = iface }
+  if not prev or prev.iface ~= iface or now <= prev.t then
+    return "↓– ↑–"
+  end
+  local dt = now - prev.t
+  return "↓" .. rate(math.max(rx - prev.rx, 0) / dt) .. " ↑" .. rate(math.max(tx - prev.tx, 0) / dt)
+end
+
+function ext.app.updateSysDisks()
+  local s = ext.cache.sys
+  s.disk = volumePct("/")
+  for i, d in ipairs(s.extraDisks) do
+    s.extra[i] = volumePct(d.path)
+  end
+end
+
+local function renderSysStats()
+  local s = ext.cache.sys
+  -- Nerd Font: oct-cpu, fa-thermometer_half, fa-bolt, fa-memory, md-harddisk, md-web.
+  local items = {
+    { "\u{F4BC}", s.cpu }, { "\u{F2C9}", s.temp }, { "\u{F0E7}", s.watt }, { "\u{EFC5}", s.mem }, { "\u{F02CA}", s.disk },
+  }
+  local tips = { "CPU", "Temp (max of CPU/GPU)", "Power (system)", "Memory", "Disk" }
+  for i, d in ipairs(s.extraDisks) do
+    table.insert(items, { d.icon, s.extra[i] or "–" })
+    table.insert(tips, d.path)
+  end
+  table.insert(items, { "\u{F059F}", s.net })
+  table.insert(tips, "Network")
+  local parts = {}
+  for _, it in ipairs(items) do
+    table.insert(parts, it[1] .. " " .. it[2])
+  end
+  ext.app.barSet("sysstats", 20, table.concat(parts, "  "), table.concat(tips, " · "))
+end
+
+-- macmon samples for ~0.5s, so run it async and re-render on exit.
+local function updateTemp()
+  local s = ext.cache.sys
+  if s.tempTask and s.tempTask:isRunning() then
+    return
+  end
+  s.tempTask = hs.task.new("/opt/homebrew/bin/macmon", function(code, out)
+    local ok, data = pcall(hs.json.decode, out or "")
+    local temps = code == 0 and ok and type(data) == "table" and type(data.temp) == "table" and data.temp or {}
+    local t
+    for _, v in ipairs({ temps.cpu_temp_avg, temps.gpu_temp_avg }) do
+      if type(v) == "number" and (not t or v > t) then
+        t = v
+      end
+    end
+    s.temp = t and (math.floor(t + 0.5) .. "°C") or "–"
+    local w = code == 0 and ok and type(data) == "table" and data.sys_power
+    s.watt = type(w) == "number" and (math.floor(w + 0.5) .. "W") or "–"
+    renderSysStats()
+  end, { "pipe", "-s", "1", "-i", "500" })
+  if not (s.tempTask and s.tempTask:start()) then
+    s.temp = "–"
+    s.watt = "–"
+  end
+end
+
+function ext.app.updateSysStats()
+  local s = ext.cache.sys
+  s.cpu = cpuPct()
+  s.mem = memStats()
+  s.net = netRates()
+  renderSysStats()
+  updateTemp()
+end
+
+ext.app.barOnClick(ext.app.updateSysStats)
+ext.app.updateSysDisks()
+ext.app.updateSysStats()
+ext.cache.sysTimer = hs.timer.doEvery(20, ext.app.updateSysStats)
+ext.cache.sysDiskTimer = hs.timer.doEvery(600, ext.app.updateSysDisks)

@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# uv and ffmpeg come from PATH; uv installs the script's dependencies.
+exec /opt/homebrew/bin/uv run --quiet --script ${toolsPath}/packages/holos-uk/holos-uk.py "$@"
