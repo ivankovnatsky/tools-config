@@ -13,6 +13,7 @@ load-env {
     _ZL_HYPHEN: "1"
     GOPATH: "${externalStoragePath}/.go"
     CARGO_HOME: "${externalStoragePath}/.cargo"
+    CARGO_INSTALL_ROOT: "${externalStoragePath}/.local"
     HF_HOME: "${externalStoragePath}/.cache/huggingface"
     TASKFORGE_VAULT: "${home}/Library/Mobile Documents/iCloud~md~obsidian/Documents/Notes"
     UV_PYTHON_INSTALL_DIR: "${externalStoragePath}/.local/share/uv/python"

@@ -16,6 +16,7 @@ set -gx _ZL_HYPHEN 1
 
 set -gx GOPATH ${externalStoragePath}/.go
 set -gx CARGO_HOME ${externalStoragePath}/.cargo
+set -gx CARGO_INSTALL_ROOT ${externalStoragePath}/.local
 set -gx HF_HOME ${externalStoragePath}/.cache/huggingface
 set -gx TASKFORGE_VAULT "${home}/Library/Mobile Documents/iCloud~md~obsidian/Documents/Notes"
 set -gx UV_PYTHON_INSTALL_DIR ${externalStoragePath}/.local/share/uv/python

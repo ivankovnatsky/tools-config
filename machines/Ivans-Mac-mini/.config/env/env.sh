@@ -16,6 +16,7 @@ export _ZL_HYPHEN="1"
 
 export GOPATH="${externalStoragePath}/.go"
 export CARGO_HOME="${externalStoragePath}/.cargo"
+export CARGO_INSTALL_ROOT="${externalStoragePath}/.local"
 export HF_HOME="${externalStoragePath}/.cache/huggingface"
 export TASKFORGE_VAULT="${home}/Library/Mobile Documents/iCloud~md~obsidian/Documents/Notes"
 export UV_PYTHON_INSTALL_DIR="${externalStoragePath}/.local/share/uv/python"
