@@ -10,3 +10,7 @@ include:
 
 vars:
   hostName: Mooings-MacBook-Air
+
+users:
+  mooing:
+    uid: 501
