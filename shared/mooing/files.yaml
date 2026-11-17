@@ -110,6 +110,9 @@ files:
   - target: ~/.config/kitty/themes/Tokyo_Night_Moon.conf
     source: machines/Ivans-Mac-mini/.config/kitty/themes/Tokyo_Night_Moon.conf
     mode: "0644"
+  - target: /etc/gitconfig
+    source: machines/Ivans-Mac-mini/etc/gitconfig
+    mode: "0644"
   - target: /etc/shells
     source: machines/Ivans-Mac-mini/etc/shells
     mode: "0644"
@@ -130,10 +133,6 @@ files:
   - target: ${localBin}/piper-uk
     source: shared/mooing/home/.local/bin/piper-uk
     mode: "0755"
-    onChange: >-
-      v=${home}/.local/share/piper/voices; py=${home}/.local/share/uv/tools/piper-tts/bin/python;
-      if [ -x "$py" ] && [ ! -f "$v/uk_UA-tetiana-high.onnx" ]; then
-      "$py" -m piper.download_voices --data-dir "$v" uk_UA-tetiana-high; fi
   - source: ${toolsPath}/packages/aws-profile/aws-profile.sh
     target: ${localBin}/aws-profile
     mode: "0755"

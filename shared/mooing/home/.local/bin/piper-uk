@@ -9,6 +9,9 @@ if [ $# -lt 2 ]; then
 fi
 voice="${3:-uk_UA-tetiana-high}"
 voices_dir="$HOME/.local/share/piper/voices"
+if [ ! -f "$voices_dir/$voice.onnx" ]; then
+  "$HOME/.local/share/uv/tools/piper-tts/bin/python" -m piper.download_voices --data-dir "$voices_dir" "$voice"
+fi
 tmp="$(mktemp -d)"
 trap 'rm -rf "$tmp"' EXIT
 perl -CSD -Mutf8 -pe 's/[«»"„“”]//g; s/…/./g; s/\s*&\s*/ і /g; s/\// /g' "$1" > "$tmp/clean.txt"

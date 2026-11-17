@@ -45,15 +45,11 @@ templates:
     path: ${localBin}/holos-uk
     file: shared/mooing/home/.local/bin/holos-uk
     mode: "0755"
-  # Model download as nix-config's supertonicModel activation; supertonic via uv.
+  # Downloads its model on first run (nix-config: supertonicModel activation).
   supertonic-uk:
     path: ${localBin}/supertonic-uk
     file: shared/mooing/home/.local/bin/supertonic-uk
     mode: "0755"
-    onChange: >-
-      if [ -x ${localBin}/supertonic ] &&
-      [ ! -f ${home}/.cache/supertonic3/onnx/tts.json ]; then
-      ${localBin}/supertonic download; fi
 
   # Mooing identity for GHE repos, GitHub identity (git/common) elsewhere.
   git-identity:

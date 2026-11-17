@@ -14,6 +14,8 @@ if os.path.exists(out):
 
 text = open(src, encoding="utf-8").read()
 text = re.sub("[ʼ’‘`]", "'", text)
+if not os.path.exists(os.path.expanduser("~/.cache/supertonic3/onnx/tts.json")):
+    subprocess.run([os.path.expanduser("~/.local/bin/supertonic"), "download"], check=True)
 tts = TTS(auto_download=False)
 ok, bad = tts.model.text_processor.validate_text(text)
 if not ok:
