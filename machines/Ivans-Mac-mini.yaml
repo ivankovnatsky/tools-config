@@ -347,8 +347,7 @@ files:
     source:
       "machines/Ivans-Mac-mini/Library/Application Support/Muxy 2/settings.toml"
     mode: "0644"
-    # Muxy rewrites it; set false for one deploy to push repo changes.
-    skip: true
+    # Muxy rewrites it: overwrite each deploy, no .tools backup.
     backup: false
   - target: "~/Library/Application Support/Muxy 2/terminal.toml"
     source:
@@ -363,6 +362,7 @@ files:
     source:
       "machines/Ivans-Mac-mini/Library/Application Support/Firefox/profiles.ini"
     mode: "0644"
+    backup: false
   - target: ~/.pi/agent/settings.json
     source: machines/Ivans-Mac-mini/.pi/agent/settings.json
     mode: "0644"
@@ -538,20 +538,10 @@ brew:
     autoUpdate: false
     cleanup: zap
   taps:
-    - pomdtr/homebrew-tap
-    - keith/homebrew-formulae
-    - antoniorodr/homebrew-memo
-    - xwmx/homebrew-taps
     - muxy-app/homebrew-tap
-    - openclaw/homebrew-tap
   trust:
     taps:
-      - pomdtr/tap
-      - keith/formulae
-      - antoniorodr/memo
-      - xwmx/taps
       - muxy-app/tap
-      - openclaw/tap
   brews:
     - age
     - aria2
