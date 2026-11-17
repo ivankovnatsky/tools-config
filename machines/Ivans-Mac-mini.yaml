@@ -112,10 +112,6 @@ npm:
     "@tobilu/qmd": {}
     taskforge-md:
       binary: taskforge
-    openclaw:
-      binary: openclaw
-      version: latest
-      postInstall: "node scripts/postinstall-bundled-plugins.mjs"
 
 uv:
   packages:
@@ -125,6 +121,7 @@ uv:
       source: yt-dlp[default,curl-cffi]
     mlx-whisper: {}
     gallery-dl: {}
+    # ranger scope.sh xlsx preview.
     xlsx2csv: {}
     agent-sessions:
       source: git+file://${toolsPath}#subdirectory=packages/agent-sessions
@@ -153,6 +150,9 @@ uv:
     nix-sort-imports:
       source: git+file://${toolsPath}#subdirectory=packages/nix-sort-imports
       binary: nix-sort-imports
+    rebuild:
+      source: git+file://${toolsPath}#subdirectory=packages/rebuild
+      binary: rebuild
     gh-pr:
       source: git+file://${toolsPath}#subdirectory=packages/gh-pr
       binary: gh-pr
@@ -453,6 +453,11 @@ files:
   - target: /etc/gitconfig
     source: machines/Ivans-Mac-mini/etc/gitconfig
     mode: "0644"
+  # Spotlight skips a volume with this marker; existing /nix/.Spotlight-V100
+  # is not purged (system files take no onChange).
+  - target: /nix/.metadata_never_index
+    source: machines/Ivans-Mac-mini/nix/.metadata_never_index
+    mode: "0644"
   - source: ${toolsPath}/packages/eat/eat.sh
     target: /Volumes/Storage/Data/.local/bin/eat
     mode: "0755"
@@ -473,6 +478,12 @@ files:
     mode: "0755"
   - source: ${toolsPath}/packages/gwq-merge/gwq-merge.sh
     target: /Volumes/Storage/Data/.local/bin/gwq-merge
+    mode: "0755"
+  - source: ${toolsPath}/packages/nix-gc/nix-gc.sh
+    target: /Volumes/Storage/Data/.local/bin/nix-gc
+    mode: "0755"
+  - source: ${toolsPath}/packages/nix-generate-sha/nix-generate-sha.sh
+    target: /Volumes/Storage/Data/.local/bin/nix-generate-sha
     mode: "0755"
   - source: ${toolsPath}/packages/image-meta/image-meta.sh
     target: /Volumes/Storage/Data/.local/bin/image-meta
@@ -548,6 +559,7 @@ brew:
     - atuin
     - autossh
     - bash
+    - bash-preexec
     - bat
     - black
     - btop
@@ -580,7 +592,7 @@ brew:
     - git-extras
     - git-filter-repo
     - gitleaks
-    - gnu-sed
+    # backup-home --tar gnutar runs gtar.
     - gnu-tar
     - gnupg
     - go
@@ -588,7 +600,6 @@ brew:
     - golangci-lint
     - gopls
     - grc
-    - grep
     - grip
     - imagemagick
     - jq
@@ -610,8 +621,8 @@ brew:
     - nixfmt
     - node
     - nushell
+    # ranger scope.sh previews: odt2txt, 7zz (sevenzip), gstat (coreutils).
     - odt2txt
-    - ollama
     - pam-reattach
     - pandoc
     - parallel
@@ -653,6 +664,7 @@ brew:
     - name: transmission-cli
       restartUnits: [launchd:com.ivankovnatsky.transmission]
     - tree
+    # nvim-treesitter compiles parsers with it.
     - tree-sitter-cli
     - treefmt
     - typos-cli
@@ -667,6 +679,9 @@ brew:
     - zapp
     - zoxide
     - zsh
+    - zsh-autosuggestions
+    - zsh-history-substring-search
+    - zsh-syntax-highlighting
   casks:
     - amethyst
     - bitwarden
