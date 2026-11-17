@@ -30,7 +30,6 @@ $env.PATH = (
     | append (
         [
             "${externalStoragePath}/.go/bin"
-            "${externalStoragePath}/.cargo/bin"
             "${externalStoragePath}/.npm/bin"
             "${externalStoragePath}/.bun/bin"
             "${externalStoragePath}/.local/bin"

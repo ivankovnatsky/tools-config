@@ -24,7 +24,7 @@ export UV_TOOL_DIR="${externalStoragePath}/.local/share/uv/tools"
 export UV_CACHE_DIR="${externalStoragePath}/.cache/uv"
 export UV_PYTHON_PREFERENCE="only-managed"
 
-for dir in ${externalStoragePath}/.go/bin ${externalStoragePath}/.cargo/bin ${externalStoragePath}/.npm/bin ${externalStoragePath}/.bun/bin ${externalStoragePath}/.local/bin; do
+for dir in ${externalStoragePath}/.go/bin ${externalStoragePath}/.npm/bin ${externalStoragePath}/.bun/bin ${externalStoragePath}/.local/bin; do
   if [ -d "$dir" ]; then
     export PATH="$PATH:$dir"
   fi

@@ -24,7 +24,7 @@ set -gx UV_TOOL_DIR ${externalStoragePath}/.local/share/uv/tools
 set -gx UV_CACHE_DIR ${externalStoragePath}/.cache/uv
 set -gx UV_PYTHON_PREFERENCE only-managed
 
-for dir in ${externalStoragePath}/.go/bin ${externalStoragePath}/.cargo/bin ${externalStoragePath}/.npm/bin ${externalStoragePath}/.bun/bin ${externalStoragePath}/.local/bin
+for dir in ${externalStoragePath}/.go/bin ${externalStoragePath}/.npm/bin ${externalStoragePath}/.bun/bin ${externalStoragePath}/.local/bin
     if test -d $dir
         set -gx PATH $PATH $dir
     end

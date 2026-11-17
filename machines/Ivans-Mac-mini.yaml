@@ -95,6 +95,8 @@ paths:
   goPath: ${externalStoragePath}/.go
   goBin: ${externalStoragePath}/.go/bin
   cargoHome: ${externalStoragePath}/.cargo
+  # cargo bins go next to uv tools, so .cargo/bin stays off PATH.
+  cargoRoot: ${externalStoragePath}/.local
 
 # Shell env files are the env-* templates; this section only exports into
 # tools' own process (uv installs).
