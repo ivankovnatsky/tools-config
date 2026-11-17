@@ -7,8 +7,6 @@ vars:
 
 npm:
   packages:
-    "@google/gemini-cli":
-      binary: gemini
     "@openai/codex":
       binary: codex
 
