@@ -47,6 +47,6 @@ just diff
 # Format all files
 just format
 
-# Lint without modifying
+# Lint: fail if formatting changes any file
 just lint
 ```

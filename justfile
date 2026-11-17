@@ -2,9 +2,9 @@
 format:
     treefmt
 
-# Lint without modifying
+# Lint: fail if formatting changes any file
 lint:
-    prettier --check '**/*.yaml' '**/*.yml' '**/*.md'
+    treefmt --fail-on-change
 
 # Apply config for this host
 apply:
