@@ -4,6 +4,10 @@ vars:
   a3Ip: 192.168.50.6
 
 fetch:
+  # nix-config home/direnv.nix (programs.direnv.nix-direnv.enable).
+  ~/.config/direnv/lib/nix-direnv.sh:
+    url: https://raw.githubusercontent.com/nix-community/nix-direnv/3.2.0/direnvrc
+    sha256: 856e8d0b5247b9edc88d9377b8333a97a2363cc69abaa7760fb857609d597ebe
   ~/.local/bin/rbw-fzf:
     url: https://raw.githubusercontent.com/doy/rbw/1.15.0/bin/rbw-fzf
     sha256: a0328919dbbdb3c3a2431643a5b64a53914befcf25efb0fc489b33eee46d2f7b
@@ -115,6 +119,10 @@ files:
     mode: "0644"
   - target: /etc/gitconfig
     source: shared/etc/gitconfig
+    mode: "0644"
+  # nix-config darwin/nix.nix
+  - target: /etc/nix/nix.conf
+    source: shared/etc/nix/nix.conf
     mode: "0644"
   - target: /etc/shells
     source: shared/etc/shells
