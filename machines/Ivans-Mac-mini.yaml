@@ -548,6 +548,7 @@ skills:
   enable:
     - qmd/qmd
 
+# Not ported: mkpasswd (brew whois does not build it).
 brew:
   environment:
     HOMEBREW_NO_ENV_HINTS: "1"
