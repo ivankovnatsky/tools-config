@@ -142,9 +142,6 @@ files:
   - target: ${localBin}/diff-deep
     source: shared/home/.local/bin/diff-deep
     mode: "0755"
-  - target: ${localBin}/turnoff
-    source: shared/mooing/home/.local/bin/turnoff
-    mode: "0755"
   - target: ${localBin}/terminal-app-profile
     source: shared/mooing/home/.local/bin/terminal-app-profile
     mode: "0755"

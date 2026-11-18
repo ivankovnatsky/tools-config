@@ -28,6 +28,11 @@ templates:
     path: ~/.config/gwq/config.toml
     file: shared/home/.config/gwq/config.toml
     mode: "0644"
+  # nix-config: tools packages/turnoff (exec settings turnoff).
+  turnoff:
+    path: ~/.local/bin/turnoff
+    file: shared/home/.local/bin/turnoff
+    mode: "0755"
 
 curlShell:
   "https://claude.ai/install.sh": bash
