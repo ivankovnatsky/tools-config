@@ -15,6 +15,9 @@ uv:
     tools:
       source: git+file://${toolsPath}
       binary: tools
+    claude-statusline:
+      source: git+file://${toolsPath}#subdirectory=packages/claude-statusline
+      binary: claude-statusline
 
 templates:
   claude-settings:

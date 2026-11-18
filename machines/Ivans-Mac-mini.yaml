@@ -348,9 +348,6 @@ files:
   - target: ~/.config/uv/uv.toml
     source: machines/Ivans-Mac-mini/.config/uv/uv.toml
     mode: "0644"
-  - target: ~/.local/bin/claude-statusline
-    source: shared/home/.local/bin/claude-statusline
-    mode: "0755"
   - target: ~/.local/bin/diff-deep
     source: shared/home/.local/bin/diff-deep
     mode: "0755"

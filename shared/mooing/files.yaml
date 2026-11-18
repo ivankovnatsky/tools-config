@@ -139,9 +139,6 @@ files:
     source: shared/etc/pam.d/sudo_local
     mode: "0444"
   # Own scripts
-  - target: ${localBin}/claude-statusline
-    source: shared/home/.local/bin/claude-statusline
-    mode: "0755"
   - target: ${localBin}/diff-deep
     source: shared/home/.local/bin/diff-deep
     mode: "0755"

@@ -56,7 +56,7 @@
   "skipDangerousModePermissionPrompt": true,
   "skipWorkflowUsageWarning": true,
   "statusLine": {
-    "command": "${home}/.local/bin/claude-statusline",
+    "command": "${uvBin}/claude-statusline",
     "type": "command"
   },
   "theme": "dark",
