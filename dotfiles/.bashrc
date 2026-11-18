@@ -9,6 +9,7 @@ HISTSIZE=1000
 HISTCONTROL=ignoredups:ignorespace
 set -o ignoreeof
 [ -f ~/.config/shell/aliases.sh ] && . ~/.config/shell/aliases.sh
+[ -f ~/.config/shell/mooing.sh ] && . ~/.config/shell/mooing.sh
 
 b=/opt/homebrew
 [ -x "$b/bin/lua" ] && [ -f "$b/opt/z.lua/share/z.lua/z.lua" ] &&
@@ -19,6 +20,7 @@ if [ -x "$b/bin/atuin" ] && [ -f "$b/etc/profile.d/bash-preexec.sh" ]; then
   eval "$("$b/bin/atuin" init bash --disable-up-arrow)"
 fi
 [ -x "$b/bin/direnv" ] && eval "$("$b/bin/direnv" hook bash)"
+[ -x "$b/bin/carapace" ] && source <("$b/bin/carapace" _carapace bash)
 [ -x "$b/bin/mise" ] && eval "$("$b/bin/mise" activate bash)"
 [ "$TERM" != dumb ] && [ -x "$b/bin/starship" ] && eval "$("$b/bin/starship" init bash)"
 unset b
