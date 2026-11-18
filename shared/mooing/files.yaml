@@ -25,6 +25,14 @@ fetch:
   "~/Library/Application Support/Firefox/Profiles/default/extensions/{446900e4-71c2-419f-a6a7-df9c091e268b}.xpi":
     url: https://addons.mozilla.org/firefox/downloads/file/5125667/bitwarden_password_manager-2026.10.0.xpi
     sha256: a25e02e961f4ffcecda12584f32f1993102ad7509e9ca84582e5287109f5bd20
+  # nix-config overlays/nextdns-app pins 2.1.4; the cask auto-updates.
+  /Applications/NextDNS.app:
+    url: https://storage.googleapis.com/nextdns_macos/NextDNS-2.1.4.dmg
+    sha256: ae70a9e39ece8a699e8d1546c814caecb7856c1b0d98b0343101c2889204f6c4
+    install: |
+      hdiutil attach -nobrowse -readonly -mountpoint "$tmp/mnt" "$src"
+      trap 'hdiutil detach "$tmp/mnt" >/dev/null' EXIT
+      ditto "$tmp/mnt/NextDNS.app" "$out"
 
 files:
   - dir: dotfiles
