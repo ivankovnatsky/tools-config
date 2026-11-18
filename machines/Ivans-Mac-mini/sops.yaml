@@ -24,6 +24,7 @@ sops:
     forgejo-token: { key: forgejo/users/forgejoUser/token }
     steam-username: { key: steam/username }
     steam-password: { key: steam/password }
+    discord-webhook-rebuild: { key: discord/webhooks/monitoringRebuild }
     discord-webhook-notifications: { key: discord/webhooks/notifications }
     weather-label: { key: weather/label }
     weather-id: { key: weather/id }
