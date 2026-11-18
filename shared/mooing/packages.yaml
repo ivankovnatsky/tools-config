@@ -321,6 +321,7 @@ brew:
     - vals
     - watchman
     - wget
+    - wireguard-tools
     - yazi
     - z.lua
     - zapp
@@ -348,3 +349,4 @@ brew:
     Microsoft Excel: 462058435
     Microsoft Word: 462054704
     TaskForge - Obsidian Tasks: 6744716215
+    WireGuard: 1451685025
