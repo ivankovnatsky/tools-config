@@ -61,7 +61,7 @@ defaults:
     com.apple.Siri:
       StatusMenuVisible: false
     # Basic follows the system light/dark appearance. Font, shell exit and
-    # Option-as-Meta live inside the profile (nix-config sets them by script).
+    # Option-as-Meta live inside the profile: terminal-app-profile (files.yaml).
     com.apple.Terminal:
       Default Window Settings: Basic
       Startup Window Settings: Basic

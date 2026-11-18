@@ -140,6 +140,10 @@ files:
   - target: ${localBin}/turnoff
     source: shared/mooing/home/.local/bin/turnoff
     mode: "0755"
+  - target: ${localBin}/terminal-app-profile
+    source: shared/mooing/home/.local/bin/terminal-app-profile
+    mode: "0755"
+    onChange: ${localBin}/terminal-app-profile
   # Voice download as nix-config's piperVoices activation; piper-tts via uv.
   - target: ${localBin}/piper-uk
     source: shared/mooing/home/.local/bin/piper-uk

@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# Terminal.app Basic profile, as nix-config home/terminal-app.nix.
+# Basic follows the system light/dark appearance. The font is an archived
+# NSFont inside the profile plist, so set it through AppleScript.
+set -euo pipefail
+
+/usr/bin/osascript \
+  -e 'tell application "Terminal"' \
+  -e 'set default settings to settings set "Basic"' \
+  -e 'set startup settings to settings set "Basic"' \
+  -e 'set font name of default settings to "Hack Nerd Font"' \
+  -e 'set font size of default settings to 13' \
+  -e 'end tell' >/dev/null
+
+# "When the shell exits": Close if the shell exited cleanly (1), and
+# "Use Option as Meta": both Option keys (1). Not scriptable and nested in
+# the profile, so edit an export and import it back. A running Terminal.app
+# keeps its old values until relaunched.
+if profile=$(/usr/bin/defaults read com.apple.Terminal "Default Window Settings" 2>/dev/null); then
+  key=":Window Settings:$profile"
+  plist=$(mktemp)
+  trap 'rm -f "$plist"' EXIT
+  /usr/bin/defaults export com.apple.Terminal "$plist"
+  /usr/libexec/PlistBuddy -c "Delete '$key:shellExitAction'" "$plist" 2>/dev/null || true
+  /usr/libexec/PlistBuddy -c "Add '$key:shellExitAction' integer 1" "$plist"
+  /usr/libexec/PlistBuddy -c "Delete '$key:useOptionAsMetaKey'" "$plist" 2>/dev/null || true
+  /usr/libexec/PlistBuddy -c "Add '$key:useOptionAsMetaKey' integer 1" "$plist"
+  /usr/bin/defaults import com.apple.Terminal "$plist"
+fi
