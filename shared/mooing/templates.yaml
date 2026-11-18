@@ -168,12 +168,3 @@ templates:
           branch: main
           bundleFile: ${home}/Library/Mobile Documents/com~apple~CloudDocs/Data/GitSync/home/home.bundle
           gitignore: ["*"]
-        # Obsidian vault on iCloud Drive; the git dir stays outside it.
-        - name: notes
-          path: ${home}/Library/Mobile Documents/iCloud~md~obsidian/Documents/Notes
-          gitDir: ${home}/Sources/local/notes.git
-          remote: icloud
-          branch: main
-          bundleFile: ${home}/Library/Mobile Documents/com~apple~CloudDocs/Data/GitSync/notes/notes.bundle
-          autoStage: true
-          gitignore: [".stfolder"]
