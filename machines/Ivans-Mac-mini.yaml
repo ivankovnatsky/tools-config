@@ -33,7 +33,6 @@ include:
   - Ivans-Mac-mini/launchd/mailpit-restart.yaml
   - Ivans-Mac-mini/launchd/miniserve.yaml
   - Ivans-Mac-mini/launchd/navidrome.yaml
-  - Ivans-Mac-mini/launchd/nix-spotlight.yaml
   - Ivans-Mac-mini/launchd/notes.yaml
   - Ivans-Mac-mini/launchd/notifications-digest.yaml
   - Ivans-Mac-mini/launchd/pmset-mgmt.yaml
@@ -147,15 +146,6 @@ uv:
     settingsctl:
       source: git+file://${toolsPath}#subdirectory=packages/settingsctl
       binary: settings
-    nix-find-orphans:
-      source: git+file://${toolsPath}#subdirectory=packages/nix-find-orphans
-      binary: nix-find-orphans
-    nix-sort-imports:
-      source: git+file://${toolsPath}#subdirectory=packages/nix-sort-imports
-      binary: nix-sort-imports
-    rebuild:
-      source: git+file://${toolsPath}#subdirectory=packages/rebuild
-      binary: rebuild
     gh-pr:
       source: git+file://${toolsPath}#subdirectory=packages/gh-pr
       binary: gh-pr
@@ -241,13 +231,8 @@ go:
 
 cargo:
   packages:
-    deadnix:
-      version: 1.3.1
     genpass:
       version: 0.5.1
-    nil:
-      source: https://github.com/oxalica/nil
-      commit: dbbb5c24f9215476992aa1bd305f8e5398e89654
 
 pi:
   packages:
@@ -267,10 +252,6 @@ curlShell:
       if [ -e "$p" ] || [ -L "$p" ]; then trash "$p"; fi; done
 
 fetch:
-  # nix-config home/direnv.nix (programs.direnv.nix-direnv.enable).
-  ~/.config/direnv/lib/nix-direnv.sh:
-    url: https://raw.githubusercontent.com/nix-community/nix-direnv/3.2.0/direnvrc
-    sha256: 856e8d0b5247b9edc88d9377b8333a97a2363cc69abaa7760fb857609d597ebe
   /Volumes/Storage/Data/.local/bin/stash:
     url: https://github.com/stashapp/stash/releases/download/v0.29.1/stash-macos
     sha256: b8c54d619021b97ee8c6f230f31d430009f45518e9d868505b413351011a7f35
@@ -340,10 +321,6 @@ fetch:
 
 files:
   - dir: dotfiles
-  # nix-config home/nix-registry.nix
-  - target: ~/.config/nix/registry.json
-    source: machines/Ivans-Mac-mini/.config/nix/registry.json
-    mode: "0644"
   # launchd jobs and GUI apps read this, not the shell-only UV_* vars.
   - target: ~/.config/uv/uv.toml
     source: machines/Ivans-Mac-mini/.config/uv/uv.toml
@@ -465,11 +442,6 @@ files:
   - target: /etc/gitconfig
     source: shared/etc/gitconfig
     mode: "0644"
-  # Spotlight skips a volume with this marker; the nix-spotlight daemon purges
-  # the existing /nix/.Spotlight-V100.
-  - target: /nix/.metadata_never_index
-    source: machines/Ivans-Mac-mini/nix/.metadata_never_index
-    mode: "0644"
   - source: ${toolsPath}/packages/eat/eat.sh
     target: /Volumes/Storage/Data/.local/bin/eat
     mode: "0755"
@@ -482,20 +454,11 @@ files:
   - source: ${toolsPath}/packages/go-lint-wrapper/go-lint-wrapper.sh
     target: /Volumes/Storage/Data/.local/bin/go-lint-wrapper
     mode: "0755"
-  - source: ${toolsPath}/packages/statix-wrapper/statix-wrapper.sh
-    target: /Volumes/Storage/Data/.local/bin/statix-wrapper
-    mode: "0755"
   - source: ${toolsPath}/packages/gpg-edit/gpg-edit.sh
     target: /Volumes/Storage/Data/.local/bin/gpg-edit
     mode: "0755"
   - source: ${toolsPath}/packages/gwq-merge/gwq-merge.sh
     target: /Volumes/Storage/Data/.local/bin/gwq-merge
-    mode: "0755"
-  - source: ${toolsPath}/packages/nix-gc/nix-gc.sh
-    target: /Volumes/Storage/Data/.local/bin/nix-gc
-    mode: "0755"
-  - source: ${toolsPath}/packages/nix-generate-sha/nix-generate-sha.sh
-    target: /Volumes/Storage/Data/.local/bin/nix-generate-sha
     mode: "0755"
   - source: ${toolsPath}/packages/image-meta/image-meta.sh
     target: /Volumes/Storage/Data/.local/bin/image-meta
@@ -631,7 +594,6 @@ brew:
       restartUnits: [launchd:com.ivankovnatsky.navidrome]
     - ncurses
     - neovim
-    - nixfmt
     - node
     - nushell
     # ranger scope.sh previews: odt2txt, 7zz (sevenzip), gstat (coreutils).
@@ -662,7 +624,6 @@ brew:
     - sops
     - starship
     - staticcheck
-    - statix
     - name: stubby
       restartUnits: [launchd:com.ivankovnatsky.stubby]
     - stylua
@@ -827,11 +788,9 @@ dock:
 settingsctl:
   fullDiskAccess:
     - bash
-    - determinate-nixd
     - kitty
     - Muxy
     - smbd
-    - sops-install-secrets
     - Terminal
   accessibility:
     - Amethyst
