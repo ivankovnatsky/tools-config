@@ -37,6 +37,9 @@ files:
   - target: ~/.config/fish/conf.d/mooing.fish
     source: shared/mooing/home/.config/fish/conf.d/mooing.fish
     mode: "0644"
+  - target: ~/.config/shell/mooing.sh
+    source: shared/mooing/home/.config/shell/mooing.sh
+    mode: "0644"
   - target: ~/.config/direnv/lib/mise.sh
     source: shared/mooing/home/.config/direnv/lib/mise.sh
     mode: "0644"
