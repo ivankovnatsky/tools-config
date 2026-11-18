@@ -1,2 +1,8 @@
 # macOS-specific shared config
 # (empty for now — will hold brew packages when nix-homebrew migration starts)
+
+# Cutover from nix-darwin (needs tools with the nixDarwin section): boots out
+# launchd jobs that run from /nix/store, trashes /etc links into /etc/static
+# and restores /etc/*.before-nix-darwin. Off while nix-darwin is still live.
+# nixDarwin:
+#   takeOver: true
