@@ -351,6 +351,12 @@ files:
   - target: ~/.local/bin/diff-deep
     source: shared/home/.local/bin/diff-deep
     mode: "0755"
+  # nix-config home/git/default.nix activation.ghAuth (laptops get gh auth
+  # from sops). Failed runs retry next deploy.
+  - target: ~/.local/bin/gh-auth-login
+    source: machines/Ivans-Mac-mini/.local/bin/gh-auth-login
+    mode: "0755"
+    onChange: ~/.local/bin/gh-auth-login
   - target: "~/Library/Application Support/Muxy 2/settings.toml"
     source:
       "machines/Ivans-Mac-mini/Library/Application Support/Muxy 2/settings.toml"

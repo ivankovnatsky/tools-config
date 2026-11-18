@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# gh login, as nix-config home/git/default.nix activation.ghAuth: log in
+# through the browser when hosts.yml or the keychain token is missing.
+set -euo pipefail
+
+if [ -f "$HOME/.config/gh/hosts.yml" ] &&
+  /usr/bin/security find-generic-password -s "gh:github.com" -w >/dev/null 2>&1; then
+  exit 0
+fi
+
+# Interactive only; exit 1 so tools retries this onChange next deploy.
+if [ ! -t 0 ]; then
+  echo "gh-auth-login: not logged in to github.com; run gh-auth-login in a terminal" >&2
+  exit 1
+fi
+
+PATH="/usr/bin:$PATH" exec /opt/homebrew/bin/gh auth login --git-protocol https --web
