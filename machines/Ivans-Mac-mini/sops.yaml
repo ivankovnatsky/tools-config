@@ -1,6 +1,7 @@
 sops:
   age:
     sshKeyPaths: [~/.ssh/id_ed25519]
+    generateSshKey: true
   secretsDir: ${secretsDir}
   defaultSopsFile: ${homeWorkPath}/Sources/github.com/ivankovnatsky/tools-config/secrets/default.yaml
   secrets:
