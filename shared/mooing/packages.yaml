@@ -108,9 +108,6 @@ uv:
     ps-top:
       source: git+file://${toolsPath}#subdirectory=packages/ps-top
       binary: ps-top
-    rebuild:
-      source: git+file://${toolsPath}#subdirectory=packages/rebuild
-      binary: rebuild
     reposync:
       source: git+file://${toolsPath}#subdirectory=packages/reposync
       binary: reposync
