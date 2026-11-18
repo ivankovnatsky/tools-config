@@ -102,12 +102,6 @@ uv:
     nextdns-mgmt:
       source: git+file://${toolsPath}#subdirectory=packages/nextdns-mgmt
       binary: nextdns-mgmt
-    nix-find-orphans:
-      source: git+file://${toolsPath}#subdirectory=packages/nix-find-orphans
-      binary: nix-find-orphans
-    nix-sort-imports:
-      source: git+file://${toolsPath}#subdirectory=packages/nix-sort-imports
-      binary: nix-sort-imports
     pblock:
       source: git+file://${toolsPath}#subdirectory=packages/pblock
       binary: pblock
@@ -166,14 +160,8 @@ go:
 
 cargo:
   packages:
-    deadnix:
-      version: 1.3.1
     genpass:
       version: 0.5.1
-    # nil_ls for the nvim dotfiles (nixvim bundled it).
-    nil:
-      source: https://github.com/oxalica/nil
-      commit: dbbb5c24f9215476992aa1bd305f8e5398e89654
 
 curlShell:
   "https://antigravity.google/cli/install.sh":
@@ -276,7 +264,6 @@ brew:
     - mpv
     - ncurses
     - neovim
-    - nixfmt
     - node
     - nushell
     - openclaw/tap/peekaboo
@@ -304,7 +291,6 @@ brew:
     - sops
     - starship
     - staticcheck
-    - statix
     - stylua
     - swiftformat
     - syncthing
