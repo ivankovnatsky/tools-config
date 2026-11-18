@@ -3,6 +3,7 @@
 sops:
   age:
     sshKeyPaths: [~/.ssh/id_ed25519]
+    generateSshKey: true
   secretsDir: ${secretsDir}
   defaultSopsFile: ${toolsConfigPath}/secrets/mooing.yaml
   secrets:
