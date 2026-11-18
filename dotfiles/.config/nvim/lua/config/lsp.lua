@@ -108,6 +108,11 @@ local servers = {
   tinymist = {},
 }
 
+-- Nix tooling only exists where nix does (a3); skip nil_ls elsewhere.
+if vim.fn.executable("nil") == 0 then
+  servers.nil_ls = nil
+end
+
 for name, cfg in pairs(servers) do
   vim.lsp.config(name, vim.tbl_extend("keep", cfg, { capabilities = capabilities }))
   vim.lsp.enable(name)
