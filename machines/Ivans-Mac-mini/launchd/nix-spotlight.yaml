@@ -1,0 +1,10 @@
+launchd:
+  daemons:
+    # nix-config darwin/desktop/spotlight.nix purges the /nix index on every
+    # activation; system files take no onChange, so purge at load instead.
+    # The .metadata_never_index marker is a files: entry.
+    nix-spotlight:
+      keepAlive: false
+      waitForMounts:
+        - /nix
+      command: /bin/rm -rf /nix/.Spotlight-V100

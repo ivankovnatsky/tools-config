@@ -33,6 +33,7 @@ include:
   - Ivans-Mac-mini/launchd/mailpit-restart.yaml
   - Ivans-Mac-mini/launchd/miniserve.yaml
   - Ivans-Mac-mini/launchd/navidrome.yaml
+  - Ivans-Mac-mini/launchd/nix-spotlight.yaml
   - Ivans-Mac-mini/launchd/notes.yaml
   - Ivans-Mac-mini/launchd/notifications-digest.yaml
   - Ivans-Mac-mini/launchd/pmset-mgmt.yaml
@@ -266,6 +267,10 @@ curlShell:
       if [ -e "$p" ] || [ -L "$p" ]; then trash "$p"; fi; done
 
 fetch:
+  # nix-config home/direnv.nix (programs.direnv.nix-direnv.enable).
+  ~/.config/direnv/lib/nix-direnv.sh:
+    url: https://raw.githubusercontent.com/nix-community/nix-direnv/3.2.0/direnvrc
+    sha256: 856e8d0b5247b9edc88d9377b8333a97a2363cc69abaa7760fb857609d597ebe
   /Volumes/Storage/Data/.local/bin/stash:
     url: https://github.com/stashapp/stash/releases/download/v0.29.1/stash-macos
     sha256: b8c54d619021b97ee8c6f230f31d430009f45518e9d868505b413351011a7f35
@@ -335,6 +340,10 @@ fetch:
 
 files:
   - dir: dotfiles
+  # nix-config home/nix-registry.nix
+  - target: ~/.config/nix/registry.json
+    source: machines/Ivans-Mac-mini/.config/nix/registry.json
+    mode: "0644"
   # launchd jobs and GUI apps read this, not the shell-only UV_* vars.
   - target: ~/.config/uv/uv.toml
     source: machines/Ivans-Mac-mini/.config/uv/uv.toml
