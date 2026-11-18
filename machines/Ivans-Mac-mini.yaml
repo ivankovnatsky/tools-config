@@ -462,8 +462,8 @@ files:
   - target: /etc/gitconfig
     source: shared/etc/gitconfig
     mode: "0644"
-  # Spotlight skips a volume with this marker; existing /nix/.Spotlight-V100
-  # is not purged (system files take no onChange).
+  # Spotlight skips a volume with this marker; the nix-spotlight daemon purges
+  # the existing /nix/.Spotlight-V100.
   - target: /nix/.metadata_never_index
     source: machines/Ivans-Mac-mini/nix/.metadata_never_index
     mode: "0644"
