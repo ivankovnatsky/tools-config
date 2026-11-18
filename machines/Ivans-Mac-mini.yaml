@@ -831,6 +831,8 @@ settingsctl:
     - Hammerspoon
     - Mac Mouse Fix
   appearanceInit: true
+  # Only reports when Location Services is off, as nix-config's activation.
+  locationInit: true
   defaultBrowser: firefoxdeveloperedition
   hostName: ${hostName}
   localHostName: ${hostName}
