@@ -77,6 +77,10 @@ defaults:
       ShowStandaloneTabBar: true
     com.apple.Safari.SandboxBroker:
       AlwaysPromptForDownloadFolder: true
+    # Keep the pinned 2.1.4 (files.yaml fetch): tools replaces a self-updated app.
+    io.nextdns.NextDNSMac:
+      SUEnableAutomaticChecks: false
+      SUAutomaticallyUpdate: false
     org.gpgtools.pinentry-mac:
       UseKeychain: false
     org.hammerspoon.Hammerspoon:
