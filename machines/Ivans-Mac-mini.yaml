@@ -198,7 +198,7 @@ uv:
       source: git+file://${toolsPath}#subdirectory=packages/subs
       binary: subs
     tasks:
-      source: git+file://${toolsPath}#subdirectory=packages/tasks
+      source: git+file://${toolsPath}#subdirectory=packages/tasks-cli
       binary: tasks
     youtube:
       source: git+file://${toolsPath}#subdirectory=packages/youtube
