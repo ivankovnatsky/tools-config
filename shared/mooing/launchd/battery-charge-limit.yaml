@@ -1,0 +1,10 @@
+launchd:
+  agents:
+    # No defaults/pmset key for the Charge Limit slider; a Shortcuts action
+    # sets it. Create the shortcut by hand once per Mac; skipped if missing.
+    battery-charge-limit:
+      keepAlive: false
+      command: >-
+        /bin/bash -c 'if /usr/bin/shortcuts list | /usr/bin/grep -Fxq "Set
+        Battery Charge Limit"; then /usr/bin/shortcuts run "Set Battery Charge
+        Limit"; fi'

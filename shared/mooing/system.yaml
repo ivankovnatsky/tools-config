@@ -1,6 +1,7 @@
 # macOS settings, launchd jobs and mgmt shared by Mooings-MacBook-Air and
 # Mooings-MacBook-Pro (nix-config: darwin/, machines/.mooing).
 include:
+  - launchd/battery-charge-limit.yaml
   - launchd/brctl-download-notes.yaml
   - launchd/nextdns-mgmt-mooing.yaml
   - launchd/qmd-update.yaml
@@ -152,6 +153,8 @@ settingsctl:
     - Mac Mouse Fix
     - NextDNS
   appearanceInit: true
+  # Every deploy, as nix-config's activation; skips when already at the model's mode.
+  scalingInit: true
   defaultBrowser: firefoxdeveloperedition
   hostName: ${hostName}
   localHostName: ${hostName}
