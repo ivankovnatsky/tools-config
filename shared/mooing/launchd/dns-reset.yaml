@@ -1,0 +1,22 @@
+launchd:
+  daemons:
+    # nix-config machines/.mooing/darwin/dns.nix (networking.knownNetworkServices):
+    # clear manual DNS servers and search domains on known services so DHCP
+    # and the NextDNS app decide. nix-darwin did this on every switch; this
+    # runs at boot and whenever the job changes.
+    dns-reset:
+      keepAlive: false
+      programArguments:
+        - /bin/bash
+        - -c
+        - |
+          services=$(/usr/sbin/networksetup -listallnetworkservices)
+          for svc in "AX88179A" "iPhone USB" "Thunderbolt Bridge" \
+            "Thunderbolt Ethernet Slot 0" "USB-C Dock Ethernet" "Wi-Fi"; do
+            case "$services" in
+              *"$svc"*)
+                /usr/sbin/networksetup -setdnsservers "$svc" empty
+                /usr/sbin/networksetup -setsearchdomains "$svc" empty
+                ;;
+            esac
+          done

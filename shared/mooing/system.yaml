@@ -3,6 +3,7 @@
 include:
   - launchd/battery-charge-limit.yaml
   - launchd/brctl-download-notes.yaml
+  - launchd/dns-reset.yaml
   - launchd/nextdns-mgmt-mooing.yaml
   - launchd/qmd-update.yaml
   - launchd/quit-mac-mouse-fix.yaml
