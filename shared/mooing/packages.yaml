@@ -148,9 +148,6 @@ go:
     stc:
       source: github.com/tenox7/stc
       binary: stc
-    ssh-to-age:
-      source: github.com/Mic92/ssh-to-age/cmd/ssh-to-age
-      binary: ssh-to-age
     username:
       source: github.com/ivankovnatsky/username
       binary: username
@@ -174,20 +171,12 @@ brew:
     autoUpdate: false
     cleanup: zap
   taps:
-    - antoniorodr/homebrew-memo
-    - keith/homebrew-formulae
     - muxy-app/homebrew-tap
     - openclaw/homebrew-tap
-    - pomdtr/homebrew-tap
-    - xwmx/homebrew-taps
   trust:
     taps:
-      - antoniorodr/memo
-      - keith/formulae
       - muxy-app/tap
       - openclaw/tap
-      - pomdtr/tap
-      - xwmx/taps
   brews:
     - age
     - argocd
