@@ -173,10 +173,12 @@ brew:
   taps:
     - muxy-app/homebrew-tap
     - openclaw/homebrew-tap
+    - raine/homebrew-workmux
   trust:
     taps:
       - muxy-app/tap
       - openclaw/tap
+      - raine/workmux
   brews:
     - age
     - argocd
@@ -253,6 +255,7 @@ brew:
     - node
     - nushell
     - openclaw/tap/peekaboo
+    - raine/workmux/workmux
     - pam-reattach
     - pandoc
     - parallel
