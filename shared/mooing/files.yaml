@@ -100,6 +100,9 @@ files:
   - target: ~/Screenshots
     directory: true
     mode: "0755"
+  - target: ~/.config/kitty/kitty-title-prefix.py
+    source: ${toolsPath}/packages/kitty-title-prefix/kitty-title-prefix.py
+    mode: "0644"
   - target: ~/.config/kitty/quick-access-terminal.conf
     source: shared/home/.config/kitty/quick-access-terminal.conf
     mode: "0644"
