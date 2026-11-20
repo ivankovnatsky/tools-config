@@ -111,6 +111,9 @@ uv:
     reposync:
       source: git+file://${toolsPath}#subdirectory=packages/reposync
       binary: reposync
+    screenshot-ocr:
+      source: git+file://${toolsPath}#subdirectory=packages/screenshot-ocr
+      binary: screenshot-ocr
     settingsctl:
       source: git+file://${toolsPath}#subdirectory=packages/settingsctl
       binary: settings

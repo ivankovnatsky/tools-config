@@ -13,6 +13,7 @@ launchd:
       preStart: |
         /bin/mkdir -p "${home}/.local/share/agent-sessions/md"
         ${uvBin}/agent-sessions ${renderedDir}/agent-sessions.json || echo "agent-sessions failed"
+        ${uvBin}/screenshot-ocr || echo "screenshot-ocr failed"
         current=$(qmd collection show notes 2>&1 | sed -n 's/^ *Path: *//p')
         want=$(realpath -q "${home}/Library/Mobile Documents/iCloud~md~obsidian/Documents/Notes" || echo "${home}/Library/Mobile Documents/iCloud~md~obsidian/Documents/Notes")
         if [ "$current" != "$want" ]; then
@@ -25,5 +26,12 @@ launchd:
           if [ -n "$current" ]; then qmd collection remove sessions; fi
           qmd collection add "${home}/.local/share/agent-sessions/md" --name sessions
           qmd context add qmd://sessions 'Past agent sessions (Claude Code, Codex, Grok, pi): user and assistant text only'
+        fi
+        current=$(qmd collection show screenshots 2>&1 | sed -n 's/^ *Path: *//p')
+        want=$(realpath -q "${home}/.local/share/screenshots/md" || echo "${home}/.local/share/screenshots/md")
+        if [ "$current" != "$want" ]; then
+          if [ -n "$current" ]; then qmd collection remove screenshots; fi
+          qmd collection add "${home}/.local/share/screenshots/md" --name screenshots
+          qmd context add qmd://screenshots 'Screenshots: OCR text'
         fi
       command: /bin/bash -c 'qmd update && qmd embed'
