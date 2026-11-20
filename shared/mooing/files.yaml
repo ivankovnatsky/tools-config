@@ -54,6 +54,9 @@ files:
   - target: ~/.grok/config.toml
     source: shared/home/.grok/config.toml
     mode: "0644"
+  - target: ~/.config/workmux/config.yaml
+    source: shared/mooing/home/.config/workmux/config.yaml
+    mode: "0644"
   - target: ~/.pi/agent/settings.json
     source: shared/mooing/home/.pi/agent/settings.json
     mode: "0644"
