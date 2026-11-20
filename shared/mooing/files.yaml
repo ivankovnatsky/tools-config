@@ -58,15 +58,6 @@ files:
     source: shared/mooing/home/.pi/agent/settings.json
     mode: "0644"
     backup: false
-  - target: "~/Library/Application Support/Muxy 2/settings.toml"
-    source: "shared/mooing/home/Library/Application Support/Muxy 2/settings.toml"
-    mode: "0644"
-    # Muxy rewrites it; set false for one deploy to push repo changes.
-    skip: true
-    backup: false
-  - target: "~/Library/Application Support/Muxy 2/terminal.toml"
-    source: "shared/home/Library/Application Support/Muxy 2/terminal.toml"
-    mode: "0644"
   - target: "~/Library/Application Support/Firefox/Profiles/default/user.js"
     source: "shared/mooing/home/Library/Application Support/Firefox/Profiles/default/user.js"
     mode: "0644"

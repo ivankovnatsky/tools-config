@@ -124,7 +124,6 @@ dock:
     - /System/Applications/Passwords.app
     - spacer
     - /Applications/kitty.app
-    - /Applications/Muxy.app
     - /Applications/Firefox Developer Edition.app
     - /Applications/Bitwarden.app
     - /Applications/Obsidian.app
@@ -140,7 +139,6 @@ dock:
 settingsctl:
   fullDiskAccess:
     - kitty
-    - Muxy
     - sshd-keygen-wrapper
     - Terminal
   accessibility:
@@ -149,7 +147,6 @@ settingsctl:
     - Hammerspoon
     - kitty
     - Mac Mouse Fix Helper
-    - Muxy
     - Terminal
   loginItems:
     - Amethyst

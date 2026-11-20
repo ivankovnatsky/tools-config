@@ -171,12 +171,10 @@ brew:
     autoUpdate: false
     cleanup: zap
   taps:
-    - muxy-app/homebrew-tap
     - openclaw/homebrew-tap
     - raine/homebrew-workmux
   trust:
     taps:
-      - muxy-app/tap
       - openclaw/tap
       - raine/workmux
   brews:
@@ -315,7 +313,6 @@ brew:
     - kitty
     - mac-mouse-fix
     - microsoft-teams
-    - muxy-app/tap/muxy
     - obsidian
     - session-manager-plugin
     - whatsapp
