@@ -334,15 +334,6 @@ files:
     source: machines/Ivans-Mac-mini/.local/bin/gh-auth-login
     mode: "0755"
     onChange: ~/.local/bin/gh-auth-login
-  - target: "~/Library/Application Support/Muxy 2/settings.toml"
-    source:
-      "machines/Ivans-Mac-mini/Library/Application Support/Muxy 2/settings.toml"
-    mode: "0644"
-    # Muxy rewrites it: overwrite each deploy, no .tools backup.
-    backup: false
-  - target: "~/Library/Application Support/Muxy 2/terminal.toml"
-    source: "shared/home/Library/Application Support/Muxy 2/terminal.toml"
-    mode: "0644"
   - target: "~/Library/Application Support/Firefox/Profiles/default/user.js"
     source:
       "machines/Ivans-Mac-mini/Library/Application
@@ -524,11 +515,6 @@ brew:
   onActivation:
     autoUpdate: false
     cleanup: zap
-  taps:
-    - muxy-app/homebrew-tap
-  trust:
-    taps:
-      - muxy-app/tap
   brews:
     - age
     - aria2
@@ -668,7 +654,6 @@ brew:
     - losslessswitcher
     - mac-mouse-fix
     - mullvad-vpn
-    - muxy-app/tap/muxy
     - obsidian
     - silicon-labs-vcp-driver
     - whatsapp
@@ -775,7 +760,6 @@ dock:
     - /System/Applications/Passwords.app
     - spacer
     - /Applications/kitty.app
-    - /Applications/Muxy.app
     - /Applications/Firefox Developer Edition.app
     - /Applications/Bitwarden.app
     - /Applications/Obsidian.app
@@ -789,14 +773,12 @@ settingsctl:
   fullDiskAccess:
     - bash
     - kitty
-    - Muxy
     - smbd
     - Terminal
   accessibility:
     - Amethyst
     - Hammerspoon
     - Mac Mouse Fix Helper
-    - Muxy
     - Terminal
     - kitty
   loginItems:
