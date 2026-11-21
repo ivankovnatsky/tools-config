@@ -3,12 +3,11 @@
 # home/packages*.nix, home/tools.nix). npm/uv/curlShell entries from
 # shared/base.yaml (codex, tools, claude installer) merge in as dict keys.
 #
+# helm-secrets, kubectl-images and kubectl-view-secret come from release
+# archives in files.yaml `fetch:`.
+#
 # Not ported (no brew/go/cargo/uv source that matches; install by hand or
 # add a section for them):
-# - helm-secrets (helm plugin; nix wrapped it into helm)
-# - kubectl-images, kubectl-view-secret (go install names the binary `cmd`;
-#   krew plugins `images` and `view-secret`)
-# - jcli (go install names it `jenkins-cli`; brew jenkins-cli is another tool)
 # - mkpasswd (brew whois does not build it)
 #
 # No pi packages on the laptops.

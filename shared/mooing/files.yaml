@@ -21,6 +21,28 @@ fetch:
   "~/Library/Application Support/Firefox/Profiles/default/extensions/{446900e4-71c2-419f-a6a7-df9c091e268b}.xpi":
     url: https://addons.mozilla.org/firefox/downloads/file/5125667/bitwarden_password_manager-2026.10.0.xpi
     sha256: a25e02e961f4ffcecda12584f32f1993102ad7509e9ca84582e5287109f5bd20
+  ~/.local/bin/kubectl-images:
+    url: https://github.com/chenjiandongx/kubectl-images/releases/download/v0.6.5/kubectl-images_darwin_arm64.tar.gz
+    sha256: a621fd63e4af013c6433fdf8c7521f1d5d7a9f2077bcbb15625b3edd6081cbe1
+    install: |
+      tar -xzf "$src" kubectl-images
+      mv kubectl-images "$out"
+    mode: "0755"
+  # kubectl finds `kubectl view-secret` as kubectl-view_secret.
+  ~/.local/bin/kubectl-view_secret:
+    url: https://github.com/elsesiy/kubectl-view-secret/releases/download/v0.17.0/kubectl-view-secret_v0.17.0_darwin_arm64.tar.gz
+    sha256: ec37a1842b1f15e636e79909ffddeaea5d929b860ca83989e7717af3a53d2a73
+    install: |
+      tar -xzf "$src" kubectl-view-secret
+      mv kubectl-view-secret "$out"
+    mode: "0755"
+  # brew helm reads plugins from ~/Library/helm/plugins on macOS.
+  ~/Library/helm/plugins/secrets:
+    url: https://github.com/jkroepke/helm-secrets/releases/download/v4.7.11/secrets-4.7.11.tgz
+    sha256: 3fabc00a556bff5f2a8a52e77540391dde7c0cb4f2e6a9551d30c59b25a9002f
+    install: |
+      tar -xzf "$src"
+      mv secrets "$out"
   # nix-config overlays/nextdns-app pins 2.1.4; the cask auto-updates.
   /Applications/NextDNS.app:
     url: https://storage.googleapis.com/nextdns_macos/NextDNS-2.1.4.dmg
