@@ -131,6 +131,8 @@ go:
     aws-sso-creds:
       source: github.com/jaxxstorm/aws-sso-creds/cmd/aws-sso-creds
       binary: aws-sso-creds
+      # v2.1.1; v2 tags lack the /v2 module path, so @latest resolves to v1.5.0
+      commit: 5b6d99977bff8264801ee9748e2169bfb954d73a
     eks-node-viewer:
       source: github.com/awslabs/eks-node-viewer/cmd/eks-node-viewer
       binary: eks-node-viewer
