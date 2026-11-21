@@ -1,5 +1,10 @@
 [formatter.prettier]
 command = "prettier"
-options = ["--write", "--prose-wrap", "always"]
-includes = ["*.md", "*.yaml", "*.yml"]
-excludes = ["secrets/*", ".sops.yaml"]
+options = ["--write"]
+includes = ["*.yaml", "*.yml"]
+excludes = ["secrets/*", ".sops.yaml", "shared/home/.config/amethyst/amethyst.yml"]
+
+[formatter.rumdl]
+command = "rumdl"
+options = ["fmt", "--respect-gitignore=false"]
+includes = ["*.md"]
