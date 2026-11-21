@@ -10,8 +10,13 @@ fish_add_path --global --move --prepend /opt/homebrew/bin
 
 set -U fish_term24bit 1
 
-if test -x /opt/homebrew/bin/lua; and test -f /opt/homebrew/opt/z.lua/share/z.lua/z.lua
-    /opt/homebrew/bin/lua /opt/homebrew/opt/z.lua/share/z.lua/z.lua --init fish | source
+if command -q lua
+    for zlua in /opt/homebrew/opt/z.lua/share/z.lua/z.lua /usr/share/z.lua/z.lua
+        if test -f $zlua
+            lua $zlua --init fish | source
+            break
+        end
+    end
 end
 
 status is-interactive; or exit
@@ -85,18 +90,18 @@ set -gx FORGIT_REFLOG_FZF_OPTS "--preview-window=bottom:90%"
 complete -c git-forgit -n __fish_is_first_arg -a "add attributes blame branch_delete checkout_branch checkout_commit checkout_file checkout_tag cherry_pick cherry_pick_from_branch clean diff fixup squash reword ignore log reflog rebase reset_head revert_commit show stash_show stash_push"
 complete -c git-forgit -n __fish_is_first_arg -f
 
-if test "$TERM" != dumb; and test -x /opt/homebrew/bin/starship
-    /opt/homebrew/bin/starship init fish | source
+if test "$TERM" != dumb; and command -q starship
+    starship init fish | source
 end
 
-if test -x /opt/homebrew/bin/carapace
-    /opt/homebrew/bin/carapace _carapace fish | source
+if command -q carapace
+    carapace _carapace fish | source
 end
 
-if test -x /opt/homebrew/bin/atuin
-    /opt/homebrew/bin/atuin init fish --disable-up-arrow | source
+if command -q atuin
+    atuin init fish --disable-up-arrow | source
 end
 
-if test -x /opt/homebrew/bin/direnv; and not functions -q __direnv_export_eval
-    /opt/homebrew/bin/direnv hook fish | source
+if command -q direnv; and not functions -q __direnv_export_eval
+    direnv hook fish | source
 end

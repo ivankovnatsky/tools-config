@@ -12,19 +12,25 @@ autoload -U compinit && compinit
 [ -f ~/.config/shell/mooing.sh ] && . ~/.config/shell/mooing.sh
 mkcd() { mkdir -p "$1" && cd "$1"; }
 
-b=/opt/homebrew
+has() { command -v "$1" >/dev/null; }
 for p in zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search; do
-  [ -f "$b/share/$p/$p.zsh" ] && . "$b/share/$p/$p.zsh"
+  for f in /opt/homebrew/share/$p/$p.zsh /usr/share/zsh/plugins/$p/$p.zsh; do
+    [ -f "$f" ] && { . "$f"; break; }
+  done
 done
-[ -x "$b/bin/lua" ] && [ -f "$b/opt/z.lua/share/z.lua/z.lua" ] &&
-  eval "$("$b/bin/lua" "$b/opt/z.lua/share/z.lua/z.lua" --init zsh)"
-[ -x "$b/bin/fzf" ] && eval "$("$b/bin/fzf" --zsh)"
-[ -x "$b/bin/atuin" ] && eval "$("$b/bin/atuin" init zsh --disable-up-arrow)"
-[ -x "$b/bin/direnv" ] && eval "$("$b/bin/direnv" hook zsh)"
-[ -x "$b/bin/carapace" ] && source <("$b/bin/carapace" _carapace zsh)
-[ -x "$b/bin/mise" ] && eval "$("$b/bin/mise" activate zsh)"
-[ "$TERM" != dumb ] && [ -x "$b/bin/starship" ] && eval "$("$b/bin/starship" init zsh)"
-unset b p
+if has lua; then
+  for f in /opt/homebrew/opt/z.lua/share/z.lua/z.lua /usr/share/z.lua/z.lua; do
+    [ -f "$f" ] && { eval "$(lua "$f" --init zsh)"; break; }
+  done
+fi
+has fzf && eval "$(fzf --zsh)"
+has atuin && eval "$(atuin init zsh --disable-up-arrow)"
+has direnv && eval "$(direnv hook zsh)"
+has carapace && source <(carapace _carapace zsh)
+has mise && eval "$(mise activate zsh)"
+[ "$TERM" != dumb ] && has starship && eval "$(starship init zsh)"
+unset -f has
+unset p f
 
 bindkey '^[l' down-case-word
 bindkey '^[[Z' reverse-menu-complete

@@ -9,8 +9,8 @@ if [[ "$base_noext" != *.* ]]; then
   inner_name="$inner_name.txt"
 fi
 
-/opt/homebrew/bin/gpg --batch --quiet --decrypt -- "$file_path" 2>/dev/null |
-  /opt/homebrew/bin/bat \
+gpg --batch --quiet --decrypt -- "$file_path" 2>/dev/null |
+  bat \
     --color=always \
     --style=plain \
     --paging=never \

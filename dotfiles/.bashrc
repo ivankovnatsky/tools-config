@@ -11,16 +11,21 @@ set -o ignoreeof
 [ -f ~/.config/shell/aliases.sh ] && . ~/.config/shell/aliases.sh
 [ -f ~/.config/shell/mooing.sh ] && . ~/.config/shell/mooing.sh
 
-b=/opt/homebrew
-[ -x "$b/bin/lua" ] && [ -f "$b/opt/z.lua/share/z.lua/z.lua" ] &&
-  eval "$("$b/bin/lua" "$b/opt/z.lua/share/z.lua/z.lua" --init bash)"
-[ -x "$b/bin/fzf" ] && eval "$("$b/bin/fzf" --bash)"
-if [ -x "$b/bin/atuin" ] && [ -f "$b/etc/profile.d/bash-preexec.sh" ]; then
-  . "$b/etc/profile.d/bash-preexec.sh"
-  eval "$("$b/bin/atuin" init bash --disable-up-arrow)"
+has() { command -v "$1" >/dev/null; }
+if has lua; then
+  for f in /opt/homebrew/opt/z.lua/share/z.lua/z.lua /usr/share/z.lua/z.lua; do
+    [ -f "$f" ] && { eval "$(lua "$f" --init bash)"; break; }
+  done
 fi
-[ -x "$b/bin/direnv" ] && eval "$("$b/bin/direnv" hook bash)"
-[ -x "$b/bin/carapace" ] && source <("$b/bin/carapace" _carapace bash)
-[ -x "$b/bin/mise" ] && eval "$("$b/bin/mise" activate bash)"
-[ "$TERM" != dumb ] && [ -x "$b/bin/starship" ] && eval "$("$b/bin/starship" init bash)"
-unset b
+has fzf && eval "$(fzf --bash)"
+if has atuin; then
+  for f in /opt/homebrew/etc/profile.d/bash-preexec.sh /usr/share/bash-preexec/bash-preexec.sh; do
+    [ -f "$f" ] && { . "$f"; eval "$(atuin init bash --disable-up-arrow)"; break; }
+  done
+fi
+has direnv && eval "$(direnv hook bash)"
+has carapace && source <(carapace _carapace bash)
+has mise && eval "$(mise activate bash)"
+[ "$TERM" != dumb ] && has starship && eval "$(starship init bash)"
+unset -f has
+unset f
