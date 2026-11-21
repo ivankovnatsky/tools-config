@@ -24,6 +24,7 @@ templates:
     path: ~/.claude/settings.json
     file: templates/claude-settings.json
     mode: "0644"
+    backup: false
   gwq:
     path: ~/.config/gwq/config.toml
     file: shared/home/.config/gwq/config.toml

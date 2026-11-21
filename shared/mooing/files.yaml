@@ -67,6 +67,15 @@ files:
   - target: "~/Library/Application Support/Firefox/profiles.ini"
     source: "shared/home/Library/Application Support/Firefox/profiles.ini"
     mode: "0644"
+    backup: false
+  - target: ~/.config/btop/btop.conf
+    source: shared/home/.config/btop/btop.conf
+    mode: "0644"
+    backup: false
+  - target: ~/.config/gh/config.yml
+    source: shared/home/.config/gh/config.yml
+    mode: "0644"
+    backup: false
   - target: ~/.config/amethyst/amethyst.yml
     source: shared/home/.config/amethyst/amethyst.yml
     mode: "0644"
