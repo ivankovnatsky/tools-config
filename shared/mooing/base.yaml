@@ -5,15 +5,10 @@ vars:
   uvBin: ${localBin}
   npmBin: ${home}/.npm/bin
   goBin: ${home}/.go/bin
-  toolsConfigPath: ${home}/Sources/github.com/ivankovnatsky/tools-config
-  secretsDir: ${home}/.local/state/tools/secrets
-  renderedDir: ${secretsDir}/rendered
 
 paths:
-  uv: /opt/homebrew/bin
   uvBin: ${uvBin}
   uvToolDir: ${home}/.local/share/uv/tools
-  nodejs: /opt/homebrew/bin
   npmBin: ${npmBin}
   goPath: ${home}/.go
   goBin: ${goBin}

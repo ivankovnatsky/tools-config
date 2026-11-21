@@ -65,16 +65,12 @@ vars:
   hostName: Ivans-Mac-mini
   miniIp: 192.168.50.4
   miniWifiIp: 192.168.50.12
-  a3Ip: 192.168.50.6
   a3WifiIp: 192.168.50.11
   bindAddress: 0.0.0.0
   localAddress: 127.0.0.1
   uvBin: ${externalStoragePath}/.local/bin
   npmBin: ${externalStoragePath}/.npm/bin
   goBin: ${externalStoragePath}/.go/bin
-  toolsConfigPath: ${home}/Sources/github.com/ivankovnatsky/tools-config
-  secretsDir: ${home}/.local/state/tools/secrets
-  renderedDir: ${secretsDir}/rendered
   forgejoDir: ${externalStoragePath}/.forgejo
   stashDataDir: ${externalStoragePath}/.stash
   stashDir: ${externalStoragePath}/Stash
@@ -85,10 +81,8 @@ vars:
   agentSessionsDir: ${externalStoragePath}/.local/share/agent-sessions
 
 paths:
-  uv: /opt/homebrew/bin
   uvBin: ${externalStoragePath}/.local/bin
   uvToolDir: ${externalStoragePath}/.local/share/uv/tools
-  nodejs: /opt/homebrew/bin
   npmBin: ${externalStoragePath}/.npm/bin
   bunBin: ${externalStoragePath}/.bun/bin
   bun: ${externalStoragePath}/.bun/bin
@@ -105,134 +99,38 @@ env:
     UV_PYTHON_INSTALL_DIR: ${externalStoragePath}/.local/share/uv/python
   shells: []
 
-npm:
-  packages:
-    "@earendil-works/pi-coding-agent": {}
-    "@bitwarden/cli": {}
-    "@steipete/summarize": {}
-    "@xai-official/grok": {}
-    "@tobilu/qmd": {}
-    taskforge-md:
-      binary: taskforge
-
 uv:
   packages:
-    osxphotos:
-      binary: osxphotos
     yt-dlp:
       source: yt-dlp[default,curl-cffi]
     mlx-whisper: {}
-    gallery-dl: {}
     # ranger scope.sh xlsx preview.
     xlsx2csv: {}
-    agent-sessions:
-      source: git+file://${toolsPath}#subdirectory=packages/agent-sessions
-      binary: agent-sessions
     battery-monitoring:
       source: git+file://${toolsPath}#subdirectory=packages/battery-monitoring
       binary: battery-monitoring
       restartUnits:
         - launchd:com.ivankovnatsky.battery-monitoring-serve
         - launchd:com.ivankovnatsky.battery-monitoring-check
-    homelab:
-      source: git+file://${toolsPath}#subdirectory=packages/homelab
-      binary: homelab
     notifications:
       source: git+file://${toolsPath}#subdirectory=packages/notifications
       binary: notifications
-    reposync:
-      source: git+file://${toolsPath}#subdirectory=packages/reposync
-      binary: reposync
-    settingsctl:
-      source: git+file://${toolsPath}#subdirectory=packages/settingsctl
-      binary: settings
-    gh-pr:
-      source: git+file://${toolsPath}#subdirectory=packages/gh-pr
-      binary: gh-pr
-    asusrouter-cli:
-      source: git+file://${toolsPath}#subdirectory=packages/asusrouter-cli
-      binary: asusrouter-cli
-    backup-home:
-      source: git+file://${toolsPath}#subdirectory=packages/backup-home
-      binary: backup-home
-    cleanup-home:
-      source: git+file://${toolsPath}#subdirectory=packages/cleanup-home
-      binary: cleanup-home
-    dns:
-      source: git+file://${toolsPath}#subdirectory=packages/dns
-      binary: dns
-    gh-notifications:
-      source: git+file://${toolsPath}#subdirectory=packages/gh-notifications
-      binary: gh-notifications
-    git-restore:
-      source: git+file://${toolsPath}#subdirectory=packages/git-restore
-      binary: git-restore
-    gpg-pass:
-      source: git+file://${toolsPath}#subdirectory=packages/gpg-pass
-      binary: gpg-pass
-    launchd-mgmt:
-      source: git+file://${toolsPath}#subdirectory=packages/launchd-mgmt
-      binary: launchd-mgmt
-    arr-mgmt:
-      source: git+file://${toolsPath}#subdirectory=packages/arr-mgmt
-      binary: arr-mgmt
-    beszel-mgmt:
-      source: git+file://${toolsPath}#subdirectory=packages/beszel-mgmt
-      binary: beszel-mgmt
-    forgejo-mgmt:
-      source: git+file://${toolsPath}#subdirectory=packages/forgejo-mgmt
-      binary: forgejo-mgmt
-    jellyfin-mgmt:
-      source: git+file://${toolsPath}#subdirectory=packages/jellyfin-mgmt
-      binary: jellyfin-mgmt
-    nextdns-mgmt:
-      source: git+file://${toolsPath}#subdirectory=packages/nextdns-mgmt
-      binary: nextdns-mgmt
-    syncthing-mgmt:
-      source: git+file://${toolsPath}#subdirectory=packages/syncthing-mgmt
-      binary: syncthing-mgmt
-    ps-top:
-      source: git+file://${toolsPath}#subdirectory=packages/ps-top
-      binary: ps-top
     subs:
       source: git+file://${toolsPath}#subdirectory=packages/subs
       binary: subs
-    tasks:
-      source: git+file://${toolsPath}#subdirectory=packages/tasks-cli
-      binary: tasks
-    youtube:
-      source: git+file://${toolsPath}#subdirectory=packages/youtube
-      binary: youtube
     podservice:
       source: git+https://github.com/ivankovnatsky/podservice.git
       binary: podservice
 
 go:
   packages:
-    go-grip:
-      source: github.com/chrishrb/go-grip
-      binary: go-grip
-    gwq:
-      source: github.com/d-kuro/gwq/cmd/gwq
-      binary: gwq
     gatus:
       source: github.com/TwiN/gatus/v5
       binary: gatus
       restartUnits: [launchd:com.ivankovnatsky.gatus]
-    stc:
-      source: github.com/tenox7/stc
-      binary: stc
-    username:
-      source: github.com/ivankovnatsky/username
-      binary: username
     xcaddy:
       source: github.com/caddyserver/xcaddy/cmd/xcaddy
       binary: xcaddy
-
-cargo:
-  packages:
-    genpass:
-      version: 0.5.1
 
 pi:
   packages:
@@ -244,11 +142,6 @@ curlShell:
     uninstall: >-
       for p in ~/.local/bin/claude ~/.local/share/claude ~/.local/state/claude
       ~/.cache/claude ~/.claude/downloads; do
-      if [ -e "$p" ] || [ -L "$p" ]; then trash "$p"; fi; done
-  "https://antigravity.google/cli/install.sh":
-    shell: bash
-    uninstall: >-
-      for p in ~/.local/bin/agy ~/.cache/antigravity; do
       if [ -e "$p" ] || [ -L "$p" ]; then trash "$p"; fi; done
 
 fetch:
@@ -266,9 +159,6 @@ fetch:
     url: https://raw.githubusercontent.com/doy/rbw/1.15.0/bin/git-credential-rbw
     sha256: 0207c0da6385d16ec307848bc8e01fc09c497e37700340596e5177a8ca558920
     mode: "0755"
-  ~/.config/nvim/spell/uk.utf-8.spl:
-    url: https://ftp.nluug.nl/vim/runtime/spell/uk.utf-8.spl
-    sha256: e1686ca4a54d7068fe66e9a6921f3bad29ccbf14046bf7048598cbe6ec072814
   /Volumes/Storage/Data/.local/bin/beszel-agent:
     url: https://github.com/henrygd/beszel/releases/download/v0.21.1/beszel-agent_darwin_arm64.tar.gz
     sha256: 9246065f680cdb0af2885b7bf5876dc45b754019f2c90eb28550cf45db978eb8
@@ -315,12 +205,8 @@ fetch:
       mv Sonarr.app "$out"
     restartUnits:
       - launchd:com.ivankovnatsky.sonarr
-  "~/Library/Application Support/Firefox/Profiles/default/extensions/addon@darkreader.org.xpi":
-    url: https://addons.mozilla.org/firefox/downloads/file/5055786/darkreader-4.9.133.xpi
-    sha256: eb06c5096d761616c7f1d954c11524ca4bff4fe7229044dc1fce288a8c0853ab
 
 files:
-  - dir: dotfiles
   # launchd jobs and GUI apps read this, not the shell-only UV_* vars.
   - target: ~/.config/uv/uv.toml
     source: machines/Ivans-Mac-mini/.config/uv/uv.toml
@@ -341,14 +227,6 @@ files:
     source: "shared/home/Library/Application Support/Firefox/profiles.ini"
     mode: "0644"
     backup: false
-  - target: ~/.config/btop/btop.conf
-    source: shared/home/.config/btop/btop.conf
-    mode: "0644"
-    backup: false
-  - target: ~/.config/gh/config.yml
-    source: shared/home/.config/gh/config.yml
-    mode: "0644"
-    backup: false
   - target: ~/.pi/agent/settings.json
     source: machines/Ivans-Mac-mini/.pi/agent/settings.json
     mode: "0644"
@@ -356,65 +234,11 @@ files:
   - target: ~/.pi/agent/models.json
     source: machines/Ivans-Mac-mini/.pi/agent/models.json
     mode: "0644"
-  - target: ~/.grok/config.toml
-    source: shared/home/.grok/config.toml
-    mode: "0644"
-  - target: ~/.config/amethyst/amethyst.yml
-    source: shared/home/.config/amethyst/amethyst.yml
-    mode: "0644"
-    onChange: >-
-      pkill -x Amethyst; for i in 1 2 3 4 5 6 7 8 9 10; do
-      pgrep -xq Amethyst || break; sleep 0.5; done;
-      open -g -b com.amethyst.Amethyst
-  - target: ~/.gnupg
-    directory: true
-    mode: "0700"
-  - target: ~/.gnupg/gpg.conf
-    source: shared/home/.gnupg/gpg.conf
-    mode: "0600"
-  - target: ~/.gnupg/gpg-agent.conf
-    source: shared/home/.gnupg/gpg-agent.conf
-    mode: "0600"
-    onChange: if command -v gpgconf >/dev/null; then gpgconf --reload gpg-agent; fi
   - target: ${externalStoragePath}/.opentofu/plugin-cache
     directory: true
-  - target: ~/.ssh/config
-    source: dotfiles/.ssh/config
-    mode: "0600"
   - target: ~/.ssh/authorized_keys
     source: machines/Ivans-Mac-mini/.ssh/authorized_keys
     mode: "0600"
-  - target: ~/Screenshots
-    directory: true
-    mode: "0755"
-  - target: ~/.config/kitty/quick-access-terminal.conf
-    source: shared/home/.config/kitty/quick-access-terminal.conf
-    mode: "0644"
-  - target: ~/.config/kitty/dark-theme.auto.conf
-    source: shared/home/.config/kitty/dark-theme.auto.conf
-    mode: "0644"
-  - target: ~/.config/kitty/light-theme.auto.conf
-    source: shared/home/.config/kitty/light-theme.auto.conf
-    mode: "0644"
-  - target: ~/.config/kitty/no-preference-theme.auto.conf
-    source: shared/home/.config/kitty/no-preference-theme.auto.conf
-    mode: "0644"
-  - target: ~/.config/kitty/themes/default.conf
-    source: shared/home/.config/kitty/themes/default.conf
-    mode: "0644"
-  - target: ~/.config/kitty/themes/GitHub_Light.conf
-    source: shared/home/.config/kitty/themes/GitHub_Light.conf
-    mode: "0644"
-  - target: ~/.config/kitty/themes/Tokyo_Night_Moon.conf
-    source: shared/home/.config/kitty/themes/Tokyo_Night_Moon.conf
-    mode: "0644"
-  - target: ~/.config/bat/config
-    source: dotfiles/.config/bat/config
-    onChange: if command -v bat >/dev/null; then bat cache --build; fi
-  - target: ~/.config/nvim/lua/config/pack.lua
-    source: dotfiles/.config/nvim/lua/config/pack.lua
-    onChange: nvim --headless +qa
-    onUpdate: nvim --headless "+lua vim.pack.update(nil, { force = true })" +qa
   - target: ${externalStoragePath}/.local/share/caddy/build.env
     source: machines/Ivans-Mac-mini/.local/share/caddy/build.env
     mode: "0644"
@@ -429,15 +253,6 @@ files:
     mode: "0644"
   - source: machines/Ivans-Mac-mini/etc/resolver/ts.net
     target: /etc/resolver/ts.net
-    mode: "0644"
-  - target: /etc/shells
-    source: shared/etc/shells
-    mode: "0644"
-  - target: /etc/pam.d/sudo_local
-    source: shared/etc/pam.d/sudo_local
-    mode: "0444"
-  - target: /etc/gitconfig
-    source: shared/etc/gitconfig
     mode: "0644"
   - source: ${toolsPath}/packages/eat/eat.sh
     target: /Volumes/Storage/Data/.local/bin/eat
@@ -482,268 +297,60 @@ files:
     target: /Volumes/Storage/Data/.local/bin/torrent-dl
     mode: "0755"
 
-gitRepos:
-  ~/.local/share/fish-plugins/autopair: https://github.com/jorgebucaran/autopair.fish
-  ~/.local/share/fish-plugins/bass: https://github.com/edc/bass
-  ~/.local/share/fish-plugins/colored-man-pages: https://github.com/PatrickF1/colored_man_pages.fish
-  ~/.local/share/fish-plugins/done: https://github.com/franciscolourenco/done
-  ~/.local/share/fish-plugins/fish-bd: https://github.com/0rax/fish-bd
-  ~/.local/share/fish-plugins/fzf-fish: https://github.com/PatrickF1/fzf.fish
-  ~/.local/share/fish-plugins/git-abbr: https://github.com/lewisacidic/fish-git-abbr
-  ~/.local/share/fish-plugins/grc: https://github.com/oh-my-fish/plugin-grc
-  ~/.local/share/fish-plugins/macos: https://github.com/halostatue/fish-macos
-  ~/.local/share/fish-plugins/puffer: https://github.com/nickeb96/puffer-fish
-  ~/.local/share/tmux-plugins/tmux-continuum: https://github.com/tmux-plugins/tmux-continuum
-  ~/.local/share/tmux-plugins/tmux-sensible: https://github.com/tmux-plugins/tmux-sensible
-  ~/.local/share/tmux-plugins/tmux-yank: https://github.com/tmux-plugins/tmux-yank
-  # yazi loads <name>.yazi dirs from here; piper.yazi is used by yazi.toml.
-  ~/.config/yazi/plugins: https://github.com/yazi-rs/plugins
-
 links:
-  - source: ~/.codex/AGENTS.md
-    target: ~/.pi/agent/AGENTS.md
   - source: ${externalStoragePath}/.cache/qmd
     target: ~/.cache/qmd
 
-skills:
-  sources:
-    qmd:
-      url: https://github.com/tobi/qmd
-      subdir: skills
-  targets: [~/.agents/skills]
-  enable:
-    - qmd/qmd
-
-# Not ported: mkpasswd (brew whois does not build it).
 brew:
-  environment:
-    HOMEBREW_NO_ENV_HINTS: "1"
-  onActivation:
-    autoUpdate: false
-    cleanup: zap
   brews:
-    - age
-    - aria2
-    - atuin
     - autossh
-    - bash
-    - bash-preexec
-    - bat
-    - black
-    - btop
-    - carapace
-    - coreutils
-    - defaultbrowser
-    - delve
-    - direnv
     - name: dnsmasq
       restartUnits: [launchd:com.ivankovnatsky.dnsmasq]
-    - duf
-    - dust
-    - erdtree
-    - exiftool
-    - fd
-    - ffmpeg
-    - ffmpegthumbnailer
-    - fish
     - name: forgejo
       restartUnits: [launchd:com.ivankovnatsky.forgejo]
-    - forgit
-    - fzf
-    - ggh
-    - gh
-    - ghorg
-    - ghq
-    - git
-    - git-crypt
-    - git-delta
-    - git-extras
-    - git-filter-repo
-    - gitleaks
     # backup-home --tar gnutar runs gtar.
     - gnu-tar
-    - gnupg
-    - go
-    - gofumpt
-    - golangci-lint
-    - gopls
-    - grc
-    - grip
-    - imagemagick
-    - jq
-    - lsd
-    - lua-language-server
-    - macmon
-    - magic-wormhole
     - name: mailpit
       restartUnits: [launchd:com.ivankovnatsky.mailpit]
     - make
-    - mas
     - name: miniserve
       restartUnits: [launchd:com.ivankovnatsky.miniserve]
-    - mpv
     - name: navidrome
       restartUnits: [launchd:com.ivankovnatsky.navidrome]
-    - ncurses
-    - neovim
-    - node
-    - nushell
     # ranger scope.sh previews: odt2txt, 7zz (sevenzip), gstat (coreutils).
     - odt2txt
-    - pam-reattach
-    - pandoc
-    - parallel
-    - pigz
-    - pinentry
-    - poppler
-    - pre-commit
-    - prettier
-    - pv
-    - pyright
     - name: rabbitmq
       restartUnits: [launchd:com.ivankovnatsky.rabbitmq]
-    - ranger
-    - rbw
-    - rclone
-    - ripgrep
-    - ruff
-    - rumdl
-    - rust
-    - rust-analyzer
     - sevenzip
-    - shellcheck
-    - shfmt
-    - sops
-    - starship
-    - staticcheck
     - name: stubby
       restartUnits: [launchd:com.ivankovnatsky.stubby]
-    - stylua
-    - swiftformat
     - name: syncthing
       restartUnits: [launchd:com.ivankovnatsky.syncthing]
     - name: tailscale
       restartUnits: [launchd:com.tailscale.tailscaled]
-    - tinymist
-    - tmux
-    - tmuxinator
     - name: transmission-cli
       restartUnits: [launchd:com.ivankovnatsky.transmission]
-    - tree
-    # nvim-treesitter compiles parsers with it.
-    - tree-sitter-cli
-    - treefmt
-    - typos-cli
-    - typst
-    - typstyle
     - unison
-    - uv
-    - watchman
-    - wget
-    - yazi
-    - z.lua
-    - zapp
-    - zoxide
-    - zsh
-    - zsh-autosuggestions
-    - zsh-history-substring-search
-    - zsh-syntax-highlighting
   casks:
-    - amethyst
-    - bitwarden
-    - firefox@developer-edition
-    - font-hack-nerd-font
-    - hammerspoon
     - name: jellyfin
       restartUnits: [launchd:com.ivankovnatsky.jellyfin]
-    - kitty
     - losslessswitcher
-    - mac-mouse-fix
     - mullvad-vpn
-    - obsidian
     - silicon-labs-vcp-driver
-    - whatsapp
-  masApps:
-    TaskForge - Obsidian Tasks: 6744716215
 
 defaults:
   user:
-    NSGlobalDomain:
-      AppleIconAppearanceTheme: RegularAutomatic
-      AppleKeyboardUIMode: 3
-      AppleSpacesSwitchOnActivate: false
-      InitialKeyRepeat: 120
-      KeyRepeat: 120
-      NSUserKeyEquivalents:
-        Move focus to active or next window: "~`"
-      TISRomanSwitchState: 1
-    com.apple.dock:
-      autohide: false
-      autohide-delay: 1000.0
-      mru-spaces: true
-      tilesize: 64
-    com.apple.finder:
-      FXRemoveOldTrashItems: true
-    com.apple.spaces:
-      spans-displays: false
-    com.apple.WindowManager:
-      EnableTiledWindowMargins: true
-      EnableTilingByEdgeDrag: true
-      EnableTilingOptionAccelerator: true
-      EnableTopTilingByEdgeDrag: true
-    com.apple.HIToolbox:
-      AppleEnabledInputSources:
-        - InputSourceKind: Keyboard Layout
-          KeyboardLayout ID: 252
-          KeyboardLayout Name: ABC
-        - InputSourceKind: Keyboard Layout
-          KeyboardLayout ID: -2354
-          KeyboardLayout Name: Ukrainian-PC
-      AppleGlobalTextInputProperties:
-        TextInputGlobalPropertyPerContextInput: 1
-    # Not the -currentHost (<domain>.<UUID>) file: nix-darwin writes this path.
-    ~/Library/Preferences/ByHost/com.apple.controlcenter:
-      Bluetooth: 24
-      Weather: 2
-    com.apple.screencapture:
-      location: ${env:HOME}/Screenshots
-      # macOS 27 screencapture reads per-target keys, not `location`.
-      location-screenrecording: ${env:HOME}/Screenshots
-      location-screenshot: ${env:HOME}/Screenshots
     com.apple.CloudSubscriptionFeatures.optIn:
       auto_opt_in: false
       device: false
-    com.amethyst.Amethyst:
-      SUEnableAutomaticChecks: false
-      SUAutomaticallyUpdate: false
     com.vincent-neo.LosslessSwitcher:
       PreferSampleRateMultiples: false
       com.vincent-neo.LosslessSwitcher-Key-BitDepthDetection: true
       com.vincent-neo.LosslessSwitcher-Key-UserPreferIconStatusBarItem: false
-    com.apple.Safari:
-      AutoOpenSafeDownloads: false
-      CloudTabsOnStartPageConsent: true
-      DeveloperPreferences: 836
-      ShowFullURLInSmartSearchField: true
-      ShowStandaloneTabBar: true
-    com.apple.Safari.SandboxBroker:
-      AlwaysPromptForDownloadFolder: true
-    org.gpgtools.pinentry-mac:
-      UseKeychain: false
     org.mozilla.firefox:
       EnterprisePoliciesEnabled: true
     com.apple.campo:
       NSStatusItem VisibleCC Item-0: false
-    org.hammerspoon.Hammerspoon:
-      SUEnableAutomaticChecks: false
-      SUAutomaticallyUpdate: false
-      SUSendProfileInfo: false
-      MJShowDockIconKey: false
-      MJShowMenuIconKey: false
-      MJKeepConsoleOnTopKey: false
-      HSUploadCrashData: false
-  restart:
-    com.apple.screencapture: screencaptureui
 
 dock:
   apps:
@@ -771,47 +378,20 @@ dock:
     - /Applications/Obsidian.app
     - /Applications/TaskForge.app
     - /Applications/WhatsApp.app
-  others:
-    - ~/Downloads
-    - ~/Screenshots
 
 settingsctl:
   fullDiskAccess:
     - bash
-    - kitty
     - smbd
-    - Terminal
-  accessibility:
-    - Amethyst
-    - Hammerspoon
-    - Mac Mouse Fix Helper
-    - Terminal
-    - kitty
-  loginItems:
-    - Hammerspoon
-    - Mac Mouse Fix
-  appearanceInit: true
   # Only reports when Location Services is off, as nix-config's activation.
   locationInit: true
-  defaultBrowser: firefoxdeveloperedition
-  hostName: ${hostName}
-  localHostName: ${hostName}
-  timeZone: Europe/Uzhgorod
   sleep:
     computer: never
     display: 10
     disk: never
   remoteLogin: true
 
-plist:
-  # The app writes this file itself (it also holds the license); set only this key.
-  ~/Library/Application Support/com.nuebling.mac-mouse-fix/config.plist:
-    General:showMenuBarItem: false
-
 users:
   ivan:
     uid: 502
     shell: /opt/homebrew/bin/fish
-
-launchd:
-  labelPrefix: com.ivankovnatsky

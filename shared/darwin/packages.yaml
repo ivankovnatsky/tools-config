@@ -1,0 +1,231 @@
+# Packages mini and the mooing laptops share. Host files add their own
+# entries: maps merge by key, brew lists append.
+
+npm:
+  packages:
+    "@earendil-works/pi-coding-agent": {}
+    "@bitwarden/cli": {}
+    "@steipete/summarize": {}
+    "@xai-official/grok": {}
+    "@tobilu/qmd": {}
+    taskforge-md:
+      binary: taskforge
+
+uv:
+  packages:
+    gallery-dl: {}
+    osxphotos:
+      binary: osxphotos
+    agent-sessions:
+      source: git+file://${toolsPath}#subdirectory=packages/agent-sessions
+      binary: agent-sessions
+    arr-mgmt:
+      source: git+file://${toolsPath}#subdirectory=packages/arr-mgmt
+      binary: arr-mgmt
+    asusrouter-cli:
+      source: git+file://${toolsPath}#subdirectory=packages/asusrouter-cli
+      binary: asusrouter-cli
+    backup-home:
+      source: git+file://${toolsPath}#subdirectory=packages/backup-home
+      binary: backup-home
+    beszel-mgmt:
+      source: git+file://${toolsPath}#subdirectory=packages/beszel-mgmt
+      binary: beszel-mgmt
+    cleanup-home:
+      source: git+file://${toolsPath}#subdirectory=packages/cleanup-home
+      binary: cleanup-home
+    dns:
+      source: git+file://${toolsPath}#subdirectory=packages/dns
+      binary: dns
+    forgejo-mgmt:
+      source: git+file://${toolsPath}#subdirectory=packages/forgejo-mgmt
+      binary: forgejo-mgmt
+    gh-notifications:
+      source: git+file://${toolsPath}#subdirectory=packages/gh-notifications
+      binary: gh-notifications
+    gh-pr:
+      source: git+file://${toolsPath}#subdirectory=packages/gh-pr
+      binary: gh-pr
+    git-restore:
+      source: git+file://${toolsPath}#subdirectory=packages/git-restore
+      binary: git-restore
+    gpg-pass:
+      source: git+file://${toolsPath}#subdirectory=packages/gpg-pass
+      binary: gpg-pass
+    homelab:
+      source: git+file://${toolsPath}#subdirectory=packages/homelab
+      binary: homelab
+    jellyfin-mgmt:
+      source: git+file://${toolsPath}#subdirectory=packages/jellyfin-mgmt
+      binary: jellyfin-mgmt
+    launchd-mgmt:
+      source: git+file://${toolsPath}#subdirectory=packages/launchd-mgmt
+      binary: launchd-mgmt
+    nextdns-mgmt:
+      source: git+file://${toolsPath}#subdirectory=packages/nextdns-mgmt
+      binary: nextdns-mgmt
+    ps-top:
+      source: git+file://${toolsPath}#subdirectory=packages/ps-top
+      binary: ps-top
+    reposync:
+      source: git+file://${toolsPath}#subdirectory=packages/reposync
+      binary: reposync
+    settingsctl:
+      source: git+file://${toolsPath}#subdirectory=packages/settingsctl
+      binary: settings
+    syncthing-mgmt:
+      source: git+file://${toolsPath}#subdirectory=packages/syncthing-mgmt
+      binary: syncthing-mgmt
+    tasks:
+      source: git+file://${toolsPath}#subdirectory=packages/tasks-cli
+      binary: tasks
+    youtube:
+      source: git+file://${toolsPath}#subdirectory=packages/youtube
+      binary: youtube
+
+go:
+  packages:
+    go-grip:
+      source: github.com/chrishrb/go-grip
+      binary: go-grip
+    gwq:
+      source: github.com/d-kuro/gwq/cmd/gwq
+      binary: gwq
+    # stc alias in the shared fish config.
+    stc:
+      source: github.com/tenox7/stc
+      binary: stc
+    username:
+      source: github.com/ivankovnatsky/username
+      binary: username
+
+cargo:
+  packages:
+    genpass:
+      version: 0.5.1
+
+curlShell:
+  "https://antigravity.google/cli/install.sh":
+    shell: bash
+    uninstall: >-
+      for p in ~/.local/bin/agy ~/.cache/antigravity; do
+      if [ -e "$p" ] || [ -L "$p" ]; then trash "$p"; fi; done
+
+# Not ported: mkpasswd (brew whois does not build it).
+brew:
+  environment:
+    HOMEBREW_NO_ENV_HINTS: "1"
+  onActivation:
+    autoUpdate: false
+    cleanup: zap
+  brews:
+    - age
+    - aria2
+    - atuin
+    - bash
+    - bash-preexec
+    - bat
+    - black
+    - btop
+    - carapace
+    - coreutils
+    - defaultbrowser
+    - delve
+    - direnv
+    - duf
+    - dust
+    - erdtree
+    - exiftool
+    - fd
+    - ffmpeg
+    - ffmpegthumbnailer
+    - fish
+    - forgit
+    - fzf
+    - ggh
+    - gh
+    - ghorg
+    - ghq
+    - git
+    - git-crypt
+    - git-delta
+    - git-extras
+    - git-filter-repo
+    - gitleaks
+    - gnupg
+    - go
+    - gofumpt
+    - golangci-lint
+    - gopls
+    - grc
+    - grip
+    - imagemagick
+    - jq
+    - lsd
+    - lua-language-server
+    - macmon
+    - magic-wormhole
+    - mas
+    - mpv
+    - ncurses
+    - neovim
+    - node
+    - nushell
+    - pam-reattach
+    - pandoc
+    - parallel
+    - pigz
+    - pinentry
+    - poppler
+    - pre-commit
+    - prettier
+    - pv
+    - pyright
+    - ranger
+    - rbw
+    - rclone
+    - ripgrep
+    - ruff
+    - rumdl
+    - rust
+    - rust-analyzer
+    - shellcheck
+    - shfmt
+    - sops
+    - starship
+    - staticcheck
+    - stylua
+    - swiftformat
+    - tinymist
+    - tmux
+    - tmuxinator
+    - tree
+    # nvim-treesitter compiles parsers with it.
+    - tree-sitter-cli
+    - treefmt
+    - typos-cli
+    - typst
+    - typstyle
+    - uv
+    - watchman
+    - wget
+    - yazi
+    - z.lua
+    - zapp
+    - zoxide
+    - zsh
+    - zsh-autosuggestions
+    - zsh-history-substring-search
+    - zsh-syntax-highlighting
+  casks:
+    - amethyst
+    - bitwarden
+    - firefox@developer-edition
+    - font-hack-nerd-font
+    - hammerspoon
+    - kitty
+    - mac-mouse-fix
+    - obsidian
+    - whatsapp
+  masApps:
+    TaskForge - Obsidian Tasks: 6744716215

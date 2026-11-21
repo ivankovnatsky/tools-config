@@ -16,49 +16,9 @@ include:
 
 defaults:
   user:
-    NSGlobalDomain:
-      AppleIconAppearanceTheme: RegularAutomatic
-      AppleKeyboardUIMode: 3
-      AppleSpacesSwitchOnActivate: false
-      InitialKeyRepeat: 120
-      KeyRepeat: 120
-      NSUserKeyEquivalents:
-        Move focus to active or next window: "~`"
-      TISRomanSwitchState: 1
-    com.apple.dock:
-      autohide: false
-      autohide-delay: 1000.0
-      mru-spaces: true
-      tilesize: 64
-    com.apple.finder:
-      FXRemoveOldTrashItems: true
-    com.apple.spaces:
-      spans-displays: false
-    com.apple.WindowManager:
-      EnableTiledWindowMargins: true
-      EnableTilingByEdgeDrag: true
-      EnableTilingOptionAccelerator: true
-      EnableTopTilingByEdgeDrag: true
-    com.apple.HIToolbox:
-      AppleEnabledInputSources:
-        - InputSourceKind: Keyboard Layout
-          KeyboardLayout ID: 252
-          KeyboardLayout Name: ABC
-        - InputSourceKind: Keyboard Layout
-          KeyboardLayout ID: -2354
-          KeyboardLayout Name: Ukrainian-PC
-      AppleGlobalTextInputProperties:
-        TextInputGlobalPropertyPerContextInput: 1
     # Not the -currentHost (<domain>.<UUID>) file: nix-darwin writes this path.
     ~/Library/Preferences/ByHost/com.apple.controlcenter:
       BatteryShowPercentage: true
-      Bluetooth: 24
-      Weather: 2
-    com.apple.screencapture:
-      location: ${env:HOME}/Screenshots
-      # macOS 27 screencapture reads per-target keys, not `location`.
-      location-screenrecording: ${env:HOME}/Screenshots
-      location-screenshot: ${env:HOME}/Screenshots
     com.apple.Siri:
       StatusMenuVisible: false
     # Basic follows the system light/dark appearance. Font, shell exit and
@@ -66,31 +26,10 @@ defaults:
     com.apple.Terminal:
       Default Window Settings: Basic
       Startup Window Settings: Basic
-    com.amethyst.Amethyst:
-      SUEnableAutomaticChecks: false
-      SUAutomaticallyUpdate: false
-    com.apple.Safari:
-      AutoOpenSafeDownloads: false
-      CloudTabsOnStartPageConsent: true
-      DeveloperPreferences: 836
-      ShowFullURLInSmartSearchField: true
-      ShowStandaloneTabBar: true
-    com.apple.Safari.SandboxBroker:
-      AlwaysPromptForDownloadFolder: true
     # Keep the pinned 2.1.4 (files.yaml fetch): tools replaces a self-updated app.
     io.nextdns.NextDNSMac:
       SUEnableAutomaticChecks: false
       SUAutomaticallyUpdate: false
-    org.gpgtools.pinentry-mac:
-      UseKeychain: false
-    org.hammerspoon.Hammerspoon:
-      SUEnableAutomaticChecks: false
-      SUAutomaticallyUpdate: false
-      SUSendProfileInfo: false
-      MJShowDockIconKey: false
-      MJShowMenuIconKey: false
-      MJKeepConsoleOnTopKey: false
-      HSUploadCrashData: false
   system:
     # Wi-Fi > Ask to join hotspots: Automatic.
     /Library/Preferences/SystemConfiguration/com.apple.airport.preferences:
@@ -104,8 +43,6 @@ defaults:
           allowed_origins:
             - https://teams.microsoft.com
             - https://teams.cloud.microsoft
-  restart:
-    com.apple.screencapture: screencaptureui
 
 dock:
   apps:
@@ -132,43 +69,18 @@ dock:
     - /Applications/Microsoft Teams.app
     - /Applications/Microsoft Excel.app
     - /Applications/Microsoft Word.app
-  others:
-    - ~/Downloads
-    - ~/Screenshots
 
 settingsctl:
   fullDiskAccess:
-    - kitty
     - sshd-keygen-wrapper
-    - Terminal
   accessibility:
-    - Amethyst
     - bash
-    - Hammerspoon
-    - kitty
-    - Mac Mouse Fix Helper
-    - Terminal
   loginItems:
     - Amethyst
     - Bitwarden
-    - Hammerspoon
-    - Mac Mouse Fix
     - NextDNS
-  appearanceInit: true
   # Every deploy, as nix-config's activation; skips when already at the model's mode.
   scalingInit: true
-  defaultBrowser: firefoxdeveloperedition
-  hostName: ${hostName}
-  localHostName: ${hostName}
-  timeZone: Europe/Uzhgorod
-
-plist:
-  # The app writes this file itself (it also holds the license); set only this key.
-  ~/Library/Application Support/com.nuebling.mac-mouse-fix/config.plist:
-    General:showMenuBarItem: false
-
-launchd:
-  labelPrefix: com.ivankovnatsky
 
 # No uid: Air's mooing is 501, Pro's 502.
 users:

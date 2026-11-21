@@ -1,5 +1,18 @@
-# macOS-specific shared config
-# (empty for now — will hold brew packages when nix-homebrew migration starts)
+# macOS config mini and the mooing laptops share; host files add the rest.
+include:
+  - darwin/packages.yaml
+  - darwin/files.yaml
+  - darwin/system.yaml
+
+vars:
+  a3Ip: 192.168.50.6
+  toolsConfigPath: ${home}/Sources/github.com/ivankovnatsky/tools-config
+  secretsDir: ${home}/.local/state/tools/secrets
+  renderedDir: ${secretsDir}/rendered
+
+paths:
+  uv: /opt/homebrew/bin
+  nodejs: /opt/homebrew/bin
 
 # Cutover from nix-darwin (needs tools with the nixDarwin section): boots out
 # launchd jobs that run from /nix/store, trashes /etc links into /etc/static
