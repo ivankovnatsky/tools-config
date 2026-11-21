@@ -30,6 +30,16 @@ if ("/opt/homebrew/bin/atuin" | path exists) {
 } else {
   rm -f ($autoload_dir | path join "atuin.nu")
 }
+# mise's init is a module, so it must be `use`d; its export-env pins PATH, so
+# 0- sorts it before autoload files that prepend to PATH (carapace).
+if ("/opt/homebrew/bin/mise" | path exists) {
+  let mise_module = ($nu.cache-dir | path join "mise.nu")
+  mkdir $nu.cache-dir
+  ^/opt/homebrew/bin/mise activate nu | save -f $mise_module
+  $"use ($mise_module | to nuon)\n" | save -f ($autoload_dir | path join "0-mise.nu")
+} else {
+  rm -f ($autoload_dir | path join "0-mise.nu")
+}
 
 $env.config = ($env.config? | default {})
 $env.config.hooks = ($env.config.hooks? | default {})
